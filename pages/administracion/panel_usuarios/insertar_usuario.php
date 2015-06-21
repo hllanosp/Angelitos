@@ -17,7 +17,17 @@ require_once($maindir."login/time_out.php");
 
  <?php
 
-   // $empleado = $_POST["empleado"];
+ function crypt_blowfish($password, $digito = 7) {
+     $set_salt = './1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+     $salt = sprintf('$2a$%02d$', $digito);
+     for($i = 0; $i < 22; $i++)
+     {
+         $salt .= $set_salt[mt_rand(0, 63)];
+     }
+     return crypt($password, $salt);
+ }
+
+ // $empleado = $_POST["empleado"];
    $nombreUsuario = $_POST["nombreUsuario"];
    $password = $_POST["password"];
    $rol = (int)$_POST["rol"];
@@ -47,6 +57,7 @@ require_once($maindir."login/time_out.php");
     
     try{
       // realizamos la consulta
+      $password = crypt_blowfish($password);
       $query = "insert into usuario (usuario, contrasena, rol_ID, fecha_creacion, estado) VALUES ('".$nombreUsuario."','".$password."','".$rol."','".$fecha_creacion."',0);";
       $result = mysql_query($query, $conexion) or die("error en la consulta");
       $mensaje = "El usuario se ha creado exitosamente...";

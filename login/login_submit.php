@@ -16,13 +16,17 @@
 	$filas = mysql_num_rows($result);
 
 	if($filas == 1){
-		$result2 = mysql_fetch_array($result);
-		$_SESSION['auntentificado'] = '1';
-		$_SESSION['user'] = $usuario;
-		$_SESSION['password'] = $password;
-		$_SESSION['rol_ID'] = $result2['rol_ID'];
-		
-		header('location:../index.php');
+        $row = mysql_fetch_row($result);
+        $passwordenBD = $row['contrasena'];
+        if( crypt($password, $passwordenBD) == $passwordenBD) {
+            $result2 = mysql_fetch_array($result);
+            $_SESSION['auntentificado'] = '1';
+            $_SESSION['user'] = $usuario;
+            $_SESSION['password'] = $password;
+            $_SESSION['rol_ID'] = $result2['rol_ID'];
+
+            header('location:../index.php');
+        }
 	}
 	else{
 		header('location:login.php?error_code=1');
