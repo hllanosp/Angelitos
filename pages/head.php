@@ -27,7 +27,10 @@
   <meta name = "viewport" content = "width = device-whidth, initial-scale=1">
   
   <!-- ========REFERENCIAS======== -->
-  <script src="bootstrap/js/jquery-1.11.3.min.js"></script>
+  <!-- Rerencia para el header-->
+  <script type="text/javascript" src="componentes/jquery-1.11.3.min.js"></script>
+  
+  <!--  -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="css/stylo.css">
   <script src = "bootstrap/js/bootstrap.js"></script>
@@ -42,13 +45,16 @@
 
   <!-- plugins para validar formulario -->
   <script src = "componentes/jquery-validate/dist/jquery.validate.js" ></script>
+
+  <link href="bower_components/morrisjs/morris.css" rel="stylesheet"> 
+  <script src = "bower_components/morrisjs/morris.js" ></script>
   
 
   <!-- stilos personalizados -->
   <link rel="stylesheet" href="css/stylo.css">
   <link rel="stylesheet" href="css/tablas.css">
 
-
+  <script src ="componentes/Highcharts-4/js/highcharts.js"></script>
 
 <script>
    

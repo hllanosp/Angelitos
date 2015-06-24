@@ -72,3 +72,6 @@ body{
    to{-moz-transform:rotateY(-360deg);}           
 
  }
+ #grafo_usuario{
+ 	color:black;
+ }

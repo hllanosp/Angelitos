@@ -37,6 +37,9 @@
 <!-- =====HTML====== -->
 <div class="container">
   <div class="row">
+    <!-- Plugings para los graficos del usuarios activos-->
+  <!-- <link rel="stylesheet" type="text/css" href="http://code.highcharts.com/highcharts.js">
+  <link rel="stylesheet" type="text/css" href= "http://code.highcharts.com/modules/exporting.js"> -->
     
      <!-- =========PANEL 1: Gestion de Usuarios==========
           MODALES 2: -nuevos usuarios
@@ -62,6 +65,7 @@
       <!-- fin del panel gestion de usuarios -->
 
     </div>
+
       <!-- panel de usuarios activos -->
       <div class = "col-sx-12 col-sm-4 col-md-3">
         <div class="panel panel-info">
@@ -70,10 +74,10 @@
           </div>
              <div class="panel-body">
                     <div class="clearfix"></div>
-                <div id="grafo_usuarios">
-                    <h1>
-                      elemento1
-                    </h1>
+                <div id="container">
+                    
+                       <?php  require_once("panel_Grafos/grafo_empleados.php"); ?>  
+                    
               </div>      
              </div>
           </div>
@@ -88,11 +92,9 @@
           </div>
              <div class="panel-body">
                     <div class="clearfix"></div>
-                <div id="grafo_usuarios">
-                    <h1>
-                          elemento2
-                    </h1>
-              </div>      
+                <div id="container2">
+                    <?php require_once("panel_grafos/bitacora.php"); ?>
+                </div>      
              </div>
           </div>
           <!-- fin panel usuarios_activos -->
