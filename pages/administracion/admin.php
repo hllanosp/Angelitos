@@ -1,5 +1,8 @@
  <?php
+ 
+
  $maindir = "../../";
+  require_once($maindir."login/seguridad.php");
   if(isset($_GET['contenido']))
     {
       $contenido = $_GET['contenido'];
@@ -33,74 +36,49 @@
 
  -->
 
-
-<!-- =====HTML====== -->
-<div class="container">
-  <div class="row">
-    <!-- Plugings para los graficos del usuarios activos-->
-  <!-- <link rel="stylesheet" type="text/css" href="http://code.highcharts.com/highcharts.js">
-  <link rel="stylesheet" type="text/css" href= "http://code.highcharts.com/modules/exporting.js"> -->
-    
-     <!-- =========PANEL 1: Gestion de Usuarios==========
-          MODALES 2: -nuevos usuarios
-                     -editar usuarios -->
-    <div  id = "panel_usuario">
-      <div class="col-sx-12 col-sm-8 col-md-9">
-        <div  class="panel panel-info">
-          <!-- Default panel contents -->
-          <div class="panel-heading">
-            <div class="btn-group" role="group" aria-label="usuarios/logs">
-                <button type="button" class="btn btn-small btn-default" id="cargar_usuarios">usuarios</button>
-                <!-- <button type="button" class="btn btn-default" id="cargas_logs">Logs</button> -->
+<div id="wrapper">
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        
+                        <li class="nav-header"> 
+                          <a id="usuarios" href="#"><i class="glyphicon glyphicon-home"></i> Inicio Administracion</a>
+                        </li>
+                        <hr> </hr>
+                        <li>
+                            <a id="usuarios_activos" href="#"><i class="fa fa-dashboard fa-fw"></i>Usuarios Activos</a>
+                        </li>
+                        <li>
+                            <a  id="logs" href="#"><i class="fa fa-file-pdf-o fa-fw"></i> Logs</a>
+                            
+                        </li>
+                        <li>
+                            <a  id="historial_ingreso" href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Historial Igreso</a>
+                            
+                        </li>
+                                               <li data-popover="true" rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-gears fa-fw"></i>Mantenimineto<i class="fa fa-collapse"></i></a></li>
+                    <li><ul class="premium-menu nav nav-list collapse">
+                            <li ><a id="areas" href="premium-profile.html"><span class="fa fa-caret-right"></span> Areas</a></li>
+                            <li ><a id="tipoDeAreas" href="premium-blog.html"><span class="fa fa-caret-right"></span> Tipos De Areas</a></li>
+                        </ul>
+                    </li>
+                    </ul>
+                </div>
             </div>
-          </div>
-
-          <div class="panel-body">
+                <!-- /.sidebar-collapse -->
+         
+    </div>
+    <div id="page-wrapper">
+        <div id="contenedor">
             <!-- cuerpo del panel -->
-           <?php 
-           require_once($maindir."pages/administracion/panel_usuarios/panel_gestion_usuarios.php");?>
-          </div>
+            <?php 
+           require_once($maindir."pages/administracion/panel_usuarios/panel_usuarios.php");?>
+      <!-- fin del panel gestion de usuarios --> 
         </div>
       </div>
-      <!-- fin del panel gestion de usuarios -->
+  <!--   </div> -->
+<!-- </div> -->
 
-    </div>
+<!-- eventos para el menu contextual -->
 
-      <!-- panel de usuarios activos -->
-      <div class = "col-sx-12 col-sm-4 col-md-3">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h4><i class="fa fa-pie-chart"></i> Usuarios Activos</h4>
-          </div>
-             <div class="panel-body">
-                    <div class="clearfix"></div>
-                <div id="container">
-                    
-                       <?php  require_once("panel_Grafos/grafo_empleados.php"); ?>  
-                    
-              </div>      
-             </div>
-          </div>
-          <!-- fin panel usuarios_activos -->
-      </div>
-
-      <!-- panel de usuarios activos -->
-      <div class = "col-sx-12 col-sm-4 col-md-3">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h4><i class="fa fa-pie-chart"></i>Bitacora</h4>
-          </div>
-             <div class="panel-body">
-                    <div class="clearfix"></div>
-                <div id="container2">
-                    <?php require_once("panel_grafos/bitacora.php"); ?>
-                </div>      
-             </div>
-          </div>
-          <!-- fin panel usuarios_activos -->
-    </div>
-  <!-- fin de row -->
-  
-
-
-</div>
+    <script type="text/javascript" src="pages/administracion/menu.js" />

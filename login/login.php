@@ -1,3 +1,12 @@
+<?php 
+	session_start();
+	$_SESSION = array();
+	session_destroy();
+	
+ ?>
+
+
+
 <!doctype html>
 <html lang="en">
 <head>

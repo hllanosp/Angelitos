@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.3
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 15-06-2015 a las 08:03:02
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 27-06-2015 a las 18:50:25
 -- Versión del servidor: 5.6.24
--- Versión de PHP: 5.5.24
+-- Versión de PHP: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -79,25 +79,52 @@ INSERT INTO `rol` (`rol_ID`, `descripcion`) VALUES
 
 CREATE TABLE IF NOT EXISTS `usuario` (
   `usuario` varchar(50) NOT NULL,
-  `contrasena` varchar(10) NOT NULL,
+  `contrasena` varchar(256) NOT NULL,
   `rol_ID` int(2) NOT NULL,
   `usuario_ID` int(11) NOT NULL,
   `fecha_creacion` date NOT NULL,
   `fecha_alta` date DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`usuario`, `contrasena`, `rol_ID`, `usuario_ID`, `fecha_creacion`, `fecha_alta`, `estado`) VALUES
-('hllanos', '123', 1, 1, '0000-00-00', NULL, 0),
-('senior', '2', 1, 2, '0000-00-00', NULL, 0),
 ('pedro', '4', 2, 3, '0000-00-00', NULL, 0),
-('juan', '5', 3, 4, '0000-00-00', NULL, 0),
-('pineda', 'asdfghjk', 1, 5, '2015-06-25', NULL, 1),
-('pineda', 'asdfghjk', 1, 6, '2015-06-25', NULL, 1);
+('pineda1234', '$2a$07$7PqV8qgy4K9toN3aiWoOueysZN8SOCoL.62VauwPTx7rPA4t46jRW', 1, 8, '2015-06-25', NULL, 0),
+('Arle2', '$2a$07$LqmyTQCJu1b.MhuPo/.wRuA8kcM2axSlqx4Aa3HC0EBRaVVoN7TH.', 1, 11, '2015-06-27', NULL, 0),
+('Arle2', '$2a$07$QDet8H8GLtGDFsDsi1FBHu7/rD19MQyOcxSfDBsXphHyDnG.NcLoy', 1, 12, '2015-06-27', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_logs`
+--
+
+CREATE TABLE IF NOT EXISTS `usuario_logs` (
+  `id_logs` int(11) NOT NULL,
+  `usuario_log` varchar(25) NOT NULL,
+  `fecha_ingreso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_salida` datetime NOT NULL,
+  `ip_conexion` varchar(40) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario_logs`
+--
+
+INSERT INTO `usuario_logs` (`id_logs`, `usuario_log`, `fecha_ingreso`, `fecha_salida`, `ip_conexion`) VALUES
+(1, 'pineda1234', '2015-06-26 23:55:30', '2015-06-27 16:15:00', ':192.168'),
+(2, 'pineda1234', '2015-06-26 23:55:43', '2015-06-27 16:15:00', ':192.168'),
+(3, 'pineda1234', '2015-06-27 00:20:46', '2015-06-28 08:19:11', '192.168.0.1'),
+(4, '', '2015-06-27 00:28:47', '0000-00-00 00:00:00', '127.0.0.1'),
+(5, '', '2015-06-27 00:29:40', '0000-00-00 00:00:00', '127.0.0.1'),
+(6, 'pineda1234', '2015-06-27 00:30:27', '0000-00-00 00:00:00', '127.0.0.1'),
+(7, 'pineda1234', '2015-06-27 00:31:18', '0000-00-00 00:00:00', '127.0.0.1'),
+(8, 'pineda1234', '2015-06-27 00:33:00', '0000-00-00 00:00:00', '127.0.0.1'),
+(9, 'pineda1234', '2015-06-27 07:49:51', '0000-00-00 00:00:00', '127.0.0.1');
 
 --
 -- Índices para tablas volcadas
@@ -113,8 +140,13 @@ ALTER TABLE `rol`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`usuario_ID`),
-  ADD KEY `FK_usuario_rol` (`rol_ID`);
+  ADD PRIMARY KEY (`usuario_ID`), ADD KEY `FK_usuario_rol` (`rol_ID`);
+
+--
+-- Indices de la tabla `usuario_logs`
+--
+ALTER TABLE `usuario_logs`
+  ADD PRIMARY KEY (`id_logs`), ADD KEY `usuario_log` (`usuario_log`), ADD KEY `usuario_log_2` (`usuario_log`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -124,7 +156,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usuario_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `usuario_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT de la tabla `usuario_logs`
+--
+ALTER TABLE `usuario_logs`
+  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --
@@ -133,7 +170,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`rol_ID`) REFERENCES `rol` (`rol_ID`);
+ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`rol_ID`) REFERENCES `rol` (`rol_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

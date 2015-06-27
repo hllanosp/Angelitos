@@ -48,6 +48,8 @@
 
   <link href="bower_components/morrisjs/morris.css" rel="stylesheet"> 
   <script src = "bower_components/morrisjs/morris.js" ></script>
+
+  <link href="componentes/sb-admin-2.css" rel="stylesheet">
   
 
   <!-- stilos personalizados -->

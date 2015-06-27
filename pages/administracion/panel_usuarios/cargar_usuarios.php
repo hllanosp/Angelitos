@@ -3,7 +3,9 @@
 
 
 <?php 
-  // <!-- Declaramos la direccion raiz -->
+
+
+ // <!-- Declaramos la direccion raiz -->
   $maindir = "../../";
 
 // <!-- anadimos los archivos necesarios para trabajar-->
@@ -12,7 +14,7 @@
 include ($maindir.'conexion/conexion.php');
 
 // verifica la sesion
-require_once($maindir."login/seguridad.php");
+
  
 // // verifica el tiempo de la sesion 
 require_once($maindir."login/time_out.php");

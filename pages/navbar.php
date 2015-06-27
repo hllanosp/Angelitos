@@ -1,4 +1,8 @@
 <?php 
+
+
+
+
 //definine esta variable temporal para tener un rol cuon el cual trabajar 
   $rol = 100;
  
