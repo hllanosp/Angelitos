@@ -93,6 +93,12 @@
             case 5:
                 error_print(5);
                 break;
+            case 6:
+                error_print(6);
+                break;
+            case 7:
+                error_print(7);
+                break;
             default:
                 break;
         }
@@ -119,6 +125,12 @@
                 break;
             case 5:
                 $mensaje = "Lo sentimos pero su sesión ya ha expirado, por favor ingrese otra vez";
+                break;
+            case 6:
+                $mensaje = "Este usuario esta deshabilitado, contacte el administrador del sistema";
+                break;
+            case 7:
+                $mensaje = "Error en autenticacion, usuario ya esta logeado";
                 break;
             default:
                 break;

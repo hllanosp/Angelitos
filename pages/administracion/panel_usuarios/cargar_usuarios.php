@@ -50,7 +50,7 @@ require_once($maindir."login/time_out.php");
                        <td> $row[usuario] </td>
                        <td> $row[descripcion] </td>
                        <td> $row[fecha_creacion]</td>";
-                        if ($estado == 1) {
+                        if ($estado == 0) {
                          echo"
                            <td>
                               <label href=\"#\" class = \"btn-sm btn-danger \">Inactivo</label>
