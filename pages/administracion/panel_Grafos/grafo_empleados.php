@@ -37,7 +37,20 @@ include ($maindir.'conexion/conexion.php');
 
 
 ?>
-
+<div>
+      <h1 class="page-header">
+          <small>Usuarios Activos en el Sistema</small>
+      </h1>
+      <ol class="breadcrumb">
+          <li class="active">
+              <span class="fa fa-dashboard"></span></i> Administracion
+          </li>
+           <li class="active">
+              <i class="fa fa-table"></i> Usuarios Activos
+          </li>
+      </ol>
+    </div>
+    
 <script>
  $(function () {
     $('#contenedor').highcharts({

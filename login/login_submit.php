@@ -33,7 +33,7 @@
 		            $_SESSION['auntentificado'] = '1';
 		            $_SESSION['user'] = $usuario;
 		            $_SESSION['usuario_ID'] = $usuario_ID;
-		            // $_SESSION['password'] = $password;
+		            $_SESSION['time_out'] = time();
 		            $_SESSION['rol_ID'] = $row['rol_ID'];
 					
 					function get_client_ip() {

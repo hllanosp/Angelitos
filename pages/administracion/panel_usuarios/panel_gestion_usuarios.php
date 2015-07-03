@@ -128,7 +128,7 @@ require_once($maindir."login/time_out.php");
     $(document).ready(function(){
 
       // plugin para formato de la tabla
-      $('#tabla_usuarios').dataTable();
+  
 
     
       // --------------------------------------------------------------------

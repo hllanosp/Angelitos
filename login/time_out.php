@@ -8,13 +8,13 @@ session_start();
 }
 */
 
-if(!isset($_SESSION['timeout']))
+if(!isset($_SESSION['time_out']))
   {
-    $_SESSION['timeout'] = time();
+    $_SESSION['time_out'] = time();
   }
 else
   {
-    $tiempo = $_SESSION['timeout'];
+    $tiempo = $_SESSION['time_out'];
 
     if (time() >  $tiempo + 60*1) 
       {
@@ -22,11 +22,12 @@ else
         // // $_SESSION['contenido'] = $contenido;
         
         // session_destroy();
-        // header("location:../login/login.php");
+
+        // header("location:../login/ckeckout.php");
       }
     else
       {
-        $_SESSION['timeout'] = time();
+        $_SESSION['time_out'] = time();
       }
   }
 

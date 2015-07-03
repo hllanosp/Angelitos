@@ -21,12 +21,21 @@ require_once($maindir."login/time_out.php");
 
   ?>
 
-  <section >
-
-
-
-     <div class="box-body table-responsive">
-       <table id = "tabla_usuarios" class='table table-bordered table-striped' cellspacing="0" width="100%" >
+    <div>
+      <h1 class="page-header">
+          <small>historial de ingreso</small>
+      </h1>
+      <ol class="breadcrumb">
+          <li class="active">
+              <span class="fa fa-dashboard"></span></i> Administracion
+          </li>
+           <li class="active">
+              <i class="fa fa-table"></i> Logs
+          </li>
+      </ol>
+    </div>
+     <div class="box-body table-responsive ">
+       <table id = "tabla_logs"  class='table table-bordered table-striped display' cellspacing="0" >
           <thead>
             <tr>
               <th>Usuario</th>
@@ -59,16 +68,13 @@ require_once($maindir."login/time_out.php");
     </div>
     <!-- fin tabla -->
     
-  </section>
+
   
   <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-    $('#tabla_logs').dataTable({}); // example es el id de la tabla
+    $('#tabla_logs').dataTable(); // example es el id de la tabla
+	});
 	
-	$('#tabla_logs')
-    .removeClass( 'display' )
-    .addClass('table table-striped table-bordered');
-  });
 </script>
 
 

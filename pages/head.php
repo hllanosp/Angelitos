@@ -15,10 +15,10 @@
 
 
   // require_once("funciones/check_session.php");
-  // require_once("funciones/timeout.php");
+  require_once("login/time_out.php");
   //require_once("navbar.php");
 ?>
-
+Administración
 
 <html lang="en">
 <head>
@@ -40,8 +40,9 @@
   <link href="bootstrap/components/styles.css" rel="stylesheet" type="text/css">   
    
    <!-- plugins para tabla -->
-  <script src = "componentes/DataTables/media/js/jquery.dataTables.min.js" ></script>
-  <script src = "componentes/DataTables/media/css/jquery.dataTables.css"></script>
+  <script src = "componentes/DataTables/media/js/jquery.dataTables.js" ></script>
+  <link rel="stylesheet" href="componentes/DataTables/media/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="css/tablas.css">
 
   <!-- plugins para validar formulario -->
   <script src = "componentes/jquery-validate/dist/jquery.validate.js" ></script>
@@ -49,6 +50,7 @@
   <link href="bower_components/morrisjs/morris.css" rel="stylesheet"> 
   <script src = "bower_components/morrisjs/morris.js" ></script>
 
+  <!-- estilo en el admin -->
   <link href="componentes/sb-admin-2.css" rel="stylesheet">
   
 
@@ -56,9 +58,15 @@
   <link rel="stylesheet" href="css/stylo.css">
   <link rel="stylesheet" href="css/tablas.css">
 
+<!-- graficos -->
   <script src ="componentes/Highcharts-4/js/highcharts.js"></script>
 
-<script>
+<!-- estilo switch -->
+ <link rel="stylesheet" href="componentes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
+ <script src = 'componentes/bootstrap-switch-master/dist/js/bootstrap-switch.js'></script>
+ 
+<script >
+
    
    $(document).ready(function(){
 

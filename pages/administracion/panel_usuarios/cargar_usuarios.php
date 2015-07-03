@@ -25,9 +25,9 @@ require_once($maindir."login/time_out.php");
     <h3 class="box-title" style = "color:black">Usuarios</h3>
 
 
-     <div class="box-body table-responsive">
-       <table id = "tabla_usuarios" class='table table-bordered table-striped' cellspacing="0" width="100%" >
-          <thead>
+     <div class="box-body table-responsive ">
+       <table id = "tabla_usuarios" class='table table-bordered table-striped display' cellspacing="0" >
+          <thead >
             <tr>
               <th>Usuario</th>
               <th>Rol</th>
@@ -53,7 +53,7 @@ require_once($maindir."login/time_out.php");
                         if ($estado == 0) {
                          echo"
                            <td>
-                              <label href=\"#\" class = \"btn-sm btn-danger \">Inactivo</label>
+                              <input data-off-color  = 'success' data-off-text = 'Activo' data-on-text = 'activo' type='checkbox' name='checkbox_tabla' disabled >
                            </td>";
 
                        }
@@ -61,7 +61,7 @@ require_once($maindir."login/time_out.php");
                         echo"
                         
                            <td>
-                              <label href=\"#\" class = \"btn-sm btn-primary \">Activo</label>
+                              <input data-on-color = 'danger' data-off-text = 'Inactivo' data-on-text = 'Inactivo' type='checkbox' name='checkbox_tabla' disabled checked>
                            </td>";
                        }
                        echo"
@@ -104,6 +104,10 @@ require_once($maindir."login/time_out.php");
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
+    // stilos de los switches
+    $("[name='checkbox_tabla']").bootstrapSwitch();
+    
+
     
 		$(".btn_editar").on('click',function(){
           
@@ -116,9 +120,7 @@ require_once($maindir."login/time_out.php");
 		    });
         });
 		 // example es el id de la tabla
-		
-		  $('#tabla_usuarios').removeClass( 'display' );
-	    $('#tabla_usuarios').addClass('table table-striped table-bordered');
-	  
+		    $('#tabla_usuarios').dataTable();
+	
       });
 </script>

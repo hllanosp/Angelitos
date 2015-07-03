@@ -1,0 +1,91 @@
+
+<!-- inserta el usuario en la base de datos -->
+<?php 
+  // <!-- Declaramos la direccion raiz -->
+  $maindir = "../../../";
+
+//acceso a bases de datos
+include ($maindir.'conexion/conexion.php');
+
+// verifica la sesion
+require_once($maindir."login/seguridad.php");
+ 
+// // verifica el tiempo de la sesion 
+// require_once($maindir."login/time_out.php");
+
+  ?>
+
+ <?php
+
+ function crypt_blowfish($password, $digito = 7) {
+     $set_salt = './1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+     $salt = sprintf('$2a$%02d$', $digito);
+     for($i = 0; $i < 22; $i++)
+     {
+         $salt .= $set_salt[mt_rand(0, 63)];
+     }
+     return crypt($password, $salt);
+ }
+
+ // $empleado = $_POST["empleado"];
+   $nombreUsuario = $_POST["nombreUsuario"];
+   $password = $_POST["password"];
+   $rol = (int)$_POST["rol"];
+   $usuario_ID = (int) $_POST['usuario_ID'];
+   // $fecha_creacion=date("Y/m/d");
+
+  
+  // Algunas validaciones
+  if($nombreUsuario == "" or $password == ""){
+    
+    $mensaje="Por favor introduzca un nombre de usuario y password validos";
+        $codMensaje =0;
+    
+    }
+    // elseif($empleado == -1){
+
+    //     $mensaje="Por favor seleccione un empleado valido";
+    //     $codMensaje =0;
+
+    // }
+    elseif($rol == -1){
+        
+        $mensaje="Por favor seleccione un rol valido";
+        $codMensaje =0;
+
+    }
+    else{
+    
+    try{
+      // realizamos la consulta
+      $password = crypt_blowfish($password);
+      // si el usuario se desactiva
+      if ($estado == 1) {
+        # code...
+      }
+      else{
+        $query = "update usuario set usuario = '".$nombreUsuario."', rol_ID = '".$rol."',where usuario_ID = '".$usuario_ID."';";      
+      }
+      $result = mysql_query($query, $conexion) or die("error en la consulta");
+      $mensaje = "El usuario se ha creado exitosamente...";
+      $codMensaje = 1;
+    
+    }catch(PDOExecption $e){
+      $mensaje="No se ha procesado su peticion, comuniquese con el administrador del sistema";
+      $codMensaje =0;
+    }
+
+    }
+
+  if(isset($codMensaje) and isset($mensaje)){
+    if($codMensaje == 1){
+      echo '<div class="alert alert-success alert-succes">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong> Exito! </strong>'.$mensaje.'</div>';
+    }else{
+      echo '<div class="alert alert-danger alert-error">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong> Error! </strong>'.$mensaje.'</div>';
+    }
+  } 
+?>

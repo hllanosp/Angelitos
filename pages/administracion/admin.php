@@ -33,7 +33,6 @@
 
 //generando la cabecera de la pagina
 // require_once("../navbar.php");
-
  -->
 
 <div id="wrapper">
@@ -70,10 +69,36 @@
     </div>
     <div id="page-wrapper">
         <div id="contenedor">
-            <!-- cuerpo del panel -->
-            <?php 
-           require_once($maindir."pages/administracion/panel_usuarios/panel_usuarios.php");?>
-      <!-- fin del panel gestion de usuarios --> 
+          <div>
+            <h1 class="page-header">
+                <small>Administracion de Usuarios</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <span class="fa fa-dashboard"></span></i> Administracion
+                </li>
+                 
+            </ol>
+          </div>
+          <div  class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+              <div class="btn-group" role="group" aria-label="usuarios/logs">
+                  <!-- <button type="button" class="btn btn-small btn-default" id="cargar_usuarios">usuarios</button> -->
+              </div>
+              <div class="btn-group" role="group" aria-label="usuarios/logs">
+                  <!-- <button type="button" class="btn btn-default" id="cargas_logs">Logs</button> -->
+              </div>
+            </div>
+            <div class="panel-body ">
+              <!-- cuerpo del panel -->
+             <?php 
+             require_once("panel_usuarios/panel_gestion_usuarios.php");?>
+            </div>
+                
+                <!-- fin del panel gestion de usuarios -->
+
+          </div>
         </div>
       </div>
   <!--   </div> -->

@@ -1,5 +1,6 @@
 <?php 
 	include('login/seguridad.php');
+  include('login/time_out.php');
  ?>
 
 

@@ -19,32 +19,17 @@ require_once($maindir."login/seguridad.php");
 // // verifica el tiempo de la sesion 
 require_once($maindir."login/time_out.php");
 
-
-
   $id = (int)$_GET['usuario_ID'];
 
-   
   $query_1 = "select usuario.usuario_ID, usuario.usuario, usuario.rol_ID, usuario.fecha_creacion, fecha_alta, usuario.estado,
             rol.descripcion from usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID WHERE usuario.usuario_ID = '".$id."';";
   $result_1 = mysql_query($query_1, $conexion) or die("erorr consulta sql");
   $dato1 = mysql_fetch_array($result_1);
-
-
-
   ?>
-
-
 
 <form id = "form_insertar_usuario" class="form" role="form" name="form_insertar" >
           <div class="form-group">
-            <label  for="pwd">Empleado</label>
-            <div > 
-                <select class="form-control">
-                    <option> -- Seleccione un empleado -- </option>
-                    <option> B </option>
-                </select>
-            </div>
-          </div>
+           
          
           <div id="verUserName" class="form-group">
                         <label>Nombre del usuario</label>
@@ -78,21 +63,27 @@ require_once($maindir."login/time_out.php");
                 </select>
             </div>
           </div>
-
+          <br><br>
           <div class="form-group">
             <br>
                         <label class = "control-label">Estado del usuario</label>
               <?php 
               if($dato1['estado'] == 0){
-                  echo '<label class="radio-inline"><input type="radio" id="radio_activo" name="radio_activo" checked>Activo</label>';
-                echo '<label class="radio-inline"><input type="radio" id="radio_inactivo" name="radio_inactivo">Inactivo</label>';
+                  echo "<input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'primary' data-off-color  = 'danger' data-off-text = 'Inactivo' data-on-text = 'activo' type='checkbox' name='my-checkbox'   checked>  ";
               }else{
-                  echo '<label class="radio-inline"><input type="radio" id="radio_activo" name="radio_activo">Activo</label>';
-                  echo '<label class="radio-inline"><input type="radio" id="radio_inactivo" name="radio_inactivo" checked>Inactivo</label>';
+                  echo  "<input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '1' data-on-color = 'primary' data-off-color = 'danger' data-off-text = 'Inactivo' data-on-text = 'activo' type='checkbox' name='my-checkbox' > ";
               } 
               ?>
-          </div>  
+          </div> 
         </form>         
      <!-- final form -->
+     <script>
+
+       $("[name='my-checkbox']").bootstrapSwitch();
+       $('[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+          
+       });
+
+     </script>
 
 
