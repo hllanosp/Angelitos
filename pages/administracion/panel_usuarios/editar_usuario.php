@@ -16,6 +16,19 @@ require_once($maindir."login/seguridad.php");
   ?>
 
  <?php
+  // recibimos las variables por post
+  $usuario_ID = $_POST["usuario_ID"];
+  // $empleado = $_POST["empleado"];
+  // $nombreUsuarioAnt = $_POST["nombreUsuarioAnt"];
+  $nombreUsuario = $_POST["usuario"];
+  $password = $_POST["password"];
+  $rol = $_POST["rol"];
+  $estado = $_POST["estado"];
+  if( $estado == 0 ){
+    $fechaFinalizar=date("Y-m-d");
+  }else{
+    $fechaFinalizar=null;
+  }
 
  function crypt_blowfish($password, $digito = 7) {
      $set_salt = './1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -26,13 +39,6 @@ require_once($maindir."login/seguridad.php");
      }
      return crypt($password, $salt);
  }
-
- // $empleado = $_POST["empleado"];
-   $nombreUsuario = $_POST["nombreUsuario"];
-   $password = $_POST["password"];
-   $rol = (int)$_POST["rol"];
-   $usuario_ID = (int) $_POST['usuario_ID'];
-   // $fecha_creacion=date("Y/m/d");
 
   
   // Algunas validaciones
@@ -52,29 +58,23 @@ require_once($maindir."login/seguridad.php");
         
         $mensaje="Por favor seleccione un rol valido";
         $codMensaje =0;
-
     }
     else{
-    
-    try{
-      // realizamos la consulta
-      $password = crypt_blowfish($password);
-      // si el usuario se desactiva
-      if ($estado == 1) {
-        # code...
+      try{
+        // realizamos la consulta
+        $password = crypt_blowfish($password);
+        
+      
+          $query = "update usuario set usuario = '".$nombreUsuario."', contrasena = '".$password."',rol_ID = '".$rol."', fecha_alta = '".$fechaFinalizar."',estado = '".$estado."'where usuario_ID = '".$usuario_ID."';";      
+        
+        $result = mysql_query($query, $conexion) or die("error en la consulta");
+        $mensaje = "El usuario se ha modificado exitosamente...";
+        $codMensaje = 1;
+      
+      }catch(PDOExecption $e){
+        $mensaje="No se ha procesado su peticion, comuniquese con el administrador del sistema";
+        $codMensaje =0;
       }
-      else{
-        $query = "update usuario set usuario = '".$nombreUsuario."', rol_ID = '".$rol."',where usuario_ID = '".$usuario_ID."';";      
-      }
-      $result = mysql_query($query, $conexion) or die("error en la consulta");
-      $mensaje = "El usuario se ha creado exitosamente...";
-      $codMensaje = 1;
-    
-    }catch(PDOExecption $e){
-      $mensaje="No se ha procesado su peticion, comuniquese con el administrador del sistema";
-      $codMensaje =0;
-    }
-
     }
 
   if(isset($codMensaje) and isset($mensaje)){
