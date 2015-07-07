@@ -40,8 +40,8 @@ require_once($maindir."login/time_out.php");
     <font color = "Black">Gestion de Usuarios</font> 
     
 	<!-- Button trigger modal  boton que lanza la pantalla modal -->
-   <button id = "insertar" class="btn btn-info " data-toggle="modal" data-target="#myModal">
-      <i class="glyphicon glyphicon-wrench"></i>...nuevo usuario 
+   <button id = "insertar" class="btn btn-default " data-toggle="modal" data-target="#myModal">
+      <i class="glyphicon glyphicon-user"></i> Nuevo Usuario 
     </button>
  </h1>
   

@@ -49,6 +49,7 @@ body{
 }
 #div_contenido{
 	min-height: 600px;
+	background-color: white;
 }
 #panel_usuario{
 	margin :auto;

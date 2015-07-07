@@ -132,7 +132,8 @@ body {
         z-index: 1;
         position: absolute;
         width: 250px;
-        margin-top: 51px;
+        background-color: white;
+        
     }
 
     .navbar-top-links .dropdown-messages,

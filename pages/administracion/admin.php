@@ -43,7 +43,6 @@
                         <li class="nav-header"> 
                           <a id="usuarios" href="#"><i class="glyphicon glyphicon-home"></i> Inicio Administracion</a>
                         </li>
-                        <hr> </hr>
                         <li>
                             <a id="usuarios_activos" href="#"><i class="fa fa-dashboard fa-fw"></i>Usuarios Activos</a>
                         </li>

@@ -28,46 +28,62 @@ require_once($maindir."login/time_out.php");
      <div class="box-body table-responsive ">
        <table id = "tabla_usuarios" class='table table-bordered table-striped display' cellspacing="0" >
           <thead >
-            <tr>
-              <th>Usuario</th>
-              <th>Rol</th>
-              <th>Fecha Creacion</th>
-              <th>Estado</th>
-              <th>Editar</th>
+            <tr style="background-color: rgb(71, 58, 147);" >
+              <th style= "color: white">Usuario</th>
+              <th style= "color: white">Rol</th>
+              <th style= "color: white">Fecha Creacion</th>
+              <th style= "color: white">Conectado</th>
+              <th style= "color: white">Estado</th>
+              <th style= "color: white">Editar</th>
             </tr>
           </thead>
           <tbody>
           <?php
           //ejecutamos la consulta con ayuda del archivo conexion.php que se encuentra arriba
-            $query = "SELECT usuario.usuario, usuario.usuario_ID, usuario.rol_ID, usuario.fecha_creacion, usuario.estado, rol.rol_ID, rol.descripcion FROM usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID";
-            $result = mysql_query($query, $conexion) or die("asdfasdf");
+            $query = "SELECT usuario.Logeado, usuario.usuario, usuario.usuario_ID, usuario.rol_ID, usuario.fecha_creacion, usuario.estado, rol.rol_ID, rol.descripcion FROM usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID";
+            $result = mysql_query($query, $conexion) or die("Error de conexion");
             
             // aqui se rellena las filas
            while($row=mysql_fetch_array($result))
               {
                $estado = $row['estado'];
+               $Logueado = $row['Logeado'];
                echo "<tr>
-                       <td> $row[usuario] </td>
-                       <td> $row[descripcion] </td>
-                       <td> $row[fecha_creacion]</td>";
-                        if ($estado == 0) {
+                       <td><center> $row[usuario] </td></center>
+                       <td><center> $row[descripcion] </td></center>
+                       <td><center> $row[fecha_creacion]</td></center>";
+                       if ($Logueado == 0) {
                          echo"
-                           <td>
-                              <input data-off-color  = 'success' data-off-text = 'Activo' data-on-text = 'activo' type='checkbox' name='checkbox_tabla' disabled >
-                           </td>";
+                           <td><center>
+                              <label href=\"#\" class = \"\">Desconectado</label>
+                           </td></center>";
 
                        }
                        else{
                         echo"
                         
-                           <td>
-                              <input data-on-color = 'danger' data-off-text = 'Inactivo' data-on-text = 'Inactivo' type='checkbox' name='checkbox_tabla' disabled checked>
-                           </td>";
+                           <td><center>
+                              <label href=\"#\" class = \"label label-success\">Conectado</label>
+                           </td></center>";
+                       }
+                        if ($estado == 0) {
+                         echo"
+                           <td><center>
+                              <label href=\"#\" class = \"label label-warning\">Inactivo</label>
+                           </td></center>";
+
+                       }
+                       else{
+                        echo"
+                        
+                           <td><Center>
+                              <label href=\"#\" class = \"label label-primary \">Activo</label>
+                           </td></center>";
                        }
                        echo"
-                       <td>
-                          <button data-id = \"$row[usuario_ID]\" href=\"#\" class = \"btn_editar btn btn-info\" id = \"editar\" data-toggle=\"modal\" data-target = \"#modal_editar_usuario\">Actualizar</button>
-                        </td>
+                       <td><center>
+                          <button data-id = \"$row[usuario_ID]\" href=\"#\" class = \"btn_editar btn btn-info\" id = \"editar\" data-toggle=\"modal\" data-target = \"#modal_editar_usuario\"><i class=\"glyphicon glyphicon-edit\"></i></button>
+                        </td></center>
                     </tr>";
               }
           ?> 

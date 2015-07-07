@@ -37,11 +37,11 @@ require_once($maindir."login/time_out.php");
      <div class="box-body table-responsive ">
        <table id = "tabla_logs"  class='table table-bordered table-striped display' cellspacing="0" >
           <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Fecha Ingreso</th>
-              <th>Duración</th>
-              <th>IP</th>
+            <tr style="background-color: rgb(71, 58, 147);">
+              <th style= "color: white">Usuario</th>
+              <th style= "color: white">Fecha Ingreso</th>
+              <th style= "color: white">Duración</th>
+              <th style= "color: white">IP</th>
 
             </tr>
           </thead>
