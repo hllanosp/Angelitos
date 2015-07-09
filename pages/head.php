@@ -65,6 +65,8 @@ Administración
  <link rel="stylesheet" href="componentes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
  <script src = 'componentes/bootstrap-switch-master/dist/js/bootstrap-switch.js'></script>
  
+ <!-- iconos -->
+  <link href="componentes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <script >
 
    
@@ -121,7 +123,7 @@ Administración
             }
             echo <<<HTML
             <li class="dropdown">   
-            <a id ="Administracion" role="button" class="fa fa-cogs" > <i class = "glyphicon glyphicon-cog" ></i> Administración</a>
+            <a id ="Administracion" role="button" class="" > <i class = "glyphicon glyphicon-cog" ></i> Administración</a>
             </li> 
 HTML;
           

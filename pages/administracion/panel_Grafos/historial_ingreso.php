@@ -5,7 +5,7 @@
       </h1>
       <ol class="breadcrumb">
           <li class="active">
-              <span class="fa fa-dashboard"></span></i> Administracion
+              <span class="glyphicon glyphicon-cog"></span></i> Administracion
           </li>
            <li class="active">
               <i class="fa fa-table"></i> Historial de Ingreso

@@ -1,0 +1,9 @@
+<?php
+	session_start();
+	$usuario_ID = $_SESSION['usuario_ID'];
+	include "../conexion/conexion.php";
+	$query = "UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario_ID."' ;";
+	$result = mysql_query($query, $conexion) or die("error en la consulta");
+	$_SESSION = array();
+	session_destroy();
+?>

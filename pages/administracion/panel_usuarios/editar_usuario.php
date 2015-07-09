@@ -11,7 +11,7 @@ include ($maindir.'conexion/conexion.php');
 require_once($maindir."login/seguridad.php");
  
 // // verifica el tiempo de la sesion 
-// require_once($maindir."login/time_out.php");
+require_once($maindir."login/time_out.php");
 
   ?>
 
@@ -35,7 +35,7 @@ require_once($maindir."login/seguridad.php");
      $salt = sprintf('$2a$%02d$', $digito);
      for($i = 0; $i < 22; $i++)
      {
-         $salt .= $set_salt[mt_rand(0, 63)];
+       $salt .= $set_salt[mt_rand(0, 63)];
      }
      return crypt($password, $salt);
  }
@@ -54,11 +54,11 @@ require_once($maindir."login/seguridad.php");
     //     $codMensaje =0;
 
     // }
-    elseif($rol == -1){
+    // elseif($rol == -1){
         
-        $mensaje="Por favor seleccione un rol valido";
-        $codMensaje =0;
-    }
+    //     $mensaje="Por favor seleccione un rol valido";
+    //     $codMensaje =0;
+    // }
     else{
       try{
         // realizamos la consulta

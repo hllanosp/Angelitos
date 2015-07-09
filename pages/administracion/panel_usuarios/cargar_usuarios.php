@@ -94,6 +94,7 @@ require_once($maindir."login/time_out.php");
     
   </section>
 
+
 <!-- modal para modificar datos del usuario -->
 <!-- ===============MODAL PARA EDITAR LA INFORMACION DEL USUARIO -->
 <!-- Modal nuevo_usuario-->
@@ -107,11 +108,8 @@ require_once($maindir."login/time_out.php");
       <div class="modal-body">
         <!-- aqui se cargar el form actualizado con los datos del usuario a modificar -->
       </div>
-     <div class="modal-footer clearfix">
-            <button   id="editar_usuario" class="btn btn-primary">Agregar</button>
-          </div>
-    </div>
   </div>
+</div>
 </div>
 
     <!-- fin modal nuevo usuario-->
