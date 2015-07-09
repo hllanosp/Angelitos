@@ -82,16 +82,15 @@ echo "<h3>Usuario: <strong>".$dato1['usuario']."</strong></h3> Ingresado el ".$d
             <div class="col-md-8">
               <?php 
               if($dato1['estado'] == 0){
-                  echo "<input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'success' data-off-color  = 'danger' data-off-text = 'Inactivo' data-on-text = 'activo' type='checkbox' name='my-checkbox'   checked>  ";
+                  echo "<input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'primary' data-off-color  = 'danger' data-off-text = 'Inactivo' data-on-text = 'activo' type='checkbox' name='my-checkbox'   >  ";
               }else{
-                  echo  "<input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '1' data-on-color = 'success' data-off-color = 'danger' data-off-text = 'Inactivo' data-on-text = 'activo' type='checkbox' name='my-checkbox' > ";
+                  echo  "<input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '1' data-on-color = 'primary' data-off-color = 'danger' data-off-text = 'Inactivo' data-on-text = 'activo' type='checkbox' name='my-checkbox' checked> ";
               } 
               echo "<p>indica si el usuario esta disponible en el sistema</p> ";
               ?>
             </div>
-            <hr>
           </div> 
-              <hr></hr> 
+          <hr>
           <div class=" form-group clearfix">
               <button id="submit_actualizar_usuario"  class="btn btn-primary pull-right"><i class="glyphicon glyphicon-edit"></i> Actualizar Informacion</button>
           </div>
@@ -105,24 +104,20 @@ echo "<h3>Usuario: <strong>".$dato1['usuario']."</strong></h3> Ingresado el ".$d
 
          $("[name='my-checkbox']").bootstrapSwitch();
          $('[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
-            // $(this).data('id') = state;
-            estado = state;
             
+            estado = state;
          });
 
            // -------evento modal modificar USUARIO-----------------
         $("#submit_actualizar_usuario").click(function() {
-          
+          // confirm("esta seguro de modificar los datos...");
           if (validador()) {
             var datos ={ 
-              //empleado:$("#test option:selected").val(),
-
               "usuario":$('#nombreUsuario_actualizar').val(),
               "password":$('#password_actualizar').val(),
               "rol":$('#rol option:selected').val(),
               "estado":estado,
               "usuario_ID":$("#usuario_ID").val()
-
               // tipoProcedimiento:"insertar"
             };
 
@@ -131,9 +126,9 @@ echo "<h3>Usuario: <strong>".$dato1['usuario']."</strong></h3> Ingresado el ".$d
                 url: 'pages/administracion/panel_usuarios/editar_usuario.php',
                 type : 'post',
                 success: function(data) {
-                    $('#notificaciones').html(data);
-                    $("#modal_editar_usuario").modal('hide');
                     
+                    $("#modal_editar_usuario").modal('hide');
+                    $('#notificaciones').html(data);
                   }
 
               });
@@ -144,11 +139,6 @@ echo "<h3>Usuario: <strong>".$dato1['usuario']."</strong></h3> Ingresado el ".$d
         function validador(){
           return true;
         }
-
-
-
-      
-
       });/*fin del ready*/
      </script>
 

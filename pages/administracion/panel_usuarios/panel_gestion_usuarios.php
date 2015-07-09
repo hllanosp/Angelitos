@@ -36,14 +36,29 @@ require_once($maindir."login/time_out.php");
 <!-- =====================cuerpo del panel============================ -->
 
 <div class="container">
-  <h1 >  
-    <font color = "Black">Gestion de Usuarios</font> 
-    
-	<!-- Button trigger modal  boton que lanza la pantalla modal -->
-   <button id = "insertar" class="btn btn-default " data-toggle="modal" data-target="#myModal">
-      <i class="glyphicon glyphicon-user"></i> Nuevo Usuario 
-    </button>
- </h1>
+  <div class="col-lg-3 col-md-6"><a>
+                </a>
+                <div class="panel panel-default"><a>
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-user fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div>Agregar</div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                      <a>
+                        <div class="panel-footer" data-toggle="modal" data-target="#modal_insertar_usuario">
+                            <span class="pull-left">Nuevo Usuario</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                      </a>
+                </div>
+            </div>
   
 </div>
 <!-- Resultado de la modal_insertar_usuario -->
@@ -59,7 +74,7 @@ require_once($maindir."login/time_out.php");
 
 <!-- ===============MODAL PARA INGRESAR NUEVO USUARIO -->
 <!-- Modal nuevo_usuario-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_insertar_usuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -69,14 +84,14 @@ require_once($maindir."login/time_out.php");
       <div class="modal-body">
         <form id = "form_insertar_usuario" class="form" role="form" name="form_insertar" >
           <div class="form-group">
-            <label  for="pwd">Empleado</label>
+            <!-- <label  for="pwd">Empleado</label>
             <div > 
                 <select class="form-control">
-                    <option> -- Seleccione un empleado -- </option>
+                    <option>  Seleccione un empleado  </option>
                     <option> B </option>
                 </select>
             </div>
-          </div>
+          </div> -->
          
           <div id="verUserName" class="form-group">
                         <label>Nombre del usuario</label>
@@ -114,23 +129,19 @@ require_once($maindir."login/time_out.php");
      <!-- final form -->
       </div>
      <div class="modal-footer clearfix">
-            <button   id="guardar_usuario" class="btn btn-primary">Agregar</button>
-          </div>
+        <hr>
+        <button   id="guardar_usuario" class="btn btn-primary">Agregar</button>
+     </div>
     </div>
   </div>
 </div>
-
     <!-- fin modal nuevo usuario-->
-
-
 
     <script>
     $(document).ready(function(){
 
       // plugin para formato de la tabla
   
-
-    
       // --------------------------------------------------------------------
      
       // -------evento modal GUARDAR USUARIO----------------------------------------------
@@ -157,9 +168,7 @@ require_once($maindir."login/time_out.php");
                   $("#modal_insertar_usuario").modal('hide');
                   $('#notificaciones').html(data);
                   $('#nombreUsuario').val() = "";
-                  $('#password').val() = "";
-                  
-                }
+                  $('#password').val() = "";                }
 
             });
         };

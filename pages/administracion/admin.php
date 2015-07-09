@@ -2,7 +2,6 @@
  
 
  $maindir = "../../";
-  require_once($maindir."login/seguridad.php");
   if(isset($_GET['contenido']))
     {
       $contenido = $_GET['contenido'];
@@ -11,9 +10,12 @@
     {
       $contenido = 'administracion';
     }
+ require_once($maindir."login/seguridad.php");
  require_once("../navbar.php");
  include '../../conexion/conexion.php';
  require_once('../../login/time_out.php');
+ 
+
 ?>
 
 
@@ -74,12 +76,12 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <span class="fa fa-dashboard"></span></i> Administracion
+                    <span class="glyphicon glyphicon-cog"></span></i> Administracion
                 </li>
                  
             </ol>
           </div>
-          <div  class="panel panel-info">
+          <div  class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">
               <div class="btn-group" role="group" aria-label="usuarios/logs">
