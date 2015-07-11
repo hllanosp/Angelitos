@@ -34,7 +34,7 @@ require_once($maindir."login/time_out.php");
 echo "<h3>Usuario: <strong>".$dato1['usuario']."</strong></h3> Ingresado el ".$dias[date_format($date,'w')]." ".date_format($date,'d')." de ".$meses[date_format($date,'n')-1]. " del ".date_format($date,'Y'); ?>
 <hr>
 <!-- formulario para editar informacion de usuario -->
-<form class = "form" role="form" id="form_actualizar">
+<div class = "form" role="form" id="form_actualizar">
       <!-- para poder acceder a la variable usuario_ID por javascript -->
       <input type="hidden" id="usuario_ID" name="idUsuario" value="<?php echo $id; ?>">
           <div class="form-group">
@@ -94,7 +94,7 @@ echo "<h3>Usuario: <strong>".$dato1['usuario']."</strong></h3> Ingresado el ".$d
           <div class=" form-group clearfix">
               <button id="submit_actualizar_usuario"  class="btn btn-primary pull-right"><i class="glyphicon glyphicon-edit"></i> Actualizar Informacion</button>
           </div>
-      </form>    
+      </div>    
      <!-- final form -->
 
      <script>

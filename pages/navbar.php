@@ -10,7 +10,7 @@
 
 <div class="navbar navbar-default" id="subnav">
     <div class="col-md-12">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse2">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse2">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
