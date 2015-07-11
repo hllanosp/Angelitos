@@ -24,7 +24,7 @@
         <div class="col-md-12">
           <div class="featurette">
 
-			 <img class="featurette-image  pull-left" src="img/angel.jpg">
+			 <img class="featurette-image  pull-left" src="img/angel.png">
 			<div class="alert alert-danger"><h1>Esta es la Seccion de Esta es de Reportes</h1></div>
            
           </div>
@@ -35,6 +35,6 @@
 </div>
 
   <script>
-        $.backstretch("../img/fondo.jpg", {speed: 1000});
+       
     </script>
 <!-- /Main -->

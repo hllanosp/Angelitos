@@ -35,6 +35,6 @@ require_once("menu_permisos.php");
 </div>
 
   <script>
-        $.backstretch("../img/fondo.jpg", {speed: 1000});
+       
     </script>
 <!-- /Main -->
