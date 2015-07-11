@@ -10,7 +10,7 @@
     {
       $contenido = 'administracion';
     }
- require_once($maindir."login/seguridad.php");
+ // require_once($maindir."login/seguridad.php");
  require_once("../navbar.php");
  include '../../conexion/conexion.php';
  require_once('../../login/time_out.php');

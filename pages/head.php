@@ -18,7 +18,9 @@
   require_once("login/time_out.php");
   //require_once("navbar.php");
 ?>
-Administración
+<hr>
+
+
 
 <html lang="en">
 <head>
@@ -45,10 +47,10 @@ Administración
   <link rel="stylesheet" href="css/tablas.css">
 
   <!-- plugins para validar formulario -->
-  <script src = "componentes/jquery-validate/dist/jquery.validate.js" ></script>
+  <script src = "componentes/jquery-validation/dist/jquery.validate.js" ></script>
 
-  <link href="bower_components/morrisjs/morris.css" rel="stylesheet"> 
-  <script src = "bower_components/morrisjs/morris.js" ></script>
+  <link href="componentes/morrisjs/morris.css" rel="stylesheet"> 
+  <script src = "componentes/morrisjs/morris.js" ></script>
 
   <!-- estilo en el admin -->
   <link href="componentes/sb-admin-2.css" rel="stylesheet">
@@ -108,7 +110,7 @@ Administración
       </button>
       <img  id = "logo" src= "img/logo.png" role = "button" height = "50" >
     </div>
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <div class="collapse navbar-collapse navbar-ex1-collapses">
       <ul class="nav navbar-nav navbar-right">
       <?php
 
@@ -139,8 +141,8 @@ HTML;
   </div> 
   </nav>
   <!-- references -->
-  <script src = "../bootstrap/js/bootstrap.js"></script>
-  <script src = "../bootstrap/js/jquery.backstretch.min.js"></script>
+  
+  <script src = "componentes/jquery.backstretch.min.js"></script>
   <!-- imagen de fondo -->
   
 

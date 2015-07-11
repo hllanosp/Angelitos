@@ -24,7 +24,7 @@
         <div class="col-md-12">
           <div class="featurette">
 
-			 <img class="featurette-image  pull-left" src="img/puta.jpg">
+			 <img class="featurette-image  pull-left" src="">
 			<div class="alert alert-info"><h1>Esta es la Seccion del programa kanguro</h1><div>
            
           </div>
@@ -35,6 +35,6 @@
 </div>
 
   <script>
-        $.backstretch("../img/fondo.jpg", {speed: 1000});
+       
     </script>
 <!-- /Main -->

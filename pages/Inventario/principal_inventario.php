@@ -35,6 +35,6 @@
 </div>
 
   <script>
-        $.backstretch("../img/fondo.jpg", {speed: 1000});
-    </script>
+        
+  </script>
 <!-- /Main -->
