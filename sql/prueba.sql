@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.3
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 09-07-2015 a las 22:28:24
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 13-07-2015 a las 07:09:15
 -- Versión del servidor: 5.6.24
--- Versión de PHP: 5.5.24
+-- Versión de PHP: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,32 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `prueba`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Log_ID`(OUT `ID` INT(10) UNSIGNED, IN `usuario_log` VARCHAR(25), IN `fecha_ingreso` DATE, IN `ip_conexion` VARCHAR(40))
+    NO SQL
+    DETERMINISTIC
+INSERT into usuario_logs (id_logs,usuario_log,fecha_ingreso,ip_conexion)VALUES(1,@usuario_log,@fecha_ingreso,@ip_conexion)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_INSERTAR_LOG`(
+    IN IPCONG VARCHAR(40),
+    IN USER_LOG VARCHAR(25), 
+    OUT `ULTIMOID` INT(11))
+BEGIN 
+
+   START TRANSACTION;
+   
+   INSERT INTO usuario_logs ( usuario_log, fecha_ingreso, ip_conexion) VALUES ( USER_LOG, CURRENT_TIMESTAMP, IPCONG);
+ 
+     SET ULTIMOID = last_insert_id(); 
+   
+   COMMIT;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -93,10 +119,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`usuario`, `contrasena`, `rol_ID`, `usuario_ID`, `fecha_creacion`, `fecha_alta`, `estado`, `Logeado`) VALUES
-('pineda1234', '$2a$07$7PqV8qgy4K9toN3aiWoOueysZN8SOCoL.62VauwPTx7rPA4t46jRW', 1, 8, '2015-06-25', NULL, 0, 0),
+('pineda1234', '$2a$07$7PqV8qgy4K9toN3aiWoOueysZN8SOCoL.62VauwPTx7rPA4t46jRW', 1, 8, '2015-06-25', NULL, 1, 1),
 ('Arleandino', '$2a$07$.TYyvGoiHPP/jA0drgfN0e5hIfwd965he8El1tVxSe2r0VLaiCIr6', 5, 11, '2015-06-27', '2015-07-08', 0, 0),
 ('Arle Reyes', '$2a$07$p550WnRYfbI4VCVyZ.QZO.Zpwh5ST6j9Xk1Adca8WvHPvxecnDYuO', 5, 12, '2015-06-27', '2015-07-08', 0, 0),
-('hllanos', '$2a$07$h/tRPEKOlV5W6VKHhQDiNu9ndzSvhfbodhuxymdQF0MG7fB8XULSy', 1, 16, '2015-07-06', '0000-00-00', 1, 0),
+('hllanos', '$2a$07$TX1seqOwkG76jFPKlLpZe.3ajaLKclf0jzCSMfYXQOfGy0sM4Gyeu', 1, 16, '2015-07-06', '0000-00-00', 1, 0),
 ('hectorllanos', '$2a$07$88EXV6GmXGpYLoHx402l5OfhbaYXnqZ87pohRJNxHu1kIEx5WOYVm', 5, 17, '2015-07-08', '2015-07-08', 0, 0),
 ('prueba', '$2a$07$85JeqXKUI2z23IgA7bamaeCSr30hAq/EolgnIwfxL2t2YmFcys3au', 2, 18, '2015-07-08', NULL, 0, 0);
 
@@ -112,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `usuario_logs` (
   `fecha_ingreso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_salida` datetime NOT NULL,
   `ip_conexion` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario_logs`
@@ -268,7 +294,73 @@ INSERT INTO `usuario_logs` (`id_logs`, `usuario_log`, `fecha_ingreso`, `fecha_sa
 (148, 'hllanos', '2015-07-09 00:47:02', '0000-00-00 00:00:00', '127.0.0.1'),
 (149, 'hllanos', '2015-07-09 00:47:36', '0000-00-00 00:00:00', '127.0.0.1'),
 (150, 'hllanos', '2015-07-09 00:47:49', '0000-00-00 00:00:00', '127.0.0.1'),
-(151, 'hllanos', '2015-07-09 00:48:11', '0000-00-00 00:00:00', '127.0.0.1');
+(151, 'hllanos', '2015-07-09 00:48:11', '0000-00-00 00:00:00', '127.0.0.1'),
+(152, 'pineda1234', '2015-07-12 09:58:23', '0000-00-00 00:00:00', '::1'),
+(153, 'pineda1234', '2015-07-12 10:03:59', '0000-00-00 00:00:00', '::1'),
+(154, 'hllanos', '2015-07-12 10:07:44', '0000-00-00 00:00:00', '192.168.0.14'),
+(155, 'pineda1234', '2015-07-12 10:23:31', '0000-00-00 00:00:00', '::1'),
+(156, 'pineda1234', '2015-07-12 10:24:48', '0000-00-00 00:00:00', '::1'),
+(157, 'pineda1234', '2015-07-12 10:25:52', '0000-00-00 00:00:00', '::1'),
+(158, 'pineda1234', '2015-07-12 10:26:20', '0000-00-00 00:00:00', '::1'),
+(159, 'pineda1234', '2015-07-12 10:31:38', '0000-00-00 00:00:00', '::1'),
+(160, 'pineda1234', '2015-07-12 10:50:52', '0000-00-00 00:00:00', '::1'),
+(161, 'pineda1234', '2015-07-12 10:50:57', '0000-00-00 00:00:00', '::1'),
+(162, 'pineda1234', '2015-07-12 10:51:26', '0000-00-00 00:00:00', '::1'),
+(163, 'pineda1234', '2015-07-12 10:54:13', '0000-00-00 00:00:00', '::1'),
+(164, 'pineda1234', '2015-07-12 10:56:03', '0000-00-00 00:00:00', '::1'),
+(165, 'pineda1234', '2015-07-12 11:51:39', '0000-00-00 00:00:00', '192.168.0.12'),
+(166, 'pineda1234', '2015-07-12 13:05:57', '0000-00-00 00:00:00', '192.168.0.15'),
+(167, 'hllanos', '2015-07-12 14:55:11', '0000-00-00 00:00:00', '::1'),
+(168, 'pineda1234', '2015-07-12 18:07:58', '0000-00-00 00:00:00', '::1'),
+(169, 'pineda1234', '2015-07-12 18:18:04', '0000-00-00 00:00:00', '::1'),
+(170, 'pineda1234', '2015-07-12 18:18:31', '0000-00-00 00:00:00', '::1'),
+(171, 'pineda1234', '2015-07-12 18:20:07', '0000-00-00 00:00:00', '::1'),
+(172, 'pineda1234', '2015-07-12 18:21:05', '0000-00-00 00:00:00', '::1'),
+(173, 'pineda1234', '2015-07-12 18:21:47', '0000-00-00 00:00:00', '::1'),
+(174, 'pineda1234', '2015-07-12 18:22:19', '0000-00-00 00:00:00', '::1'),
+(175, 'pineda1234', '2015-07-12 18:22:37', '0000-00-00 00:00:00', '::1'),
+(176, 'pineda1234', '2015-07-12 18:24:09', '0000-00-00 00:00:00', '::1'),
+(177, 'pineda1234', '2015-07-12 18:25:44', '0000-00-00 00:00:00', '::1'),
+(182, 'pineda1234', '2015-07-12 21:00:47', '0000-00-00 00:00:00', '::1'),
+(183, 'pineda1234', '2015-07-12 21:07:35', '0000-00-00 00:00:00', '::1'),
+(184, 'pineda1234', '2015-07-12 21:09:29', '2015-07-12 21:09:31', '::1'),
+(185, 'pineda1234', '2015-07-12 21:09:42', '2015-07-12 21:10:37', '::1'),
+(186, 'pineda1234', '2015-07-12 21:10:41', '0000-00-00 00:00:00', '::1'),
+(187, 'pineda1234', '2015-07-12 21:12:07', '0000-00-00 00:00:00', '::1'),
+(188, 'pineda1234', '2015-07-12 21:51:15', '0000-00-00 00:00:00', '::1'),
+(189, 'pineda1234', '2015-07-12 22:05:36', '0000-00-00 00:00:00', '::1'),
+(190, 'pineda1234', '2015-07-12 22:08:14', '2015-07-12 22:08:37', '::1'),
+(191, 'pineda1234', '2015-07-12 22:08:42', '0000-00-00 00:00:00', '::1'),
+(192, 'pineda1234', '2015-07-12 22:09:20', '2015-07-12 22:10:07', '::1'),
+(193, 'pineda1234', '2015-07-12 22:10:11', '0000-00-00 00:00:00', '::1'),
+(194, 'pineda1234', '2015-07-12 22:11:45', '0000-00-00 00:00:00', '::1'),
+(195, 'pineda1234', '2015-07-12 22:13:17', '0000-00-00 00:00:00', '::1'),
+(196, 'pineda1234', '2015-07-12 22:13:37', '0000-00-00 00:00:00', '::1'),
+(197, 'pineda1234', '2015-07-12 22:14:21', '0000-00-00 00:00:00', '::1'),
+(198, 'pineda1234', '2015-07-12 22:14:54', '0000-00-00 00:00:00', '::1'),
+(199, 'pineda1234', '2015-07-12 22:16:06', '0000-00-00 00:00:00', '::1'),
+(200, 'pineda1234', '2015-07-12 22:16:42', '2015-07-12 22:16:56', '::1'),
+(201, 'pineda1234', '2015-07-12 22:17:03', '2015-07-12 22:17:21', '::1'),
+(202, 'pineda1234', '2015-07-12 22:19:24', '0000-00-00 00:00:00', '::1'),
+(203, 'pineda1234', '2015-07-12 22:19:58', '0000-00-00 00:00:00', '::1'),
+(204, 'pineda1234', '2015-07-12 22:21:42', '2015-07-12 22:21:59', '::1'),
+(205, 'pineda1234', '2015-07-12 22:22:04', '0000-00-00 00:00:00', '::1'),
+(206, 'pineda1234', '2015-07-12 22:22:41', '0000-00-00 00:00:00', '::1'),
+(207, 'pineda1234', '2015-07-12 22:26:47', '2015-07-12 22:27:26', '::1'),
+(208, 'pineda1234', '2015-07-12 22:34:09', '2015-07-12 22:34:30', '::1'),
+(209, 'pineda1234', '2015-07-12 22:35:30', '2015-07-12 22:35:34', '::1'),
+(210, 'pineda1234', '2015-07-12 22:36:17', '2015-07-12 22:36:38', '::1'),
+(211, 'pineda1234', '2015-07-12 22:36:59', '2015-07-12 22:37:01', '::1'),
+(212, 'pineda1234', '2015-07-12 22:37:06', '2015-07-12 22:37:38', '::1'),
+(213, 'pineda1234', '2015-07-12 22:43:14', '2015-07-12 22:43:23', '::1'),
+(214, 'pineda1234', '2015-07-12 22:43:58', '0000-00-00 00:00:00', '::1'),
+(215, 'pineda1234', '2015-07-12 23:00:04', '0000-00-00 00:00:00', '::1'),
+(216, 'pineda1234', '2015-07-12 23:00:30', '0000-00-00 00:00:00', '::1'),
+(217, 'pineda1234', '2015-07-12 23:01:04', '0000-00-00 00:00:00', '::1'),
+(218, 'pineda1234', '2015-07-12 23:01:27', '0000-00-00 00:00:00', '::1'),
+(219, 'pineda1234', '2015-07-12 23:04:23', '0000-00-00 00:00:00', '::1'),
+(220, 'pineda1234', '2015-07-12 23:04:45', '2015-07-12 23:04:49', '::1'),
+(221, 'pineda1234', '2015-07-12 23:04:54', '0000-00-00 00:00:00', '::1');
 
 --
 -- Índices para tablas volcadas
@@ -284,16 +376,13 @@ ALTER TABLE `rol`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`usuario_ID`),
-  ADD KEY `FK_usuario_rol` (`rol_ID`);
+  ADD PRIMARY KEY (`usuario_ID`), ADD KEY `FK_usuario_rol` (`rol_ID`);
 
 --
 -- Indices de la tabla `usuario_logs`
 --
 ALTER TABLE `usuario_logs`
-  ADD PRIMARY KEY (`id_logs`),
-  ADD KEY `usuario_log` (`usuario_log`),
-  ADD KEY `usuario_log_2` (`usuario_log`);
+  ADD PRIMARY KEY (`id_logs`), ADD KEY `usuario_log` (`usuario_log`), ADD KEY `usuario_log_2` (`usuario_log`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -308,7 +397,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuario_logs`
 --
 ALTER TABLE `usuario_logs`
-  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=152;
+  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=222;
 --
 -- Restricciones para tablas volcadas
 --
@@ -317,7 +406,7 @@ ALTER TABLE `usuario_logs`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`rol_ID`) REFERENCES `rol` (`rol_ID`);
+ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`rol_ID`) REFERENCES `rol` (`rol_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
