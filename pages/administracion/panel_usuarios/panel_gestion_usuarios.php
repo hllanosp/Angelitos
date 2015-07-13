@@ -28,7 +28,7 @@ include ($maindir.'conexion/conexion.php');
 // require_once($maindir."login/seguridad.php");
  
 // // verifica el tiempo de la sesion 
-require_once($maindir."login/time_out.php");
+//require_once($maindir."login/time_out.php");
 
   ?>
 

@@ -15,7 +15,7 @@
 
 
   // require_once("funciones/check_session.php");
-  require_once("login/time_out.php");
+  //require_once("login/time_out.php");
   //require_once("navbar.php");
 ?>
 <hr>
@@ -91,15 +91,18 @@
       $("#div_contenido" ).load( "pages/Perfil/perfil.php");
     });
 
-    //agregar mas eventos aqui
+    //
 
    });
 
 </script>
+
+
+
 </head>
 
 
-<body >
+<body onload="inicio()" onkeypress="reset()" onclick="reset()" onMouseMove="reset()" >
   <nav class="navbar navbar-inverse navbar-fixed-top header">
   <div class="col-md-12">
      <div class="navbar-header">

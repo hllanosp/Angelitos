@@ -1,6 +1,6 @@
 <?php 
 	include('login/seguridad.php');
-  include('login/time_out.php');
+  //include('login/time_out.php');
  ?>
 
 <!-- Este codigo en js, tiene como funcion cerrar el log en la base de datos y destruir las variables de sesion si se ha cerrado la pestaña del navegador -->
@@ -13,8 +13,28 @@
 	$.ajax("funciones/eventoCerrarPestaña.php");
     }
 </script>
+
 <!-- Fin de codigo js -->
 
+<script type="text/javascript">
+var time;
+function inicio() { 
+  time = setTimeout(function() { 
+    $(document).ready(function(e) {
+		document.location.href = "login/time_out.php";
+});
+	},20000);//fin timeout
+}//fin inicio
+
+function reset() {
+  clearTimeout(time);//limpia el timeout para resetear el tiempo desde cero 
+  time = setTimeout(function() { 
+    $(document).ready(function(e) {
+    document.location.href = "login/time_out.php";
+});
+	},20000);//fin timeout
+}//fin reset
+</script> 
 <?php
   
 $maindir = "";
@@ -26,7 +46,7 @@ $maindir = "";
 
 <!-- Div principal el cual contendra la generacion dinamica de la pag -->
 <!-- div_contenido -->
-<div id="div_contenido">
+<div id="div_contenido" onload="inicio()" onkeypress="reset()" onclick="reset()" onMouseMove="reset()">
 
 <?php
   

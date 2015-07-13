@@ -6,6 +6,7 @@
 } 
 
 	include("../conexion/conexion.php");
+	include("../conexion/config.inc.php");
 
 	$usuario = $_POST['usuario'];
 	$password = $_POST['password'];
@@ -57,9 +58,28 @@
 					
 					$user_ip = get_client_ip();
 					
-					
-					$query = "INSERT INTO usuario_logs ( usuario_log, fecha_ingreso, ip_conexion) VALUES ( '$usuario', CURRENT_TIMESTAMP,'$user_ip')";
-								$result = mysql_query($query, $conexion) or die("error en la consulta");
+								//Obtencion del ID-logs
+							
+
+				 	  $stmt = $db->prepare("CALL SP_INSERTAR_LOG(?,?,@ultID)");
+				 	
+					      //Introduccion de parametros
+			          $stmt->bindParam(1, $user_ip, PDO::PARAM_STR); 
+			          $stmt->bindParam(2, $usuario, PDO::PARAM_STR);
+			          
+			         
+			       		 $stmt->execute();
+			      		 $output = $db->query("select @ultID")->fetch(PDO::FETCH_ASSOC);
+			     		 //var_dump($output);
+			      		$_SESSION['Log_id']= $output['@ultID'];
+			      		 $codMensaje = 0;
+
+
+
+
+								
+							
+
 
 		            header('location:../index.php');
 		        }else{

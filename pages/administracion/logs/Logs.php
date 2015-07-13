@@ -17,7 +17,7 @@ include ($maindir.'conexion/conexion.php');
 
  
 // // verifica el tiempo de la sesion 
-require_once($maindir."login/time_out.php");
+//require_once($maindir."login/time_out.php");
 
   ?>
 
@@ -40,7 +40,8 @@ require_once($maindir."login/time_out.php");
             <tr style="background-color: rgb(71, 58, 147);">
               <th style= "color: white">Usuario</th>
               <th style= "color: white">Fecha Ingreso</th>
-              <th style= "color: white">Duración</th>
+               <th style= "color: white">Hora Inicio</th>
+              <th style= "color: white">Hora Salida</th>
               <th style= "color: white">IP</th>
 
             </tr>
@@ -48,18 +49,20 @@ require_once($maindir."login/time_out.php");
           <tbody>
           <?php
           //ejecutamos la consulta con ayuda del archivo conexion.php que se encuentra arriba
-            $query = "SELECT usuario_log,fecha_ingreso,fecha_salida,ip_conexion FROM usuario_logs ORDER BY fecha_ingreso DESC  ";
+            $query = "SELECT usuario_log,fecha_ingreso,date_format(fecha_ingreso,'%H:%i:%s') as Inicio,date_format(fecha_salida,'%H:%i:%s') as Salida,ip_conexion FROM usuario_logs ORDER BY fecha_ingreso DESC  ";
             $result = mysql_query($query, $conexion) or die("asdfasdf");
+
+
             
             // aqui se rellena las filas
            while($row=mysql_fetch_array($result))
               {
-              
                echo "<tr>
                        <td> $row[usuario_log] </td>
                        <td> $row[fecha_ingreso] </td>
-                       <td> $row[fecha_salida]</td>
-					    <td> $row[ip_conexion]</td>
+                       <td> $row[Inicio] </td>
+                       <td> $row[Salida]</td>
+					             <td> $row[ip_conexion]</td>
                     </tr>";
               }
           ?> 

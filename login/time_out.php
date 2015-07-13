@@ -1,34 +1,25 @@
 <?php
+  session_start();
+ 
+  if (isset($_SESSION['usuario_ID'])) {
+      include("../conexion/conexion.php");
+      $usuario = $_SESSION['usuario_ID'];
+      $log_id=$_SESSION['Log_id'];
 
-/*
-if(!isset($_SESSION)) 
-{ 
-session_set_cookie_params(1800); // las sesion de los cookies durara 1 hora en el cliente  
-session_start();
-}
-*/
+    $query = "UPDATE usuario_logs SET fecha_salida = CURRENT_TIMESTAMP  where   id_logs = '".$log_id."' ;";
 
-if(!isset($_SESSION['time_out']))
-  {
-    $_SESSION['time_out'] = time();
-  }
-else
-  {
-    $tiempo = $_SESSION['time_out'];
+     mysql_query($query, $conexion) or die("error en la consulta");
 
-    if (time() >  $tiempo + 60*1) 
-      {
-       // session timed out
-        // // $_SESSION['contenido'] = $contenido;
-        
-        // session_destroy();
+      $query = "UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario."' ;";
 
-        // header("location:../login/ckeckout.php");
-      }
-    else
-      {
-        $_SESSION['time_out'] = time();
-      }
-  }
+        mysql_query($query, $conexion) or die("error en la consulta");
 
-?>
+      
+
+
+
+    }
+  $_SESSION = array();
+  session_destroy();
+  header("location:../login/login.php?error_code=5, $log_id");
+ ?>
