@@ -5,8 +5,6 @@
 
 <!-- Este codigo en js, tiene como funcion cerrar el log en la base de datos y destruir las variables de sesion si se ha cerrado la pestaña del navegador -->
 <script language="JavaScript" type="text/javascript">
-
-    window.onbeforeunload = accionAntesDeSalir;
      
     function accionAntesDeSalir()
     {
@@ -46,7 +44,7 @@ $maindir = "";
 
 <!-- Div principal el cual contendra la generacion dinamica de la pag -->
 <!-- div_contenido -->
-<div id="div_contenido" onload="inicio()" onkeypress="reset()" onclick="reset()" onMouseMove="reset()">
+<div id="div_contenido" onUnload = "accionAntesDeSalir()" accionAntesd onload="inicio()" onkeypress="reset()" onclick="reset()" onMouseMove="reset()">
 
 <?php
   
