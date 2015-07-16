@@ -1,5 +1,5 @@
  <?php
- 
+
 
  $maindir = "../../";
   if(isset($_GET['contenido']))
@@ -10,32 +10,14 @@
     {
       $contenido = 'administracion';
     }
- // require_once($maindir."login/seguridad.php");
- require_once("../navbar.php");
- include '../../conexion/conexion.php';
-// require_once('../../login/time_out.php');
  
+ require_once($maindir."pages/navbar.php");
+ include ($maindir.'conexion/conexion.php');
+ require_once($maindir."funciones/seguridad.php");
+
+  
 
 ?>
-
-
-<!-- anadimos los archivos necesarios para trabajar-->
-<!-- 
-// archivo de seguridad
-// include('seguridad.php')
-
-//acceso a bases de datos
-// include '../../conexion/conexion.php';
-
-// verifica la sesion
-// require_once($maindir."login/seguridad.php");
- 
-// // verifica el tiempo de la sesion 
-// require_once($maindir."login/time_out.php");
-
-//generando la cabecera de la pagina
-// require_once("../navbar.php");
- -->
 
 <div id="wrapper">
             <div class="navbar-default sidebar" role="navigation">

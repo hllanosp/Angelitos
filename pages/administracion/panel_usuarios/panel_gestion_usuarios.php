@@ -7,28 +7,15 @@
   $maindir = "../../";
 
 
-// <!-- Inicializamos el contenido de esta pagina> -->
-
-  // if(isset($_GET['contenido']))
-  //     {
-  //       $contenido = $_GET['contenido'];
-  //     }
-  //   else
-  //     {
-  //       $contenido = 'administracion';
-  //     }
-
-
 // <!-- anadimos los archivos necesarios para trabajar-->
 
 //acceso a bases de datos
+  if(!isset($_SESSION['auntentificado']) ) {
+    header("location: ../../../login/login.php?error_code=2");
+   } 
+
 include ($maindir.'conexion/conexion.php');
 
-// verifica la sesion
-// require_once($maindir."login/seguridad.php");
- 
-// // verifica el tiempo de la sesion 
-//require_once($maindir."login/time_out.php");
 
   ?>
 
@@ -51,7 +38,7 @@ include ($maindir.'conexion/conexion.php');
                     </div>
                     </a>
                       <a>
-                        <div class="panel-footer" data-toggle="modal" data-target="#modal_insertar_usuario">
+                        <div rol = "button" class="panel-footer" data-toggle="modal" data-target="#modal_insertar_usuario">
                             <span class="pull-left">Nuevo Usuario</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>

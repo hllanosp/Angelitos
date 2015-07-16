@@ -2,16 +2,13 @@
 <!-- inserta el usuario en la base de datos -->
 <?php 
   // <!-- Declaramos la direccion raiz -->
-  $maindir = "../../../";
+  $maindir = "../../";
 
-//acceso a bases de datos
-include ($maindir.'conexion/conexion.php');
-
-// verifica la sesion
-// require_once($maindir."login/seguridad.php");
- 
-// // verifica el tiempo de la sesion 
-//require_once($maindir."login/time_out.php");
+  //acceso a bases de datos
+  include ($maindir.'conexion/conexion.php');
+  if(!isset($_SESSION['auntentificado']) ) {
+      header("location: ../../../login/login.php?error_code=2");
+   } 
 
   ?>
 

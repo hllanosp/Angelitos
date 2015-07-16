@@ -4,5 +4,5 @@
  $host = 'localhost';
  $dbname = 'prueba';
  $username = 'root';
- $password = 'root';
+ $password = '';
 ?> 

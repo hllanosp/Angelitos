@@ -77,7 +77,7 @@
     //Al precionar la etiqueta Administracion se levanta el evento de click 
     $("#Administracion").click(function(event) {
       event.preventDefault();
-      $("#div_contenido" ).load( "pages/administracion/admin.php");
+      $("#div_contenido" ).load( "pages/administracion/admin.php?contenido=administracion");
     }); 
     
     //Al precionar el logo se redirecciona a la pantalla de home

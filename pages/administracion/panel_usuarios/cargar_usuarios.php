@@ -5,19 +5,17 @@
 <?php 
 
 
- // <!-- Declaramos la direccion raiz -->
-  $maindir = "../../";
+// <!-- Declaramos la direccion raiz -->
+   $maindir = "../../";
 
 // <!-- anadimos los archivos necesarios para trabajar-->
 
 //acceso a bases de datos
-include ($maindir.'conexion/conexion.php');
+  include ($maindir.'conexion/conexion.php');
+  if(!isset($_SESSION['auntentificado']) ) {
+      header("location: ../../../login/login.php?error_code=2");
+  } 
 
-// verifica la sesion
-
- 
-// // verifica el tiempo de la sesion 
-//require_once($maindir."login/time_out.php");
 
   ?>
 
@@ -120,8 +118,6 @@ include ($maindir.'conexion/conexion.php');
   $(document).ready(function() {
     // stilos de los switches
     $("[name='checkbox_tabla']").bootstrapSwitch();
-    
-
     
 		$(".btn_editar").on('click',function(){
           
