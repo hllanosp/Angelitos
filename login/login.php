@@ -122,7 +122,7 @@
                 $mensaje = "Usuario o contraseña incorrecto";
                 break;
             case 2:
-                $mensaje = "Credenciales inválidas, por favor trate de ingresar dentro de unos segundos";
+                $mensaje = "Credenciales inválidas, por favor trate de ingresar con un usuario y contraseña validos";
                 break;
             case 3:
                 $mensaje = "Por el momento no es posible procesar su petición, por favor trate de ingresar dentro de unos momentos";

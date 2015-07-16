@@ -1,5 +1,5 @@
 <?php 
-	include('login/seguridad.php');
+	include('funciones/seguridad.php');
   //include('login/time_out.php');
  ?>
 
@@ -21,7 +21,7 @@ function inicio() {
     $(document).ready(function(e) {
 		document.location.href = "login/time_out.php";
 });
-	},20000);//fin timeout
+	},2000000);//fin timeout
 }//fin inicio
 
 function reset() {

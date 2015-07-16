@@ -63,7 +63,7 @@
 
 				 	  $stmt = $db->prepare("CALL SP_INSERTAR_LOG(?,?,@ultID)");
 				 	
-					      //Introduccion de parametros
+					     //Introduccion de parametros
 			          $stmt->bindParam(1, $user_ip, PDO::PARAM_STR); 
 			          $stmt->bindParam(2, $usuario, PDO::PARAM_STR);
 			          
@@ -73,12 +73,6 @@
 			     		 //var_dump($output);
 			      		$_SESSION['Log_id']= $output['@ultID'];
 			      		 $codMensaje = 0;
-
-
-
-
-								
-							
 
 
 		            header('location:../index.php');
