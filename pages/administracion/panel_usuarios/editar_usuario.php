@@ -5,10 +5,10 @@
   session_start() ;
   $maindir = "../../../";
 
-  //acceso a bases de datos
-  // if(!isset($_SESSION['auntentificado']) ) {
-  //     header("location: ../../../login/login.php?error_code=2");
-  //    }
+  // acceso a bases de datos
+  if(!isset($_SESSION['auntentificado']) ) {
+      header("location: ../../../login/login.php?error_code=2");
+     }
   include ($maindir.'conexion/conexion.php');
 
 
