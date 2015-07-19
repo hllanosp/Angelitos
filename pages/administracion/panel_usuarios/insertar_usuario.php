@@ -1,19 +1,18 @@
- 
+
 <!-- inserta el usuario en la base de datos -->
-<?php 
+<?php
   // <!-- Declaramos la direccion raiz -->
-  $maindir = "../../";
+  session_start() ;
+  $maindir = "../../../";
 
   //acceso a bases de datos
   include ($maindir.'conexion/conexion.php');
   if(!isset($_SESSION['auntentificado']) ) {
       header("location: ../../../login/login.php?error_code=2");
-   } 
-
+   }
   ?>
 
  <?php
-
  function crypt_blowfish($password, $digito = 7) {
      $set_salt = './1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
      $salt = sprintf('$2a$%02d$', $digito);
@@ -30,28 +29,22 @@
    $rol = (int)$_POST["rol"];
    $fecha_creacion=date("Y/m/d");
 
-  
+
   // Algunas validaciones
   if($nombreUsuario == "" or $password == ""){
-    
     $mensaje="Por favor introduzca un nombre de usuario y password validos";
         $codMensaje =0;
-    
     }
     // elseif($empleado == -1){
-
     //     $mensaje="Por favor seleccione un empleado valido";
     //     $codMensaje =0;
-
     // }
     elseif($rol == -1){
-        
         $mensaje="Por favor seleccione un rol valido";
         $codMensaje =0;
-
     }
     else{
-    
+
     try{
       // realizamos la consulta
       $password = crypt_blowfish($password);
@@ -59,12 +52,11 @@
       $result = mysql_query($query, $conexion) or die("error en la consulta");
       $mensaje = "El usuario se ha creado exitosamente...";
       $codMensaje = 1;
-    
+
     }catch(PDOExecption $e){
       $mensaje="No se ha procesado su peticion, comuniquese con el administrador del sistema";
       $codMensaje =0;
     }
-
     }
 
   if(isset($codMensaje) and isset($mensaje)){
@@ -77,5 +69,5 @@
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong> Error! </strong>'.$mensaje.'</div>';
     }
-  } 
+  }
 ?>

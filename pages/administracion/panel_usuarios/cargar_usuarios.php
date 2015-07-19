@@ -2,19 +2,19 @@
 <!---INFORMACION DE LA PAGINA- -->
 
 
-<?php 
+<?php
 
-
+  
 // <!-- Declaramos la direccion raiz -->
    $maindir = "../../";
 
 // <!-- anadimos los archivos necesarios para trabajar-->
 
 //acceso a bases de datos
-  include ($maindir.'conexion/conexion.php');
   if(!isset($_SESSION['auntentificado']) ) {
       header("location: ../../../login/login.php?error_code=2");
-  } 
+  }
+  include ($maindir.'conexion/conexion.php');
 
 
   ?>
@@ -40,7 +40,7 @@
           //ejecutamos la consulta con ayuda del archivo conexion.php que se encuentra arriba
             $query = "SELECT usuario.Logeado, usuario.usuario, usuario.usuario_ID, usuario.rol_ID, usuario.fecha_creacion, usuario.estado, rol.rol_ID, rol.descripcion FROM usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID";
             $result = mysql_query($query, $conexion) or die("Error de conexion");
-            
+
             // aqui se rellena las filas
            while($row=mysql_fetch_array($result))
               {
@@ -59,7 +59,7 @@
                        }
                        else{
                         echo"
-                        
+
                            <td><center>
                               <label href=\"#\" class = \"label label-success\">Conectado</label>
                            </td></center>";
@@ -73,7 +73,7 @@
                        }
                        else{
                         echo"
-                        
+
                            <td><Center>
                               <label href=\"#\" class = \"label label-primary \">Activo</label>
                            </td></center>";
@@ -84,12 +84,12 @@
                         </td></center>
                     </tr>";
               }
-          ?> 
+          ?>
           </tbody>
       </table>
     </div>
     <!-- fin tabla -->
-    
+
   </section>
 
 
@@ -118,9 +118,9 @@
   $(document).ready(function() {
     // stilos de los switches
     $("[name='checkbox_tabla']").bootstrapSwitch();
-    
+
 		$(".btn_editar").on('click',function(){
-          
+
 
           id = $(this).data('id');
           // alert('id='+id);
@@ -131,6 +131,6 @@
         });
 		 // example es el id de la tabla
 		    $('#tabla_usuarios').dataTable();
-	
+
       });
 </script>

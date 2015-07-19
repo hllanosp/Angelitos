@@ -6,10 +6,10 @@
     $query = "UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario."' ;";
           $result = mysql_query($query, $conexion) or die("error en la consulta");
   }
-  
+
 	$_SESSION = array();
 	session_destroy();
-	
+
  ?>
 
 
@@ -30,7 +30,7 @@
     $( "a" ).click(function() {
       login();
     });
-    
+
 });
 </script>
 
@@ -39,15 +39,15 @@
   function login(){
      var usuario = $('#usuario');
      var password = $('#password');
-     
+
      var text = "";
      var valid = true;
-     
+
      if(usuario == "" || password == ""){
          text = "Introduzca un nombre de usuario y contraseña validos";
          valid = false;
      }
-     
+
      if(!valid){
          alert(text);
          return;
@@ -55,13 +55,13 @@
 
      // var loginInfo = "login_submit.php?usuario=" + encodeURIComponent(usuario) +
      //                 "&password=" + encodeURIComponent(password);
-     
+
      // redirigimos hacia el archivo loginInfo
      var loginInfo = "login_submit.php"
      window.location.href = loginInfo;
   }
-    
-</script> 
+
+</script>
 
 <body class =  "well">
   <div class ="container well sha" >
@@ -110,7 +110,7 @@
                 break;
         }
    }
-   
+
    function error_print($error_code)
    {
        $mensaje = "";
@@ -189,7 +189,7 @@
     </div>
     <!--  end forgotbox -->
   <!-- </div> - -->
-      
+
   <!-- references -->
   <script src = "../bootstrap/js/bootstrap.js"></script>
   <script src = "../componentes/jquery.backstretch.min.js"></script>

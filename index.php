@@ -1,11 +1,11 @@
-<?php 
+<?php
 	include('funciones/seguridad.php');
   //include('login/time_out.php');
  ?>
 
 <!-- Este codigo en js, tiene como funcion cerrar el log en la base de datos y destruir las variables de sesion si se ha cerrado la pestaña del navegador -->
 <script language="JavaScript" type="text/javascript">
-     
+
     function accionAntesDeSalir()
     {
 	$.ajax("funciones/eventoCerrarPestaña.php");
@@ -16,8 +16,8 @@
 
 <script type="text/javascript">
 var time;
-function inicio() { 
-  time = setTimeout(function() { 
+function inicio() {
+  time = setTimeout(function() {
     $(document).ready(function(e) {
 		document.location.href = "login/time_out.php";
 });
@@ -25,16 +25,16 @@ function inicio() {
 }//fin inicio
 
 function reset() {
-  clearTimeout(time);//limpia el timeout para resetear el tiempo desde cero 
-  time = setTimeout(function() { 
+  clearTimeout(time);//limpia el timeout para resetear el tiempo desde cero
+  time = setTimeout(function() {
     $(document).ready(function(e) {
     document.location.href = "login/time_out.php";
 });
-	},20000);//fin timeout
+	},200000);//fin timeout
 }//fin reset
-</script> 
+</script>
 <?php
-  
+
 $maindir = "";
 
   // crea el encabezado de la pagina
@@ -47,7 +47,7 @@ $maindir = "";
 <div id="div_contenido" onUnload = "accionAntesDeSalir()" accionAntesd onload="inicio()" onkeypress="reset()" onclick="reset()" onMouseMove="reset()">
 
 <?php
-  
+
   if(!isset($_GET['contenido']))
   {
     require_once("pages/home.php");

@@ -1,6 +1,4 @@
  <?php
-
-
  $maindir = "../../";
   if(isset($_GET['contenido']))
     {
@@ -10,12 +8,10 @@
     {
       $contenido = 'administracion';
     }
- 
+
  require_once($maindir."pages/navbar.php");
  include ($maindir.'conexion/conexion.php');
  require_once($maindir."funciones/seguridad.php");
-
-  
 
 ?>
 
@@ -23,8 +19,8 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        
-                        <li class="nav-header"> 
+
+                        <li class="nav-header">
                           <a id="usuarios" href="#"><i class="glyphicon glyphicon-home"></i> Inicio Administracion</a>
                         </li>
                         <li>
@@ -32,11 +28,11 @@
                         </li>
                         <li>
                             <a  id="logs" href="#"><i class="fa fa-file-pdf-o fa-fw"></i> Logs</a>
-                            
+
                         </li>
                         <li>
                             <a  id="historial_ingreso" href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Historial Ingreso</a>
-                            
+
                         </li>
                                                <li data-popover="true" rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-gears fa-fw"></i>Mantenimineto<i class="fa fa-collapse"></i></a></li>
                     <li><ul class="premium-menu nav nav-list collapse">
@@ -48,7 +44,7 @@
                 </div>
             </div>
                 <!-- /.sidebar-collapse -->
-         
+
     </div>
     <div id="page-wrapper">
         <div id="contenedor">
@@ -60,7 +56,7 @@
                 <li class="active">
                     <span class="glyphicon glyphicon-cog"></span></i> Administracion
                 </li>
-                 
+
             </ol>
           </div>
           <div  class="panel panel-default">
@@ -75,10 +71,10 @@
             </div>
             <div class="panel-body ">
               <!-- cuerpo del panel -->
-             <?php 
+             <?php
              require_once("panel_usuarios/panel_gestion_usuarios.php");?>
             </div>
-                
+
                 <!-- fin del panel gestion de usuarios -->
 
           </div>
