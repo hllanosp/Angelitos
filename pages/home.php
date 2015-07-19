@@ -8,7 +8,7 @@
     {
       $contenido = 'home';
     }
-;
+
 
   require_once("navbar.php");
 
@@ -18,17 +18,17 @@
 <div class="container-fluid" >
 <div class="row">
     <div class="col-sm-12">
-        
+
        <div class="row">
         <div class="col-md-12">
           <div class="featurette">
 
 			 <img class="featurette-image  pull-left" src="img/home.jpg">
-           
+
           </div>
         </div>
       </div>
-    </div><!--/col-span-9-->     
+    </div><!--/col-span-9-->
 </div>
 </div>
 

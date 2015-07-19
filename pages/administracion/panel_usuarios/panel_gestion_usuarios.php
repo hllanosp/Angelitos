@@ -2,24 +2,16 @@
 <!---INFORMACION DE LA PAGINA- -->
 
 
-<?php 
+<?php
   // <!-- Declaramos la direccion raiz -->
   $maindir = "../../";
-
-
-// <!-- anadimos los archivos necesarios para trabajar-->
-
-//acceso a bases de datos
+  // <!-- anadimos los archivos necesarios para trabajar-->
+  //acceso a bases de datos
   if(!isset($_SESSION['auntentificado']) ) {
     header("location: ../../../login/login.php?error_code=2");
-   } 
-
-include ($maindir.'conexion/conexion.php');
-
-
+   }
+    include ($maindir.'conexion/conexion.php');
   ?>
-
-
 <!-- =====================cuerpo del panel============================ -->
 
 <div class="container">
@@ -38,7 +30,7 @@ include ($maindir.'conexion/conexion.php');
                     </div>
                     </a>
                       <a>
-                        <div rol = "button" class="panel-footer" data-toggle="modal" data-target="#modal_insertar_usuario">
+                        <div role = "button" class="panel-footer" data-toggle="modal" data-target="#modal_insertar_usuario">
                             <span class="pull-left">Nuevo Usuario</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
@@ -46,11 +38,11 @@ include ($maindir.'conexion/conexion.php');
                       </a>
                 </div>
             </div>
-  
+
 </div>
-<!-- Resultado de la modal_insertar_usuario -->
-<div id = "notificaciones">
+
   <!-- AREA DE NOFIFICACIONES -->
+<div id = "notificaciones">
 </div>
 <!-- - -->
 
@@ -59,8 +51,7 @@ include ($maindir.'conexion/conexion.php');
 
 
 
-<!-- ===============MODAL PARA INGRESAR NUEVO USUARIO -->
-<!-- Modal nuevo_usuario-->
+<!-- ===============MODAL PARA INGRESAR NUEVO USUARIO============= -->
 <div class="modal fade" id="modal_insertar_usuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -69,56 +60,47 @@ include ($maindir.'conexion/conexion.php');
           <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i> Ingreso de Datos del Usuario </h4>
       </div>
       <div class="modal-body">
-        <form id = "form_insertar_usuario" class="form" role="form" name="form_insertar" >
+
+        <form id = "form_insertar_usuario" class="form" name="form_insertar_usuario"  >
           <div class="form-group">
-            <!-- <label  for="pwd">Empleado</label>
-            <div > 
-                <select class="form-control">
-                    <option>  Seleccione un empleado  </option>
-                    <option> B </option>
-                </select>
-            </div>
-          </div> -->
-         
+
           <div id="verUserName" class="form-group">
                         <label>Nombre del usuario</label>
-                        <input type="text" class="form-control" id="nombreUsuario" value = "">
+                        <input type="text" class="form-control" name = "nombreUsuario" id="nombreUsuario" title = "Solo son permitidos numeros y letras 5 caracteres minimo" minlength="5" pattern="[a-zA-Z0-9]{5,}"autocomplete = "off"required >
                     </div>
           <div id="verPass" class="form-group">
                         <label>Contraseña </label>
-                        <input type="password" class="form-control" id="password" name="password" value = "">
+                        <input type="password" class="form-control" id="password" name="password"  title = "Solo son permitidos numeros y letras 8 caracteres minimo"  pattern="[a-zA-Z0-9]{5,}" autocomplete = "off"required >
                     </div>
           <div id="verPass2" class="form-group">
                         <label class="control-label">Repetir contraseña</label>
                         <input type="password" class="form-control" id="password2" name="password2" value = "">
                     </div>
-          <div class="form-group">
+          <div id = "verrol"class="form-group">
             <label class="" for="pwd">Rol del usuario</label>
-            <div class="col-sm-10"> 
+            <div class="col-sm-10">
                 <select id = "rol" class="form-control">
-                    <option> -- Seleccione un rol de usuario -- </option>
-                    <!-- cargamos los roles desde la base de datos -->
-                    
                     <?php
+                    $default = -1;
+                    echo "<option selected value= '-1'> -- Seleccione un rol de usuario -- </option>";
                     $query = "SELECT rol.rol_ID, rol.descripcion FROM rol ";
 
-                    $result = mysql_query($query, $conexion) or die("asdfasdf");
+                    $result = mysql_query($query, $conexion) or die("");
                     while($row=mysql_fetch_array($result))
                       {
 
                        echo "<option> $row[rol_ID] $row[descripcion] </option>";
                       }
-                      ?> 
+                      ?>
                 </select>
             </div>
           </div>
-        </form>         
+           <div class="modal-footer clearfix">
+              <button  id="guardar_usuario" class="btn btn-primary">Agregar</button>
+           </div>
+        </form>
      <!-- final form -->
       </div>
-     <div class="modal-footer clearfix">
-        <hr>
-        <button   id="guardar_usuario" class="btn btn-primary">Agregar</button>
-     </div>
     </div>
   </div>
 </div>
@@ -126,133 +108,63 @@ include ($maindir.'conexion/conexion.php');
 
     <script>
     $(document).ready(function(){
-
-      // plugin para formato de la tabla
-  
-      // --------------------------------------------------------------------
-     
-      // -------evento modal GUARDAR USUARIO----------------------------------------------
-      $("#guardar_usuario").click(function() {
-
-        
-        // $("#form_insertar_usuario").validate();
+      // tratamiento del submit del formulario ingresar nuevo usuario
+      $("#form_insertar_usuario").submit(function(e) {
+          e.preventDefault();
         if (validador()) {
-          var datos ={ 
-            //empleado:$("#test option:selected").val(),
-
+          var datos ={
             "nombreUsuario":$('#nombreUsuario').val(),
             "password":$('#password').val(),
             "rol":$('#rol option:selected').val()
             // tipoProcedimiento:"insertar"
           };
-
           $.ajax({
               data: datos,
               url: 'pages/administracion/panel_usuarios/insertar_usuario.php',
               type : 'post',
               success: function(data) {
-                  
                   $("#modal_insertar_usuario").modal('hide');
                   $('#notificaciones').html(data);
                   $('#nombreUsuario').val() = "";
-                  $('#password').val() = "";                }
-
+                  $('#password').val() = "";
+              }
             });
         };
       });
-        
-      // ------------funcion para validar Modal_insertar_usuario-------------
+
+    //validacion personlizada
      function validador(){
-      var nombre = $("#nombreUsuario").val();
       var pass1 = $("#password").val();
-    var pass2 = $("#password2").val();
-    
-    //valida si se han itroduzido otros digitos aparte de numeros y letras\
-    
-    $('.form-group').removeClass("has-warning");
-    $('.form-group').removeClass("has-error");
-    
-    // 
-    // if(soloLetrasYNumeros(nombre) == false){
-    //     $("#verUserName").addClass("has-warning");
-    //   $("#verUserName").find("label").text("Nombre del usuario: Solo son permitidos numeros y letras");
-    //   $("#nombreUsuario").focus();
-    //   return false;
-    // }else{
-    //     $("#verUserName").removeClass("has-warning");
-    //   $("#verUserName").find("label").text("Nombre del usuario");
-    // }
-    
-    // if(soloLetrasYNumeros(pass1) == false){
-    //     $("#verPass").addClass("has-warning");
-    //   $("#verPass").find("label").text("Contraseña: Solo son permitidos numeros y letras");
-    //   $("#password").focus();
-    //   return false;
-    // }else{
-    //     $("#verPass").removeClass("has-warning");
-    //   $("#verPass").find("label").text("Contraseña (Maximo 20 carateres)");
-    // } 
-    
-    // if(soloLetrasYNumeros(pass2) == false){
-    //     $("#verPass2").addClass("has-warning");
-    //   $("#verPass2").find("label").text("Repetir contraseña: Solo son permitidos numeros y letras");
-    //   $("#password2").focus();
-    //   return false;
-    // }else{
-    //     $("#verPass2").removeClass("has-warning");
-    //   $("#verPass2").find("label").text("Repetir contraseña");
-    // }
-    
-    // valida si el password es el mismo que se ingreso la segunda vez
-    if(pass1 == pass2){
-        $("#verPass2").removeClass("has-error");
-      $("#verPass2").find("label").text("Repetir contraseña");
-    }else{
-        $("#verPass2").addClass("has-error");
-      $("#verPass2").find("label").text("Repetir contraseña: Error la contraseña no coincide");
-      $("#password2").focus();
-        return false;
-    }
-    
-    // valida el numero de caracteres valido para el nombre
-    if(nombre.length < 5){
-        $("#verUserName").addClass("has-warning");
-      $("#verUserName").find("label").text("Nombre del usuario: El nombre debe ser mayor a 5 caracteres");
-      $("#nombreUsuario").focus();
-      return false;
-    }
-    // valida el numero de caracteres valido para la contrasena
-    if(pass1.length < 8){
-        $("#verPass").addClass("has-warning");
-      $("#verPass").find("label").text("Contraseña: debe contener por lo menos 8 caracteres");
-      $("#password").focus();
-      return false;
-    }
-    
-    if(pass2.length < 8){
-        $("#verPass2").addClass("has-warning");
-      $("#verPass2").find("label").text("Repetir contraseña: debe contener por lo menos 8 caracteres");
-      $("#password2").focus();
-      return false;
-    }
-    
-    return true;
-     }
-     // fin del validador
-     function soloLetrasYNumeros(text){
-      var letters = /^[0-9a-zA-Z]+$/; 
-      if(text.match(letters)){
-          return true;
+      var pass2 = $("#password2").val();
+      var rol = $('#rol option:selected').val();
+
+      $('.form-group').removeClass("has-warning");
+      $('.form-group').removeClass("has-error");
+
+      // valida si el password es el mismo que se ingreso la segunda vez
+      if(pass1 == pass2){
+          $("#verPass2").removeClass("has-error");
+          $("#verPass2").find("label").text("Repetir contraseña");
+
       }else{
+          $("#verPass2").addClass("has-error");
+          $("#verPass2").find("label").text("Repetir contraseña: Error la contraseña no coincide");
+          $("#password2").focus();
           return false;
       }
-     }
-
-
-
-  }); 
+      //valida si selecciona un rol valido
+      if (rol == '-1' ) {
+        $("#verrol").addClass("has-error");
+        $("#verrol").find("label").text("Selecciona un rol de usuario valido");
+        $("#verrol").focus();
+        return false;
+      } else {
+        $("#verrol").removeClass("has-error");
+        $("#verrol").find("label").text("-- Seleccione un rol de usuario -- ");
+      }
+      return true;
+    }
+    //fin del validador
+  });
   // fin del evento ready
   </script>
-
-
-
