@@ -5,19 +5,18 @@
   session_start(); 
 } 
 
-	include("../conexion/conexion.php");
 	include("../conexion/config.inc.php");
 
 	$usuario = $_POST['usuario'];
 	$password = $_POST['password'];
 	// $password = (int)$password;
 
-	$query = "select usuario,usuario_ID,contrasena,Logeado,estado, rol_ID from usuario where usuario = '".$usuario."' ;";
-	$result = mysql_query($query, $conexion) or die("error en la consulta");
-	$filas = mysql_num_rows($result);
+	$query =  $db->prepare("select usuario,usuario_ID,contrasena,Logeado,estado, rol_ID from usuario where usuario = '".$usuario."' ;");
+	$query->execute();
+	$result = $query -> rowCount();
 	
-	if($filas == 1){
-		$row = mysql_fetch_array($result);
+	if($result >0){
+		$row = $query->fetch();
         $passwordenBD = $row['contrasena'];
         $logeado = $row['Logeado'];
         $estado = $row['estado'];
@@ -29,8 +28,9 @@
             if(($logeado == 0)){
             	if(($estado == 1)){
 
-            		$query = "UPDATE usuario SET Logeado = 1 where usuario_ID = '".$usuario_ID."' ;";
-					$result = mysql_query($query, $conexion) or die("error en la consulta");
+            		$query2 = $db ->prepare("UPDATE usuario SET Logeado = 1 where usuario_ID = '".$usuario_ID."' ;");
+					// $result = mysql_query($query, $conexion) or die("error en la consulta");
+					$query2->execute();
 		            $_SESSION['auntentificado'] = '1';
 		            $_SESSION['user'] = $usuario;
 		            $_SESSION['usuario_ID'] = $usuario_ID;
@@ -57,23 +57,17 @@
 					}
 					
 					$user_ip = get_client_ip();
-					
-								//Obtencion del ID-logs
-							
+					//Obtencion del ID-logs
+				 	$stmt = $db->prepare("CALL SP_INSERTAR_LOG(?,?,@ultID)");
+					//Introduccion de parametros
+			        $stmt->bindParam(1, $user_ip, PDO::PARAM_STR); 
+			        $stmt->bindParam(2, $usuario, PDO::PARAM_STR);
+			        $stmt->execute();
 
-				 	  $stmt = $db->prepare("CALL SP_INSERTAR_LOG(?,?,@ultID)");
-				 	
-					     //Introduccion de parametros
-			          $stmt->bindParam(1, $user_ip, PDO::PARAM_STR); 
-			          $stmt->bindParam(2, $usuario, PDO::PARAM_STR);
-			          
-			         
-			       		 $stmt->execute();
-			      		 $output = $db->query("select @ultID")->fetch(PDO::FETCH_ASSOC);
-			     		 //var_dump($output);
-			      		$_SESSION['Log_id']= $output['@ultID'];
-			      		 $codMensaje = 0;
-
+		      		$output = $db->query("select @ultID")->fetch(PDO::FETCH_ASSOC);
+		     		//var_dump($output);
+		      		$_SESSION['Log_id']= $output['@ultID'];
+		      		$codMensaje = 0;
 
 		            header('location:../index.php');
 		        }else{

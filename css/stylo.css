@@ -5,10 +5,9 @@
 }
 body{
 	
-	padding-top:20px;
+	padding-top:38px;
 	padding-bottom: 0px;
-	
-	font-family: Arial;
+	font-family: Arial, "Helvetica Neue", sans-serif;
 	
 }
 .login{
@@ -78,4 +77,5 @@ body{
  }
  #modal_editar_usuario h3{
  	color:#222222;
- }
+ 
+ /*navbar*/

@@ -11,18 +11,18 @@
   // <!-- anadimos los archivos necesarios para trabajar-->
 
   //acceso a bases de datos
-  include ($maindir.'conexion/conexion.php');
   if(!isset($_SESSION['auntentificado']) ) {
     header("location: ../../../login/login.php?error_code=2");
   }
-
+  include ($maindir.'conexion/config.inc.php');
 
   $id = (int)$_GET['usuario_ID'];
 
-  $query_1 = "select usuario.usuario_ID, usuario.usuario, usuario.rol_ID, usuario.fecha_creacion, fecha_alta, usuario.estado,
-            rol.descripcion from usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID WHERE usuario.usuario_ID = '".$id."';";
-  $result_1 = mysql_query($query_1, $conexion) or die("erorr consulta sql");
-  $dato1 = mysql_fetch_array($result_1);
+  $query_1 = $db->prepare("select usuario.usuario_ID, usuario.usuario, usuario.rol_ID, usuario.fecha_creacion, fecha_alta, usuario.estado,
+            rol.descripcion from usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID WHERE usuario.usuario_ID = '".$id."';");
+  // $result_1 = mysql_query($query_1, $conexion) or die("erorr consulta sql");
+  $query_1->execute();
+  $dato1 = $query_1->fetch();
 
   $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
   $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -58,12 +58,11 @@ echo "<h3>Usuario: <strong>".$dato1['usuario']."</strong></h3> Ingresado el ".$d
                     <option> -- Seleccione un rol de usuario -- </option>
                     <!-- cargamos los roles desde la base de datos -->
                    <?php
-                    $query2 = "SELECT rol.rol_ID, rol.descripcion FROM rol ";
+                    $query2 = $db ->prepare("SELECT rol.rol_ID, rol.descripcion FROM rol ");
+                    $query2 -> execute();
 
-                    $result2 = mysql_query($query2, $conexion) or die("asdfasdf");
-                    while($row=mysql_fetch_array($result2))
+                    while($row=$query2 ->fetch())
                       { ?>
-
                        <option <?php if($row['rol_ID'] == $dato1['rol_ID']){ echo 'selected'; } ?> value="<?php echo $row['rol_ID'];?>"> <?php echo $row['descripcion'] ?> </option>
                       <?php  }
                       ?>

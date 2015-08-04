@@ -16,7 +16,7 @@
   $maindir = "../../../";
 
 //acceso a bases de datos
-include ($maindir.'conexion/conexion.php');
+include ($maindir.'conexion/config.inc.php');
 
 // // verifica la sesion
 // require_once($maindir."login/seguridad.php");
@@ -26,14 +26,14 @@ include ($maindir.'conexion/conexion.php');
 
   try{
 
-    $query = "select count(estado) as cuenta from usuario where estado = 1";
-    $result = mysql_query($query, $conexion) or die("error en la consulta");
+    $query = $db->prepare("select count(estado) as cuenta from usuario where estado = 1");
+    $query ->execute();
 
-    $query = "select count(estado) as cuenta from usuario where estado = 0";
-    $result1 = mysql_query($query, $conexion) or die("error en la consulta");
-    
-    $numero = mysql_fetch_array($result);
-    $numero1 = mysql_fetch_array($result1);
+    $query2 = $db->prepare("select count(estado) as cuenta from usuario where estado = 0");
+    $query2->execute();    
+
+    $numero = $query ->fetch();
+    $numero1 = $query2->fetch();
     $codMensaje = 1;
   }
   catch(PDOExecption $e){

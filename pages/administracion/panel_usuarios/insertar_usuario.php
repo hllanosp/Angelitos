@@ -6,13 +6,11 @@
   $maindir = "../../../";
 
   //acceso a bases de datos
-  include ($maindir.'conexion/conexion.php');
+  include ($maindir.'conexion/config.inc.php');
   if(!isset($_SESSION['auntentificado']) ) {
       header("location: ../../../login/login.php?error_code=2");
    }
-  ?>
 
- <?php
  function crypt_blowfish($password, $digito = 7) {
      $set_salt = './1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
      $salt = sprintf('$2a$%02d$', $digito);
@@ -48,8 +46,9 @@
     try{
       // realizamos la consulta
       $password = crypt_blowfish($password);
-      $query = "insert into usuario (usuario, contrasena, rol_ID, fecha_creacion, estado) VALUES ('".$nombreUsuario."','".$password."','".$rol."','".$fecha_creacion."',0);";
-      $result = mysql_query($query, $conexion) or die("error en la consulta");
+      $query = $db->prepare("insert into usuario (usuario, contrasena, rol_ID, fecha_creacion, estado) VALUES ('".$nombreUsuario."','".$password."','".$rol."','".$fecha_creacion."',1);");
+      // $result = mysql_query($query, $conexion) or die("error en la consulta");
+      $query->execute();
       $mensaje = "El usuario se ha creado exitosamente...";
       $codMensaje = 1;
 
@@ -71,3 +70,9 @@
     }
   }
 ?>
+<!-- efecto de alerta temporal -->
+<script type="text/javascript">
+  // setTimeout(function() {
+  //   $("#notificaciones").fadeOut(1500);
+  // },4000);
+</script>

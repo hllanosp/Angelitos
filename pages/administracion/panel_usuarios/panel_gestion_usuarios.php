@@ -10,11 +10,11 @@
   if(!isset($_SESSION['auntentificado']) ) {
     header("location: ../../../login/login.php?error_code=2");
    }
-    include ($maindir.'conexion/conexion.php');
+    include ($maindir.'conexion/config.inc.php');
   ?>
 <!-- =====================cuerpo del panel============================ -->
 
-<div class="container">
+<!-- <div class="container">
   <div class="col-lg-3 col-md-6"><a>
                 </a>
                 <div class="panel panel-default"><a>
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-</div>
+</div> -->
 
   <!-- AREA DE NOFIFICACIONES -->
 <div id = "notificaciones">
@@ -83,10 +83,9 @@
                     <?php
                     $default = -1;
                     echo "<option selected value= '-1'> -- Seleccione un rol de usuario -- </option>";
-                    $query = "SELECT rol.rol_ID, rol.descripcion FROM rol ";
-
-                    $result = mysql_query($query, $conexion) or die("");
-                    while($row=mysql_fetch_array($result))
+                    $query = $db->prepare("SELECT rol.rol_ID, rol.descripcion FROM rol ");
+                    $query ->execute();
+                    while($row= $query->fetchAll())
                       {
 
                        echo "<option> $row[rol_ID] $row[descripcion] </option>";

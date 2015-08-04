@@ -23,7 +23,7 @@
   // --------------------------------------------------------------
   if($contenido == 'home'){
     echo <<<HTML
-      <li  class="active"><a role='button' id="home" >Inicio</a></li>
+      <li  class="active"><a role='button' id="home">Inicio</a></li>
 HTML;
   }
   else{
@@ -43,7 +43,7 @@ HTML;
       //     break;
       // }
       echo <<<HTML
-      <li class="active"><a id="neonatos">Neonatos</a></li>
+      <li class="active"><a id="neonatos active" >Neonatos</a></li>
 
 HTML;
     }
@@ -65,7 +65,7 @@ HTML;
         //     break;
         // }
           echo <<<HTML
-          <li class="active"><a role="button" id="reportes">Reportes</a></li>
+          <li class="active"><a role="button" id="reportes" active>Reportes</a></li>
 HTML;
       }
       else{

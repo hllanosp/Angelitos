@@ -4,23 +4,21 @@
 
 <?php
 
-  
+
 // <!-- Declaramos la direccion raiz -->
    $maindir = "../../";
 
 // <!-- anadimos los archivos necesarios para trabajar-->
 
-//acceso a bases de datos
   if(!isset($_SESSION['auntentificado']) ) {
       header("location: ../../../login/login.php?error_code=2");
   }
-  include ($maindir.'conexion/conexion.php');
-
-
+  //acceso a bases de datos
+  include ($maindir.'conexion/config.inc.php');
   ?>
 
   <section >
-    <h3 class="box-title" style = "color:black">Usuarios</h3>
+    <!-- <h3 class="box-title" style = "color:black"></h3> -->
 
 
      <div class="box-body table-responsive ">
@@ -38,11 +36,10 @@
           <tbody>
           <?php
           //ejecutamos la consulta con ayuda del archivo conexion.php que se encuentra arriba
-            $query = "SELECT usuario.Logeado, usuario.usuario, usuario.usuario_ID, usuario.rol_ID, usuario.fecha_creacion, usuario.estado, rol.rol_ID, rol.descripcion FROM usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID";
-            $result = mysql_query($query, $conexion) or die("Error de conexion");
-
-            // aqui se rellena las filas
-           while($row=mysql_fetch_array($result))
+            $query  = $db->prepare("SELECT usuario.Logeado, usuario.usuario, usuario.usuario_ID, usuario.rol_ID, usuario.fecha_creacion, usuario.estado, rol.rol_ID, rol.descripcion FROM usuario INNER JOIN rol ON usuario.rol_ID = rol.rol_ID");
+            $query->execute();
+            $result1 = $query->fetchAll();
+              foreach($result1 as $row)
               {
                $estado = $row['estado'];
                $Logueado = $row['Logeado'];

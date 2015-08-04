@@ -9,9 +9,7 @@
   if(!isset($_SESSION['auntentificado']) ) {
       header("location: ../../../login/login.php?error_code=2");
      }
-  include ($maindir.'conexion/conexion.php');
-
-
+  include ($maindir.'conexion/config.inc.php');
   ?>
 
 
@@ -65,9 +63,10 @@
         $password = crypt_blowfish($password);
 
 
-          $query = "update usuario set usuario = '".$nombreUsuario."', contrasena = '".$password."',rol_ID = '".$rol."', fecha_alta = '".$fechaFinalizar."',estado = '".$estado."'where usuario_ID = '".$usuario_ID."';";
-
-        $result = mysql_query($query, $conexion) or die("error en la consulta");
+          $query = $db->prepare("update usuario set usuario = '".$nombreUsuario."', contrasena = '".$password."',rol_ID = '".$rol."', fecha_alta = '".$fechaFinalizar."',estado = '".$estado."'where usuario_ID = '".$usuario_ID."';");
+          $query->execute();
+        // $result = mysql_query($query, $conexion) or die("error en la consulta");
+        
         $mensaje = "El usuario se ha modificado exitosamente...";
         $codMensaje = 1;
 
@@ -79,13 +78,18 @@
 
   if(isset($codMensaje) and isset($mensaje)){
     if($codMensaje == 1){
-      echo '<div class="alert alert-success alert-succes">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
+      echo '<div class="alert alert-success  alert-dismissable">
         <strong> Exito! </strong>'.$mensaje.'</div>';
     }else{
-      echo '<div class="alert alert-danger alert-error">
+      echo '<div class="alert alert-danger alert-dismissable">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong> Error! </strong>'.$mensaje.'</div>';
     }
   }
 ?>
+<!-- efecto alerta temporal -->
+<script type="text/javascript">
+  // setTimeout(function() {
+  //   $("#notificaciones").fadeOut(1500);
+  // },4000);
+</script>

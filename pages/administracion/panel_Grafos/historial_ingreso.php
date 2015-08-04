@@ -15,13 +15,13 @@
 
  <?php 
         $maindir = "../../../";
-        require_once($maindir."conexion/conexion.php");
+        require_once($maindir."conexion/config.inc.php");
       
       try{
 
-            $query = "Select YEAR(fecha_ingreso) as year, MONTHNAME(fecha_ingreso) as Mes, COUNT(day(fecha_ingreso)) as count
-                      from (Select fecha_ingreso from usuario_logs where fecha_ingreso > now() - interval 5 month) as t1 group by month(fecha_ingreso)";
-            $result = mysql_query($query, $conexion) or die("error en la consulta");
+            $query = $db->prepare("Select YEAR(fecha_ingreso) as year, MONTHNAME(fecha_ingreso) as Mes, COUNT(day(fecha_ingreso)) as count
+                      from (Select fecha_ingreso from usuario_logs where fecha_ingreso > now() - interval 5 month) as t1 group by month(fecha_ingreso)");
+            $query ->execute();
 
       }catch(PDOExecption $e){
             $mensaje="Error en la obtencion de datos";
@@ -49,9 +49,9 @@
                 categories: 
                 [
                     <?php 
-                        $numItems = mysql_num_rows($result);
+                        $numItems = $query->rowCount();
                         $cuenta = 0;        
-                        while($row = mysql_fetch_array($result)){ 
+                        while($row = $query->fetch()){ 
                             $x = $row['Mes'].$row['year'];
                             echo "'".$x."'";
                             if(++$cuenta != $numItems) {
@@ -95,12 +95,12 @@
                         data: 
                         [
                             <?php 
-                                $query = "Select YEAR(fecha_ingreso) as year, MONTHNAME(fecha_ingreso) as Mes, COUNT(day(fecha_ingreso)) as count
-                                        from (Select fecha_ingreso from usuario_logs where fecha_ingreso > now() - interval 5 month) as t1 group by month(fecha_ingreso)";
-                                $result = mysql_query($query, $conexion) or die("error en la consulta");
-                                $numItems = mysql_num_rows($result);
+                                $query2 = $db->prepare("Select YEAR(fecha_ingreso) as year, MONTHNAME(fecha_ingreso) as Mes, COUNT(day(fecha_ingreso)) as count
+                                        from (Select fecha_ingreso from usuario_logs where fecha_ingreso > now() - interval 5 month) as t1 group by month(fecha_ingreso)");
+                                $query2->execute();
+                                $numItems = $query2->rowCount();
                                 $cuenta = 0;
-                                while($row = mysql_fetch_array($result)){ 
+                                while($row = $query2->fetch()){ 
                                     $y = $row['count'];
                                     echo $y;
                                     if(++$cuenta <= $numItems) {

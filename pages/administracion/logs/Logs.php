@@ -11,7 +11,7 @@
 // <!-- anadimos los archivos necesarios para trabajar-->
 
 //acceso a bases de datos
-include ($maindir.'conexion/conexion.php');
+include ($maindir.'conexion/config.inc.php');
 
 // verifica la sesion
 
@@ -49,13 +49,13 @@ include ($maindir.'conexion/conexion.php');
           <tbody>
           <?php
           //ejecutamos la consulta con ayuda del archivo conexion.php que se encuentra arriba
-            $query = "SELECT usuario_log,fecha_ingreso,date_format(fecha_ingreso,'%H:%i:%s') as Inicio,date_format(fecha_salida,'%H:%i:%s') as Salida,ip_conexion FROM usuario_logs ORDER BY fecha_ingreso DESC  ";
-            $result = mysql_query($query, $conexion) or die("asdfasdf");
+            $query = $db->prepare("SELECT usuario_log,fecha_ingreso,date_format(fecha_ingreso,'%H:%i:%s') as Inicio,date_format(fecha_salida,'%H:%i:%s') as Salida,ip_conexion FROM usuario_logs ORDER BY fecha_ingreso DESC  ");
+            $query->execute();
 
 
             
             // aqui se rellena las filas
-           while($row=mysql_fetch_array($result))
+           while($row= $query->fetch())
               {
                echo "<tr>
                        <td> $row[usuario_log] </td>

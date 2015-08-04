@@ -15,24 +15,24 @@
 ?>
 
 <!-- Main -->
-<div class="container-fluid" >
+<div class="container-fluid">
 <div class="row">
-    <div class="col-sm-12">
-
-       <div class="row">
+   
+    
         <div class="col-md-12">
-          <div class="featurette">
-
-			 <img class="featurette-image  pull-left" src="img/home.jpg">
-
-          </div>
-        </div>
+      
+    
+            <img class="" src="img/home3.png" style = "margin:0px;" height="80%" width = "100%" >
+            
+          
       </div>
-    </div><!--/col-span-9-->
-</div>
+      </div>
+
 </div>
 
-  <script>
-         // $.backstretch("../img/fondo.jpg", {speed: 1000});
-    </script>
+
+   <script>
+        // $.backstretch("../img/home3.pmg", {speed: 800});
+  </script>
+
 <!-- /Main -->

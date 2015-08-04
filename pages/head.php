@@ -11,13 +11,8 @@
     {
       $contenido = 'index';
     }
-
-
-  // require_once("funciones/check_session.php");
-  //require_once("login/time_out.php");
-  //require_once("navbar.php");
 ?>
-<hr>
+
 <!doctype HTML>
 <html lang="en">
 <head>
@@ -57,19 +52,17 @@
   <link rel="stylesheet" href="css/stylo.css">
   <link rel="stylesheet" href="css/tablas.css">
 
-<!-- graficos -->
-  <script src ="componentes/Highcharts-4/js/highcharts.js"></script>
+  <!-- graficos -->
+    <script src ="componentes/Highcharts-4/js/highcharts.js"></script>
 
-<!-- estilo switch -->
- <link rel="stylesheet" href="componentes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
- <script src = 'componentes/bootstrap-switch-master/dist/js/bootstrap-switch.js'></script>
- <link rel="stylesheet" href="componenetes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
+  <!-- estilo switch -->
+   <link rel="stylesheet" href="componentes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
+   <script src = 'componentes/bootstrap-switch-master/dist/js/bootstrap-switch.js'></script>
+   <link rel="stylesheet" href="componentes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
 
- <!-- iconos -->
-  <link href="componentes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   <!-- iconos -->
+    <link href="componentes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <script >
-
-
    $(document).ready(function(){
 
     //Al precionar la etiqueta Administracion se levanta el evento de click
@@ -88,19 +81,13 @@
       event.preventDefault();
       $("#div_contenido" ).load( "pages/Perfil/perfil.php");
     });
-
-    //
-
    });
 
 </script>
-
-
-
 </head>
 
 
-<body onload="inicio()" onkeypress="reset()" onclick="reset()" onMouseMove="reset()" >
+<div onload="inicio()" onkeypress="reset()" onclick="reset()" onMouseMove="reset()" >
   <nav class="navbar navbar-inverse navbar-fixed-top header">
   <div class="col-md-12">
      <div class="navbar-header">
@@ -145,6 +132,4 @@ HTML;
 
   <script src = "componentes/jquery.backstretch.min.js"></script>
   <!-- imagen de fondo -->
-
-
-</body>
+</div>

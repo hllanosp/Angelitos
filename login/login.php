@@ -1,17 +1,20 @@
-<?php 
+
+<!-- Descripcion de la pagina -->
+
+<?php
 	session_start();
   if (isset($_SESSION['usuario_ID'])) {
-    include("../conexion/conexion.php");
+    include("../conexion/config.inc.php");
     $usuario = $_SESSION['usuario_ID'];
-    $query = "UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario."' ;";
-          $result = mysql_query($query, $conexion) or die("error en la consulta");
-  }
+    $query = $db->prepare("UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario."' ;");
+    $query ->execute();
+          // $result = mysql_query($query, $conexion) or die("error en la consulta");
 
+
+  }
 	$_SESSION = array();
 	session_destroy();
-
  ?>
-
 
 
 <!doctype html>
@@ -53,15 +56,13 @@
          return;
      }
 
-     // var loginInfo = "login_submit.php?usuario=" + encodeURIComponent(usuario) +
-     //                 "&password=" + encodeURIComponent(password);
-
      // redirigimos hacia el archivo loginInfo
      var loginInfo = "login_submit.php"
      window.location.href = loginInfo;
   }
 
 </script>
+
 
 <body class =  "well">
   <div class ="container well sha" >
@@ -157,13 +158,9 @@
     <div class="form-group">
       <button id = "iniciar_sesion" class = "btn btn-lg btn-block" >Inciar Sesion</button>
     </div>
-    <div class="form-group">
-      <div class="check">
-        <td valign="top"><input type="checkbox" class="checkbox-size" id="login-check" /><label for="login-check">Recuerdame</label></td>
-      </div>
-    </div>
+
     <div class="clear"></div>
-  <a href="" class="forgot-pwd" data-toggle = "modal" data-target = "#forgot-inner">Olividaste la Contrasena?</a>
+  	<a rol ="button"style = "color:#FFD400"  class="forgot-pwd" data-toggle = "modal" data-target = "#forgot-inner">Olividaste la Contrasena?</a>
    </div>
   </form>
   </div>

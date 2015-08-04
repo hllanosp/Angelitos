@@ -4256,7 +4256,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-nav {
-    float: left;
+    /*float: left;*/
     margin: 0;
   }
   .navbar-nav > li {
@@ -4385,10 +4385,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-left {
-    float: left !important;
+    /*float: left !important;*/
   }
   .navbar-right {
-    float: right !important;
+    /*float: right !important;*/
     margin-right: -15px;
   }
   .navbar-right ~ .navbar-right {

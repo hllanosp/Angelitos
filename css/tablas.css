@@ -1,7 +1,7 @@
 table {
-	margin :3px;
-  border-collapse: separate;
-  border-spacing: 0 5px;
+ /*margin :3px;*/
+  border-collapse: ;
+  border-spacing: 0 1px;
 }
 
 thead th {
@@ -24,6 +24,3 @@ tr th:last-child {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
 }
-
-
- 
