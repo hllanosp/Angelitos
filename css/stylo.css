@@ -61,9 +61,9 @@ body{
 	
 }
 .animacion{
-	-moz-animation: animar 0.5s 50;
+	-moz-animation: animar 0.5s 1;
 	-moz-animation:timing-function:ease;
-	-moz-animation-duration:2s;
+	-moz-animation-duration:1s;
 	-moz-transform-style:preserve-3d;
 }
 

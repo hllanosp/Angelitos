@@ -10,7 +10,7 @@
     }
 
  require_once($maindir."pages/navbar.php");
- // include ($maindir.'conexion/conexion.php');
+ // include ($maindir.'conexion/.php');
  require_once($maindir."funciones/seguridad.php");
 
 ?>
@@ -23,9 +23,7 @@
                         <li class="nav-header">
                           <a id="usuarios" href="#"><i class="glyphicon glyphicon-home"></i> Inicio Administracion</a>
                         </li>
-                        <li>
-                            <a id="usuarios_activos" href="#"><i class="fa fa-dashboard fa-fw"></i>Usuarios Activos</a>
-                        </li>
+                       
                         <li>
                             <a  id="logs" href="#"><i class="fa fa-file-pdf-o fa-fw"></i> Logs</a>
 
@@ -55,9 +53,7 @@
             <li class="active">
                 <span class="fa fa-dashboard"></span></i> Administracion
             </li>
-             <li class="active">
-                <i class="fa fa-table"></i> 
-            </li>
+            
         </ol>
       </div>
 
@@ -70,11 +66,7 @@
           <div class="row">
             <div class="col-md-3 col-sm-3">
              
-              <div class="box-header">
-                <i class="fa fa-user"></i>
-                <h3 class="box-title" style = "color:black;"> Usuarios </h3>
-              </div>
-                        
+               
               <div class="panel panel-default">
                 <a>
                   <div class="panel-heading">
@@ -98,31 +90,32 @@
               </div>
 
               
-                <div style="margin-top: 15px;">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="header">Configuracion</li>
-                        <!-- <li class="active"><a id="todosFolios" href="#"><i class="fa fa-inbox"></i> Folios </a></li> -->
-                          <li>
-                            <a id="foliosEntrada" href="#"><i class="glyphicon glyphicon-download-alt"></i> Alertas </a>
-                        </li>
-                        <li>
-                            <a id="foliosSalida" href="#"><i class="glyphicon glyphicon-send"></i> Sesiones</a>
-                        </li>                                                                   
-                    </ul>
+                <div class = "box" style="margin-top: 15px;">
+                  <div class="box-header well">
+                    <i class="fa fa-bar-chart-o fa-fw"></i>
+                    <h5 class="box-title" style = "color:black;"> usuarios activos</h5>
+                  </div>
+                    
+                        <?php 
+                          require_once('panel_Grafos/grafo_empleados.php');
+                         ?>                                                                   
+                    
                 </div>
-              </div><!-- /.col (LEFT) -->
+              </div>
+              <!-- /.col (LEFT) -->
 
               <div class="col-md-9 col-sm-8">
                 <div class="box">
                     <div class="box-header">
-                    </div><!-- /.box-header -->
+                    </div>
                     <div class="box-body table-responsive" id = "contenedor">
                       <?php
-                       require_once("panel_usuarios/panel_gestion_usuarios.php");?>
+                       require_once("panel_usuarios/panel_gestion_usuarios.php");
+                       ?>
                      </div>
                      <!-- /.box-body -->
                 </div>
-               <!-- /.box --> -->
+               <!-- /.box -->
               </div>
               <!-- /.col (RIGHT) -->
 

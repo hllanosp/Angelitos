@@ -6,9 +6,11 @@
 <!-- Este codigo en js, tiene como funcion cerrar el log en la base de datos y destruir las variables de sesion si se ha cerrado la pestaña del navegador -->
 <script language="JavaScript" type="text/javascript">
 
+    window.onbeforeunload = accionAntesDeSalir;
+    
     function accionAntesDeSalir()
     {
-	$.ajax("funciones/eventoCerrarPestaña.php");
+  $.ajax("funciones/eventoCerrarPestaña.php");
     }
 </script>
 

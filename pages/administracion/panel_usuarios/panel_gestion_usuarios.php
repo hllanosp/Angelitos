@@ -14,33 +14,6 @@
   ?>
 <!-- =====================cuerpo del panel============================ -->
 
-<!-- <div class="container">
-  <div class="col-lg-3 col-md-6"><a>
-                </a>
-                <div class="panel panel-default"><a>
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-user fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div>Agregar</div>
-                            </div>
-                        </div>
-                    </div>
-                    </a>
-                      <a>
-                        <div role = "button" class="panel-footer" data-toggle="modal" data-target="#modal_insertar_usuario">
-                            <span class="pull-left">Nuevo Usuario</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                      </a>
-                </div>
-            </div>
-
-</div> -->
-
   <!-- AREA DE NOFIFICACIONES -->
 <div id = "notificaciones">
 </div>
@@ -85,7 +58,7 @@
                     echo "<option selected value= '-1'> -- Seleccione un rol de usuario -- </option>";
                     $query = $db->prepare("SELECT rol.rol_ID, rol.descripcion FROM rol ");
                     $query ->execute();
-                    while($row= $query->fetchAll())
+                    while($row= $query->fetch())
                       {
 
                        echo "<option> $row[rol_ID] $row[descripcion] </option>";

@@ -7,15 +7,11 @@
     include("../conexion/config.inc.php");
     $usuario = $_SESSION['usuario_ID'];
     $query = $db->prepare("UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario."' ;");
-    $query ->execute();
-          // $result = mysql_query($query, $conexion) or die("error en la consulta");
-
-
+    $query ->execute();    
   }
 	$_SESSION = array();
 	session_destroy();
  ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -29,7 +25,7 @@
 </head>
 <script>
   $(document).ready(function(){
-     $("#rectangulo").css('mozAnimationName','animar');
+     // $("#rectangulo").css('mozAnimationName','animar');
     $( "a" ).click(function() {
       login();
     });
@@ -37,7 +33,7 @@
 });
 </script>
 
-<!-- verifica los datos del formulario de login.. y luego son verificados por login_submit.php -->
+
 <script type="text/javascript">
   function login(){
      var usuario = $('#usuario');
@@ -63,54 +59,42 @@
 
 </script>
 
-
-<body class =  "well">
-  <div class ="container well sha" >
-    <div class="container">
-      <h2 class="form-login-heading span">Inicio   de   Sesión </h2>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <img class = "animacion" id= "avatar" src="../img/logo.png" alt="Logo Fundacion Angelitos">
-      </div>
-    </div>
-  <form class = "login" action = "login_submit.php" method = "POST">
-
 <!-- Se procesan cualquier tipo de error ocurrido en la pantalla de login -->
 <?php
-
-   if(isset($_GET["error_code"]))
-   {
-       $accion = $_GET["error_code"];
-        switch ($accion) {
-            case 0:
-                error_print(0);
-                break;
-            case 1:
-                error_print(1);
-                break;
-            case 2:
-                error_print(2);
-                break;
-            case 3:
-                error_print(3);
-                break;
-            case 4:
-                error_print(4);
-                break;
-            case 5:
-                error_print(5);
-                break;
-            case 6:
-                error_print(6);
-                break;
-            case 7:
-                error_print(7);
-                break;
-            default:
-                break;
-        }
-   }
+  function cargar_error(){
+     if(isset($_GET["error_code"]))
+     {
+         $accion = $_GET["error_code"];
+          switch ($accion) {
+              case 0:
+                  error_print(0);
+                  break;
+              case 1:
+                  error_print(1);
+                  break;
+              case 2:
+                  error_print(2);
+                  break;
+              case 3:
+                  error_print(3);
+                  break;
+              case 4:
+                  error_print(4);
+                  break;
+              case 5:
+                  error_print(5);
+                  break;
+              case 6:
+                  error_print(6);
+                  break;
+              case 7:
+                  error_print(7);
+                  break;
+              default:
+                  break;
+          }
+     }
+  }
 
    function error_print($error_code)
    {
@@ -149,50 +133,88 @@
    }
 
 ?>
-    <div class="form-group">
-      <input type="text" id = "usuario" class = "form-control" placeholder = "usuario" name = "usuario" required autofocus>
-    </div>
-    <div class="form-group">
-      <input type="password" id = "password" class="form-control" placeholder = "contrasena" name = "password" required>
-    </div>
-    <div class="form-group">
-      <button id = "iniciar_sesion" class = "btn btn-lg btn-block" >Inciar Sesion</button>
-    </div>
 
-    <div class="clear"></div>
-  	<a rol ="button"style = "color:#FFD400"  class="forgot-pwd" data-toggle = "modal" data-target = "#forgot-inner">Olividaste la Contrasena?</a>
-   </div>
-  </form>
-  </div>
-  <!-- <div class="container">
-    <div id="forgotbox" class = "modal-fade sha" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <h2 class="form-login-heading ">Por favor envianos tu email </h2>
-      <! start forgot-inner -->
-      <!-- <div id="forgot-inner">
-      <table border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <th>Email:</th>
-        <td><input type="email" value=""   class="login-inp" /></td>
-      </tr>
-      <tr>
-        <th> </th>
-        <td><input type="button" class="submit-login"  /></td>
-      </tr>
-      </table>
+
+<body class =  "well">
+  <div class ="container well sha" id = "content_login">
+    <div class="text-center">
+      <div class="row">
+        <div class="col-xs-12">
+          <img class = "animacion" id= "avatar" src="../img/logo.png" alt="Logo Fundacion Angelitos">
+        </div>
       </div>
-      <!--  end forgot-inner -->
-      <!-- <div class="clear"></div>
-      <a href="" class="back-login">Regresar login</a>
+      <br>
+      <h4 style="color: #FFD400">FUNDACION ANGELITOS</h4>
+      <h5><strong style="color: #FFD400">INICIAR SESIÓN</strong></h5>
+      <br>
+
+      <?php 
+        cargar_error();
+       ?>
     </div>
-    <!--  end forgotbox -->
-  <!-- </div> - -->
+ 
+    <form class = "login" action = "login_submit.php" method = "POST">
+      <div class="form-group">
+        <input type="text" id = "usuario" class = "form-control" placeholder = "usuario" name = "usuario" required autofocus>
+      </div>
+      <div class="form-group">
+        <i class="fa fa-key overlay"></i>
+        <input type="password" id = "password" class="form-control" placeholder = "contrasena" name = "password" required>
+      </div>
+      <div class="form-group">
+        <button id = "iniciar_sesion" class = "btn btn-lg btn-block" >Inciar Sesion</button>
+      </div>
+
+      <div class="clear"></div>
+    	
+      <label id= 'forgot'rol ="button" style = "color:#FFD400"  class=""><i class = "glyphicon glyphicon-chevron-right"></i>Olividaste la Contrasena?</label>
+     </div>
+    </form>
+  </div>
+  
 
   <!-- references -->
   <script src = "../bootstrap/js/bootstrap.js"></script>
   <script src = "../componentes/jquery.backstretch.min.js"></script>
   <!-- imagen de fondo -->
   <script>
-        $.backstretch("../img/fondo.jpg", {speed: 800});
+    $(document).ready(function(){
+        $('#forgot').click(function(){
+          $("#content_login").addClass('animacion');
+          $('#content_login').load('forgot_pass.php');
+        });
+
+        $("#login_forgot").submit(function(e) {
+            e.preventDefault();
+            alert ('que ondas');
+            if (validador()) {
+               var datos ={
+                 "usuario":$('#usuario').val(),
+                 "email":$('#email').val(),
+                 
+               };
+               $.ajax({
+                       data: datos,
+                       url: 'send_mail.php',
+                       type : 'post',
+                       success: function(data) {
+                           $('#resultado').html(data);
+                         }
+
+                     });
+            };
+        });
+
+        $('#back_login').click(function(){
+          $('content_login').load("content_login");
+          $("#content_login").addClass('animacion');
+        });
+    });
+
+
+
+    $.backstretch("../img/fondo.jpg", {speed: 800});
+
   </script>
 
 </body>

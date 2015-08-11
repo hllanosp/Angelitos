@@ -1,28 +1,11 @@
-<div>
-      <h1 class="page-header">
-          <small>Usuarios Activos en el Sistema</small>
-      </h1>
-      <ol class="breadcrumb">
-          <li class="active">
-              <span class="fa fa-dashboard"></span></i> Administracion
-          </li>
-           <li class="active">
-              <i class="fa fa-table"></i> Usuarios Activos
-          </li>
-      </ol>
-</div>
+
 <?php 
   // <!-- Declaramos la direccion raiz -->
-  $maindir = "../../../";
+  $maindir = "../../";
 
 //acceso a bases de datos
 include ($maindir.'conexion/config.inc.php');
 
-// // verifica la sesion
-// require_once($maindir."login/seguridad.php");
- 
-// // // verifica el tiempo de la sesion 
-// require_once($maindir."login/time_out.php");
 
   try{
 
@@ -94,6 +77,6 @@ include ($maindir.'conexion/config.inc.php');
 
 </script>
 
-<div id="graficaUsers" style="width: 100%; height: 500px; margin: 0 auto">
+<div id="graficaUsers" style="width: 100%; height: 255px; margin: 0 auto">
     <h1>Hola Mundo</h1>
 </div>

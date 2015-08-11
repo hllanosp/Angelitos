@@ -7,6 +7,12 @@
   -moz-transform: perspective(1000px);
   -ms-transform-style: preserve-3d;
   -ms-transform: perspective(1000px);
+
+
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform: perspective(1000px);
+  -ms-transform-style: preserve-3d;
+  -ms-transform: perspective(1000px);
 }
  
 .flip-container, .front, .back {
