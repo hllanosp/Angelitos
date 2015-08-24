@@ -46,7 +46,10 @@
 
   <!-- estilo en el admin -->
   <link href="componentes/sb-admin-2.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" >
+<script src = "css/scripts.js" type="text/javascript">
 
+</script>
 
   <!-- stilos personalizados -->
   <link rel="stylesheet" href="css/stylo.css">

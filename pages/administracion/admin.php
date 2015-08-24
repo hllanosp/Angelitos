@@ -17,20 +17,18 @@
 
 <div id="wrapper">
             <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
+                <div class="container">
+                    <ul class="nav nav-list bs-docs-sidenav nav-collapse" id="">
 
                         <li class="nav-header">
                           <a id="usuarios" href="#"><i class="glyphicon glyphicon-home"></i> Inicio Administracion</a>
                         </li>
-                       
+
                         <li>
                             <a  id="logs" href="#"><i class="fa fa-file-pdf-o fa-fw"></i> Logs</a>
-
                         </li>
                         <li>
                             <a  id="historial_ingreso" href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Historial Ingreso</a>
-
                         </li>
                          <li data-popover="true" rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-gears fa-fw"></i>Mantenimineto<i class="fa fa-collapse"></i></a></li>
                     <li><ul class="premium-menu nav nav-list collapse">
@@ -42,7 +40,6 @@
                 </div>
             </div>
                 <!-- /.sidebar-collapse -->
-
     </div>
     <div id="page-wrapper">
       <div>
@@ -53,7 +50,7 @@
             <li class="active">
                 <span class="fa fa-dashboard"></span></i> Administracion
             </li>
-            
+
         </ol>
       </div>
 
@@ -65,8 +62,8 @@
         <div class="box-body well" >
           <div class="row">
             <div class="col-md-3 col-sm-3">
-             
-               
+
+
               <div class="panel panel-default">
                 <a>
                   <div class="panel-heading">
@@ -89,17 +86,17 @@
                 </a>
               </div>
 
-              
+
                 <div class = "box" style="margin-top: 15px;">
                   <div class="box-header well">
                     <i class="fa fa-bar-chart-o fa-fw"></i>
                     <h5 class="box-title" style = "color:black;"> usuarios activos</h5>
                   </div>
-                    
-                        <?php 
+
+                        <?php
                           require_once('panel_Grafos/grafo_empleados.php');
-                         ?>                                                                   
-                    
+                         ?>
+
                 </div>
               </div>
               <!-- /.col (LEFT) -->

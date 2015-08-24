@@ -7,7 +7,7 @@
     include("../conexion/config.inc.php");
     $usuario = $_SESSION['usuario_ID'];
     $query = $db->prepare("UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario."' ;");
-    $query ->execute();    
+    $query ->execute();
   }
 	$_SESSION = array();
 	session_destroy();
@@ -29,10 +29,8 @@
     $( "a" ).click(function() {
       login();
     });
-
 });
 </script>
-
 
 <script type="text/javascript">
   function login(){
@@ -59,7 +57,6 @@
 
 </script>
 
-<!-- Se procesan cualquier tipo de error ocurrido en la pantalla de login -->
 <?php
   function cargar_error(){
      if(isset($_GET["error_code"]))
@@ -127,7 +124,7 @@
             default:
                 break;
         }
-        echo '<div class="alert alert-danger alert-error">
+        echo '<div class="alert alert-danger alert-error" id = "notificaciones">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong> Error! </strong>'.$mensaje.'</div>';
    }
@@ -143,17 +140,22 @@
           <img class = "animacion" id= "avatar" src="../img/logo.png" alt="Logo Fundacion Angelitos">
         </div>
       </div>
-      <br>
-      <h4 style="color: #FFD400">FUNDACION ANGELITOS</h4>
-      <h5><strong style="color: #FFD400">INICIAR SESIÓN</strong></h5>
-      <br>
+    </div>
 
-      <?php 
+     <div class="text-center"  style = "display:block;">
+      <br>
+      <h3 style="color: #FFD400">FUNDACION ANGELITOS</h3>
+      <h5 id = "titulo_login"><strong style="color: #FFD400">INICIAR SESIÓN</strong></h5>
+      <h5 id = "titulo_forgot"><strong style="color: #FFD400; display:none;">RENERACION DE CONTRASENA</strong></h5>
+      <br>
+     </div>
+
+
+      <?php
         cargar_error();
        ?>
-    </div>
- 
-    <form class = "login" action = "login_submit.php" method = "POST">
+
+    <form id = "form_login" class = "login" action = "login_submit.php" method = "POST" style = "" >
       <div class="form-group">
         <input type="text" id = "usuario" class = "form-control" placeholder = "usuario" name = "usuario" required autofocus>
       </div>
@@ -166,12 +168,30 @@
       </div>
 
       <div class="clear"></div>
-    	
+
       <label id= 'forgot'rol ="button" style = "color:#FFD400"  class=""><i class = "glyphicon glyphicon-chevron-right"></i>Olividaste la Contrasena?</label>
-     </div>
+    </form>
+
+
+    <form  id = "form_forgot" class = "login_forgot" style = "">
+      <label id= ''rol ="button" style = "color:#ffffff" href="" class=""> Ingresa el usuario y direccion de correo electronico. Se enviara un correo con tu nueva contrasena</label>
+        <div class="form-group">
+        <input type="text" id = "usuario_forgot" class = "form-control" placeholder = "usuario" name = "usuario_forgot" required autofocus>
+      </div>
+        <div class="form-group">
+        <input type="email"g id = "email" class = "form-control" placeholder = "correo electronico" name = "email" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <button type = "submit" id = "" class = "btn btn-lg btn-block" >Enviar</button>
+      </div>
+      <div class="clear"></div>
+      <label id= 'back_login'rol ="button" style = "color:#FFD400"  class=""><i class = "glyphicon glyphicon-chevron-left"></i> Regresar login</label>
     </form>
   </div>
-  
+</body>
+
+
 
   <!-- references -->
   <script src = "../bootstrap/js/bootstrap.js"></script>
@@ -179,42 +199,60 @@
   <!-- imagen de fondo -->
   <script>
     $(document).ready(function(){
-        $('#forgot').click(function(){
+      $("titulo_forgot").hide();
+      $("#form_forgot").hide();
+
+			$('#forgot').click(function(){
+
           $("#content_login").addClass('animacion');
-          $('#content_login').load('forgot_pass.php');
+          // $('#content_login').load('forgot_pass.php');
+         // $("#titulo_login").css('display','none');
+         $('#titulo_login').hide();
+         $('#form_login').hide();
+         $("#titulo_forgot").show();
+         $("#form_forgot").show();
+         setTimeout("$('#content_login').removeClass('animacion');",700);
+
+      });
+
+        $('#back_login').click(function(){
+          // $('content_login').load("content_login");
+          // $("#content_login").addClass('animacion');
+         $("#content_login").addClass('animacion');
+
+         $("titulo_forgot").hide();
+         $("#form_forgot").hide();
+          $("#titulo_login").show();
+          $("#form_login").show();
+          setTimeout("$('#content_login').removeClass('animacion');",700);
+
         });
 
-        $("#login_forgot").submit(function(e) {
+        $("#form_forgot").submit(function(e) {
+
             e.preventDefault();
-            alert ('que ondas');
             if (validador()) {
                var datos ={
-                 "usuario":$('#usuario').val(),
+                //  "usuario":$('#usuario').val(),
                  "email":$('#email').val(),
-                 
                };
                $.ajax({
-                       data: datos,
-                       url: 'send_mail.php',
-                       type : 'post',
-                       success: function(data) {
-                           $('#resultado').html(data);
-                         }
+                 data: datos,
+                 url: 'send_mail.php',
+                 type : 'post',
+                 success: function(data) {
+                     $('#notificaciones').html(data);
+                   }
 
                      });
             };
         });
 
-        $('#back_login').click(function(){
-          $('content_login').load("content_login");
-          $("#content_login").addClass('animacion');
-        });
+
     });
-
-
-
+		function validador(){
+			return true;
+		}
     $.backstretch("../img/fondo.jpg", {speed: 800});
 
   </script>
-
-</body>

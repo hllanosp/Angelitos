@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 
 
 
-//definine esta variable temporal para tener un rol cuon el cual trabajar 
+//definine esta variable temporal para tener un rol cuon el cual trabajar
   $rol = 100;
- 
+
 ?>
 
 <div class="navbar navbar-default" id="subnav">
@@ -36,10 +36,10 @@ HTML;
   // ----------------------------------------------------------------
   // pagina del neonatos
   if($rol == 100 || $rol == 50 || $rol == 30 || $rol == 20){
-    if($contenido == 'neonatos'){       
-      // switch($rol){   
-      //   case 100: 
-      //     $url = 'pages/Neonatos/principal.php?contenido=neonatos';// 100    
+    if($contenido == 'neonatos'){
+      // switch($rol){
+      //   case 100:
+      //     $url = 'pages/Neonatos/principal.php?contenido=neonatos';// 100
       //     break;
       // }
       echo <<<HTML
@@ -54,13 +54,13 @@ HTML;
     }
   }
     // ----------------------------------------------------------------
-             
+
     // pagina de Reportes
     if($rol == 100 || $rol == 50 || $rol == 30 || $rol == 20){
-      if($contenido == 'reportes') 
+      if($contenido == 'reportes')
       {
-        // switch($rol){   
-        //   case 100: 
+        // switch($rol){
+        //   case 100:
         //     $url = 'pages/Reportes/principal_reportes.php?contenido=reportes';
         //     break;
         // }
@@ -90,7 +90,7 @@ HTML;
                 <li><a role="button" id="pkanguro">Programa Kanguro</a></li>
 HTML;
       }
-    } 
+    }
     // --------------------------------------------------------------------------
 
     if($rol >= 40){
@@ -108,12 +108,26 @@ HTML;
 HTML;
         }
     }
-    //---------------------------------------------------------------------------- 
+    //----------------------------------------------------------------------------
+
+    if($rol == 100 || $rol == 50 || $rol == 30 || $rol == 20){
+      if($contenido == 'recursos_humanos'){
+        echo <<<HTML
+        <li class="active"><a id="recursos_humanos" >Recursos Humanos</a></li>
+
+HTML;
+      }
+      else{
+        echo <<<HTML
+        <li><a role="button" id="recursos_humanos">Recursos Humanos</a></li>
+HTML;
+      }
+    }
 ?>
 
            </ul>
-        </div>  
-     </div> 
+        </div>
+     </div>
 </div>
 <!-- fin del navbar -->
 <script>
@@ -121,38 +135,44 @@ HTML;
       // evento para neonatos
       $("#neonatos").click(function(event) {
       event.preventDefault();
-          
+
       $("#div_contenido" ).load( "pages/Neonatos/principal.php?contenido=neonatos" );
-      }); 
+      });
       // --------------------------
-         
+
         $("#home").click(function(event) {
       event.preventDefault();
       $("#div_contenido" ).load( "pages/home.php?contenido=home" );
-    
-      }); 
+
+      });
       // ----------------------------
         $("#Inventario").click(function(event) {
       event.preventDefault();
-          
+
       $("#div_contenido" ).load( "pages/Inventario/principal_inventario.php?contenido=inventario" );
-    
-      }); 
-      
-        $("#pkanguro").click(function(event) {
-      event.preventDefault();
-      $("#div_contenido" ).load( "pages/Programa_Kanguro/principal_kanguro.php?contenido=kanguro" );
-    
-  
-      }); 
-      
-        $("#reportes").click(function(event) {
-      event.preventDefault();
-      $("#div_contenido" ).load( "pages/Reportes/principal_reportes.php?contenido=reportes" );
-    
 
       });
 
-      }); 
+        $("#pkanguro").click(function(event) {
+      event.preventDefault();
+      $("#div_contenido" ).load( "pages/Programa_Kanguro/principal_kanguro.php?contenido=kanguro" );
+
+
+      });
+
+        $("#reportes").click(function(event) {
+      event.preventDefault();
+      $("#div_contenido" ).load( "pages/Reportes/principal_reportes.php?contenido=reportes" );
+
+      });
+
+      $("#recursos_humanos").click(function(event) {
+    event.preventDefault();
+    $("#div_contenido" ).load( "pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos" );
+
+
+    });
+
+      });
 
 </script>

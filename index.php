@@ -7,11 +7,12 @@
 <script language="JavaScript" type="text/javascript">
 
     window.onbeforeunload = accionAntesDeSalir;
-    
+
     function accionAntesDeSalir()
     {
-  $.ajax("funciones/eventoCerrarPestaña.php");
-    }
+      $.ajax("funciones/eventoCerrarPestania.php");
+    	// return "Perderas todos tus datos de sesion";
+		}
 </script>
 
 <!-- Fin de codigo js -->

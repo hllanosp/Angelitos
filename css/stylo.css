@@ -4,11 +4,11 @@
 	height: 56px;
 }
 body{
-	
+
 	padding-top:38px;
 	padding-bottom: 0px;
 	font-family: Arial, "Helvetica Neue", sans-serif;
-	
+
 }
 .login{
 
@@ -23,7 +23,7 @@ body{
 	max-width: 340px;
 	box-shadow: 0px 0px 18px 0px rgba(48,50,50, 0.4);
 	border-radius: 6%;
-	
+
 }
 #avatar{
 	/*width: 96px;
@@ -58,7 +58,7 @@ body{
 }
 .box-header{
 	color:black;
-	
+
 }
 .animacion{
 	-moz-animation: animar 0.5s 1;
@@ -68,8 +68,8 @@ body{
 }
 
 @-moz-keyframes animar{
-   from{-moz-transform:rotateY(0deg);}           
-   to{-moz-transform:rotateY(-360deg);}           
+   from{-moz-transform:rotateY(0deg);}
+   to{-moz-transform:rotateY(-180deg);}           
 
  }
  #grafo_usuario{
@@ -77,5 +77,5 @@ body{
  }
  #modal_editar_usuario h3{
  	color:#222222;
- 
+
  /*navbar*/
