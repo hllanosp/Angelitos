@@ -1,4 +1,5 @@
 <?php
+
 $pame = mysql_query("SELECT * FROM cargo");
 
  if(isset($_GET['contenido']))
@@ -12,7 +13,7 @@ $pame = mysql_query("SELECT * FROM cargo");
 
   require_once($maindir."funciones/check_session.php");
 
-  require_once($maindir."funciones/timeout.php");
+ require_once($maindir."funciones/timeout.php");
 
 ?>
 <html lang="es">
@@ -56,7 +57,7 @@ $pame = mysql_query("SELECT * FROM cargo");
                             <td><div class="text" id="nombre-<?php echo $idCargo ?>"><?php echo $row['Cargo'] ?></div></td>
 
 <?php
-             if($_SESSION['user_rol'] != 100){
+             if($_SESSION['rol_ID'] != 100){
               echo'              <td>
                     <center>
                         <button class="elimina btn btn-danger glyphicon glyphicon-trash" disabled="TRUE"></button>

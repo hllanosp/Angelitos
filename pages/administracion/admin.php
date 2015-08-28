@@ -17,7 +17,7 @@
 
 <div id="wrapper">
             <div class="navbar-default sidebar" role="navigation">
-                <div class="container">
+                <div class="">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse" id="">
 
                         <li class="nav-header">

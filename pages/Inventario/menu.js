@@ -22,6 +22,6 @@
     //
     $("#registro_categoria").click(function(event) {
       event.preventDefault();
-      $("#page-wrapper").load("pages/Inventario/mantenimiento/registrarCategoria.php" );
+      $("#page-wrapper").load("pages/Inventario/mantenimiento/Categorias/registrarCategoria.php" );
       });
 });

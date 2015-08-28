@@ -28,13 +28,13 @@ class PDF extends FPDF
      function Header()
          {
 
- $this->Image('../../../../assets/img/lucen-aspicio.png', 50,30,200,200, 'PNG');
-$this->Image('../../../../assets/img/logo_unah.png' , 10,5,20,35, 'PNG');
-$this->Image('../../../../assets/img/logo-cienciasjuridicas.png' , 170,8, 35 , 35,'PNG');
+ $this->Image('../../../../img/angel.png', 5,1,25,40, 'PNG');
+//$this->Image('../../../../assets/img/logo_unah.png' , 10,5,20,35, 'PNG');
+//$this->Image('../../../../assets/img/logo-cienciasjuridicas.png' , 170,8, 35 , 35,'PNG');
 $this->Cell(18, 10, '', 0);
 $this->SetFont('Arial', '', 18);
 $this->Cell(5, 10, '', 0);
-$this->Cell(140, 10, 'Universidad Nacional Autonoma de Honduras', 0,0,"C");
+$this->Cell(140, 10, 'Fundacion Angelitos', 0,0,"C");
 $this->Ln(25);
 $this->SetFont('Arial', 'U', 14);
 $this->Cell(30, 8, ' ', 0,0,"C");

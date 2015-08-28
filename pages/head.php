@@ -63,6 +63,9 @@
    <script src = 'componentes/bootstrap-switch-master/dist/js/bootstrap-switch.js'></script>
    <link rel="stylesheet" href="componentes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
 
+   <!-- plugin jquery para confirm -->
+   <script src="componentes/Bootstrap-Confirmation-master/bootstrap-confirmation.js"></script>
+
    <!-- iconos -->
     <link href="componentes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <script >

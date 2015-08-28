@@ -1,26 +1,9 @@
 <?php
 
- // require_once('../../Datos/conexion.php');
+  require_once('../../Datos/conexion.php');
  $queryCE = mysql_query("SELECT * FROM empleado inner join persona on empleado.N_identidad=persona.N_identidad inner join departamento_laboral on departamento_laboral.Id_departamento_laboral=empleado.Id_departamento Where estado_empleado='1'");
   
- if(isset($_GET['contenido']))
-    {
-      $contenido = $_GET['contenido'];
-    }
-  else
-    {
-      $contenido = 'recursos_humanos';
-    }
 
-  require_once($maindir."funciones/check_session.php");
-
-  require_once($maindir."funciones/timeout.php");
-
-  if(!isset( $_SESSION['user_id'] ))
-  {
-    header('Location: '.$maindir.'login/logout.php?code=100');
-    exit();
-  }
 
  
 

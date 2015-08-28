@@ -10,7 +10,7 @@
 	$pais='';
 	
 	$enlace = mysql_connect('localhost', 'root', '');
-        mysql_select_db("sistema_ciencias_juridicas", $enlace);
+        mysql_select_db("prueba", $enlace);
 	
 	  if (isset($_POST['idpersona'])) 
     {

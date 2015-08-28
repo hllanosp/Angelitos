@@ -1,6 +1,6 @@
 <?php
 
-include '../../Datos/conexion.php';
+//include '../../Datos/conexion.php';
 
 
 

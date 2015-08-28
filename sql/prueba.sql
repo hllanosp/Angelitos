@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.4.3
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2015 a las 07:09:15
+-- Servidor: localhost
+-- Tiempo de generación: 28-08-2015 a las 09:05:33
 -- Versión del servidor: 5.6.24
--- Versión de PHP: 5.6.8
+-- Versión de PHP: 5.5.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -24,10 +24,18 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `aumentar_STOCK`(IN `producto_ID` INT(11), IN `nombre` INT(11), IN `entrada` INT)
+    NO SQL
+update  i_instancia_producto set i_instancia_producto.cantidad = i_instancia_producto.cantidad + entrada where i_instancia_producto.id_producto = producto_ID$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Log_ID`(OUT `ID` INT(10) UNSIGNED, IN `usuario_log` VARCHAR(25), IN `fecha_ingreso` DATE, IN `ip_conexion` VARCHAR(40))
     NO SQL
     DETERMINISTIC
 INSERT into usuario_logs (id_logs,usuario_log,fecha_ingreso,ip_conexion)VALUES(1,@usuario_log,@fecha_ingreso,@ip_conexion)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Reabastecer`(IN `producto_ID` INT(11), IN `entrada` INT(11), IN `usuario` VARCHAR(50))
+    NO SQL
+INSERT into i_entrada ( id_instancia, fecha_entrada, usuario_ID, cant_entrada)      VALUES ( producto_ID, CURRENT_TIMESTAMP, usuario, entrada)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_INSERTAR_LOG`(
     IN IPCONG VARCHAR(40),
@@ -49,6 +57,325 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cargo`
+--
+
+CREATE TABLE IF NOT EXISTS `cargo` (
+  `ID_cargo` int(11) NOT NULL,
+  `Cargo` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `cargo`
+--
+
+INSERT INTO `cargo` (`ID_cargo`, `Cargo`) VALUES
+(1, 'Administrador Principal'),
+(2, 'Medico Residente '),
+(3, 'Enfermera'),
+(4, 'Enfermera');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases`
+--
+
+CREATE TABLE IF NOT EXISTS `clases` (
+  `ID_Clases` int(11) NOT NULL,
+  `Clase` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases_has_experiencia_academica`
+--
+
+CREATE TABLE IF NOT EXISTS `clases_has_experiencia_academica` (
+  `ID_Clases` int(11) NOT NULL,
+  `ID_Experiencia_academica` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamento_laboral`
+--
+
+CREATE TABLE IF NOT EXISTS `departamento_laboral` (
+  `Id_departamento_laboral` int(11) NOT NULL,
+  `nombre_departamento` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `departamento_laboral`
+--
+
+INSERT INTO `departamento_laboral` (`Id_departamento_laboral`, `nombre_departamento`) VALUES
+(0, 'Salud'),
+(1, 'administrativo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleado`
+--
+
+CREATE TABLE IF NOT EXISTS `empleado` (
+  `No_Empleado` varchar(20) NOT NULL,
+  `N_identidad` varchar(20) NOT NULL,
+  `Id_departamento` int(11) NOT NULL,
+  `Fecha_ingreso` date NOT NULL,
+  `fecha_salida` date DEFAULT NULL,
+  `Observacion` text,
+  `estado_empleado` tinyint(1) DEFAULT NULL,
+  `foto_perfil` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`No_Empleado`, `N_identidad`, `Id_departamento`, `Fecha_ingreso`, `fecha_salida`, `Observacion`, `estado_empleado`, `foto_perfil`) VALUES
+('123', '0801-1991-17475', 1, '2015-03-11', '0000-00-00', 'jajajaja', 1, 0x6e756c6c),
+('aa92', '0801-1992-06985', 1, '2015-03-11', '0000-00-00', 'holaaaaaaa', 1, 0x6e756c6c),
+('flux', '0801-1991-04000', 1, '2015-03-06', '0000-00-00', 'jode', 1, 0x6e756c6c),
+('lm91', '0801-1991-17475', 1, '2015-03-06', '0000-00-00', 'problemas siguiendo ordenes', 1, ''),
+('mo93', '0801-1993-01722', 1, '2015-03-06', '0000-00-00', 'trabajador', 1, 0x6e756c6c);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleado_has_cargo`
+--
+
+CREATE TABLE IF NOT EXISTS `empleado_has_cargo` (
+  `No_Empleado` varchar(20) NOT NULL,
+  `ID_cargo` int(11) NOT NULL,
+  `Fecha_ingreso_cargo` date NOT NULL,
+  `Fecha_salida_cargo` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estudios_academico`
+--
+
+CREATE TABLE IF NOT EXISTS `estudios_academico` (
+  `ID_Estudios_academico` int(11) NOT NULL,
+  `Nombre_titulo` varchar(45) NOT NULL,
+  `ID_Tipo_estudio` int(11) NOT NULL,
+  `N_identidad` varchar(20) NOT NULL,
+  `Id_universidad` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `experiencia_academica`
+--
+
+CREATE TABLE IF NOT EXISTS `experiencia_academica` (
+  `ID_Experiencia_academica` int(11) NOT NULL,
+  `Institucion` varchar(45) NOT NULL,
+  `Tiempo` int(3) NOT NULL,
+  `N_identidad` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `experiencia_laboral`
+--
+
+CREATE TABLE IF NOT EXISTS `experiencia_laboral` (
+  `ID_Experiencia_laboral` int(11) NOT NULL,
+  `Nombre_empresa` varchar(45) NOT NULL,
+  `Tiempo` int(3) NOT NULL,
+  `N_identidad` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `experiencia_laboral_has_cargo`
+--
+
+CREATE TABLE IF NOT EXISTS `experiencia_laboral_has_cargo` (
+  `ID_Experiencia_laboral` int(11) NOT NULL,
+  `ID_cargo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `idioma`
+--
+
+CREATE TABLE IF NOT EXISTS `idioma` (
+  `ID_Idioma` int(11) NOT NULL,
+  `Idioma` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `idioma`
+--
+
+INSERT INTO `idioma` (`ID_Idioma`, `Idioma`) VALUES
+(0, 'Portugues'),
+(1, 'Frances'),
+(2, 'espaÃƒÂ±ol'),
+(3, 'espaÃƒÂ±ol');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `idioma_has_persona`
+--
+
+CREATE TABLE IF NOT EXISTS `idioma_has_persona` (
+  `ID_Idioma` int(11) NOT NULL,
+  `N_identidad` varchar(20) NOT NULL,
+  `Nivel` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `i_entrada`
+--
+
+CREATE TABLE IF NOT EXISTS `i_entrada` (
+  `id_instancia` int(11) DEFAULT NULL,
+  `fecha_entrada` date DEFAULT NULL,
+  `usuario_ID` int(11) DEFAULT NULL,
+  `cant_entrada` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `i_entrada`
+--
+
+INSERT INTO `i_entrada` (`id_instancia`, `fecha_entrada`, `usuario_ID`, `cant_entrada`) VALUES
+(1, '2015-08-27', 16, 100),
+(2, '2015-08-27', 16, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `i_instancia_producto`
+--
+
+CREATE TABLE IF NOT EXISTS `i_instancia_producto` (
+  `id_instancia` int(11) NOT NULL,
+  `fecha_exp` date DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `id_producto` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `i_instancia_producto`
+--
+
+INSERT INTO `i_instancia_producto` (`id_instancia`, `fecha_exp`, `cantidad`, `id_producto`) VALUES
+(5, '2016-01-14', 7800, 1),
+(6, '2016-09-08', 5050, 2),
+(7, '2015-12-10', 150, 3),
+(8, '2016-06-13', 100, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `i_marca`
+--
+
+CREATE TABLE IF NOT EXISTS `i_marca` (
+  `id_marca` int(11) NOT NULL,
+  `descripcion` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `i_producto`
+--
+
+CREATE TABLE IF NOT EXISTS `i_producto` (
+  `id_producto` int(11) NOT NULL,
+  `nombre` varchar(20) DEFAULT NULL,
+  `tipo_producto` int(11) DEFAULT NULL,
+  `id_marca` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `i_producto`
+--
+
+INSERT INTO `i_producto` (`id_producto`, `nombre`, `tipo_producto`, `id_marca`) VALUES
+(1, 'alcohol', 1, NULL),
+(2, 'panales', 2, NULL),
+(3, 'talco', 1, NULL),
+(4, 'Leche porlvo', 2, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `i_salida`
+--
+
+CREATE TABLE IF NOT EXISTS `i_salida` (
+  `id_instancia` int(11) DEFAULT NULL,
+  `fecha_salida` date DEFAULT NULL,
+  `usuario_ID` int(11) DEFAULT NULL,
+  `cantidad_salida` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `i_tipo_producto`
+--
+
+CREATE TABLE IF NOT EXISTS `i_tipo_producto` (
+  `id_tipo_producto` int(11) NOT NULL,
+  `descripcion` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `i_tipo_producto`
+--
+
+INSERT INTO `i_tipo_producto` (`id_tipo_producto`, `descripcion`) VALUES
+(1, 'Medicamento'),
+(2, 'accesorios');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pais`
+--
+
+CREATE TABLE IF NOT EXISTS `pais` (
+  `Id_pais` int(11) NOT NULL,
+  `Nombre_pais` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pais`
+--
+
+INSERT INTO `pais` (`Id_pais`, `Nombre_pais`) VALUES
+(0, 'Estados Unidos'),
+(1, 'Honduras'),
+(2, 'Guatemala'),
+(3, 'Mexico'),
+(4, 'Panama city');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `persona`
 --
 
@@ -66,13 +393,6 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `Nacionalidad` varchar(20) NOT NULL,
   `foto_perfil` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `persona`
---
-
-INSERT INTO `persona` (`N_identidad`, `Primer_nombre`, `Segundo_nombre`, `Primer_apellido`, `Segundo_apellido`, `Fecha_nacimiento`, `Sexo`, `Direccion`, `Correo_electronico`, `Estado_Civil`, `Nacionalidad`, `foto_perfil`) VALUES
-('0000-0000-00000', 'Prueba', 'Prueba', 'Prueba', 'Prueba', '2015-03-29', 'M', 'prueba', 'prueba@prueba.com', 'soltero', 'prueba', '');
 
 -- --------------------------------------------------------
 
@@ -96,6 +416,119 @@ INSERT INTO `rol` (`rol_ID`, `descripcion`) VALUES
 (3, 'Residente'),
 (4, 'interno'),
 (5, 'enfermera');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `telefono`
+--
+
+CREATE TABLE IF NOT EXISTS `telefono` (
+  `ID_Telefono` int(11) NOT NULL,
+  `Tipo` varchar(45) NOT NULL,
+  `Numero` varchar(20) NOT NULL,
+  `N_identidad` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `telefono`
+--
+
+INSERT INTO `telefono` (`ID_Telefono`, `Tipo`, `Numero`, `N_identidad`) VALUES
+(0, 'Celular', '96413007', '0000-0000-00000');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_area`
+--
+
+CREATE TABLE IF NOT EXISTS `tipo_area` (
+  `id_Tipo_Area` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `observaciones` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo_area`
+--
+
+INSERT INTO `tipo_area` (`id_Tipo_Area`, `nombre`, `observaciones`) VALUES
+(1, 'exterior1', 'cara de mono'),
+(3, 'pollo1', 'ffdd'),
+(4, 'alksndal', 'asda');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_estudio`
+--
+
+CREATE TABLE IF NOT EXISTS `tipo_estudio` (
+  `ID_Tipo_estudio` int(11) NOT NULL,
+  `Tipo_estudio` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo_estudio`
+--
+
+INSERT INTO `tipo_estudio` (`ID_Tipo_estudio`, `Tipo_estudio`) VALUES
+(0, 'Cientifico'),
+(1, 'licenciatura');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `titulo`
+--
+
+CREATE TABLE IF NOT EXISTS `titulo` (
+  `id_titulo` int(11) NOT NULL,
+  `titulo` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `titulo`
+--
+
+INSERT INTO `titulo` (`id_titulo`, `titulo`) VALUES
+(0, 'Medico Cirujano');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `unidad_academica`
+--
+
+CREATE TABLE IF NOT EXISTS `unidad_academica` (
+  `Id_UnidadAcademica` int(11) NOT NULL,
+  `NombreUnidadAcademica` text NOT NULL,
+  `UbicacionUnidadAcademica` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `universidad`
+--
+
+CREATE TABLE IF NOT EXISTS `universidad` (
+  `Id_universidad` int(11) NOT NULL,
+  `nombre_universidad` varchar(50) NOT NULL,
+  `Id_pais` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `universidad`
+--
+
+INSERT INTO `universidad` (`Id_universidad`, `nombre_universidad`, `Id_pais`) VALUES
+(0, 'UNITEC', 0),
+(1, 'UNAH', 0),
+(11, 'CATOLICA', 0),
+(13, 'ceutec', 1),
+(14, 'hola', 1);
 
 -- --------------------------------------------------------
 
@@ -138,7 +571,7 @@ CREATE TABLE IF NOT EXISTS `usuario_logs` (
   `fecha_ingreso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_salida` datetime NOT NULL,
   `ip_conexion` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario_logs`
@@ -360,11 +793,210 @@ INSERT INTO `usuario_logs` (`id_logs`, `usuario_log`, `fecha_ingreso`, `fecha_sa
 (218, 'pineda1234', '2015-07-12 23:01:27', '0000-00-00 00:00:00', '::1'),
 (219, 'pineda1234', '2015-07-12 23:04:23', '0000-00-00 00:00:00', '::1'),
 (220, 'pineda1234', '2015-07-12 23:04:45', '2015-07-12 23:04:49', '::1'),
-(221, 'pineda1234', '2015-07-12 23:04:54', '0000-00-00 00:00:00', '::1');
+(221, 'pineda1234', '2015-07-12 23:04:54', '0000-00-00 00:00:00', '::1'),
+(222, 'hllanos', '2015-08-27 11:47:52', '2015-08-27 11:52:23', '127.0.0.1'),
+(223, 'hllanos', '2015-08-27 12:01:22', '2015-08-27 12:13:07', '127.0.0.1'),
+(224, 'hllanos', '2015-08-27 12:16:52', '2015-08-27 12:32:01', '127.0.0.1'),
+(225, 'hllanos', '2015-08-27 12:46:04', '2015-08-27 12:50:08', '127.0.0.1'),
+(226, 'hllanos', '2015-08-27 13:06:37', '2015-08-27 13:16:32', '127.0.0.1'),
+(227, 'hllanos', '2015-08-27 13:16:54', '2015-08-27 13:26:22', '127.0.0.1'),
+(228, 'hllanos', '2015-08-27 13:33:45', '0000-00-00 00:00:00', '127.0.0.1'),
+(229, 'hllanos', '2015-08-27 15:50:01', '0000-00-00 00:00:00', '127.0.0.1'),
+(230, 'hllanos', '2015-08-27 16:49:39', '2015-08-27 16:53:51', '127.0.0.1'),
+(231, 'hllanos', '2015-08-27 17:00:34', '2015-08-27 17:05:27', '127.0.0.1'),
+(232, 'hllanos', '2015-08-27 17:07:08', '2015-08-27 17:14:24', '127.0.0.1'),
+(233, 'hllanos', '2015-08-27 17:14:49', '0000-00-00 00:00:00', '127.0.0.1'),
+(234, 'hllanos', '2015-08-27 17:16:23', '0000-00-00 00:00:00', '127.0.0.1'),
+(235, 'hllanos', '2015-08-27 17:16:50', '0000-00-00 00:00:00', '127.0.0.1'),
+(236, 'hllanos', '2015-08-27 17:17:45', '0000-00-00 00:00:00', '127.0.0.1'),
+(237, 'hllanos', '2015-08-27 17:19:01', '0000-00-00 00:00:00', '127.0.0.1'),
+(238, 'hllanos', '2015-08-27 17:19:29', '0000-00-00 00:00:00', '127.0.0.1'),
+(239, 'hllanos', '2015-08-27 17:20:02', '0000-00-00 00:00:00', '127.0.0.1'),
+(240, 'hllanos', '2015-08-27 17:26:00', '0000-00-00 00:00:00', '127.0.0.1'),
+(241, 'hllanos', '2015-08-27 17:26:31', '0000-00-00 00:00:00', '127.0.0.1'),
+(242, 'hllanos', '2015-08-27 17:27:49', '0000-00-00 00:00:00', '127.0.0.1'),
+(243, 'hllanos', '2015-08-27 17:28:29', '2015-08-27 17:32:03', '127.0.0.1'),
+(244, 'hllanos', '2015-08-27 17:34:34', '0000-00-00 00:00:00', '127.0.0.1'),
+(245, 'hllanos', '2015-08-27 18:05:48', '0000-00-00 00:00:00', '127.0.0.1'),
+(246, 'hllanos', '2015-08-27 18:07:11', '0000-00-00 00:00:00', '127.0.0.1'),
+(247, 'hllanos', '2015-08-27 18:09:11', '0000-00-00 00:00:00', '127.0.0.1'),
+(248, 'hllanos', '2015-08-27 18:13:09', '2015-08-27 18:21:31', '127.0.0.1'),
+(249, 'hllanos', '2015-08-27 18:31:27', '2015-08-27 18:54:15', '127.0.0.1'),
+(250, 'hllanos', '2015-08-27 18:59:08', '2015-08-27 19:04:54', '127.0.0.1'),
+(251, 'hllanos', '2015-08-27 19:07:17', '2015-08-27 19:08:29', '127.0.0.1'),
+(252, 'hllanos', '2015-08-27 19:09:05', '0000-00-00 00:00:00', '127.0.0.1'),
+(253, 'hllanos', '2015-08-27 19:15:16', '2015-08-27 19:19:03', '127.0.0.1'),
+(254, 'hllanos', '2015-08-27 22:41:37', '2015-08-27 22:56:17', '127.0.0.1'),
+(255, 'hllanos', '2015-08-27 22:58:52', '2015-08-27 23:04:17', '127.0.0.1'),
+(256, 'hllanos', '2015-08-27 23:04:38', '2015-08-27 23:08:02', '127.0.0.1'),
+(257, 'hllanos', '2015-08-27 23:11:30', '0000-00-00 00:00:00', '127.0.0.1'),
+(258, 'hllanos', '2015-08-27 23:11:46', '2015-08-27 23:15:18', '127.0.0.1'),
+(259, 'hllanos', '2015-08-27 23:16:40', '0000-00-00 00:00:00', '127.0.0.1'),
+(260, 'hllanos', '2015-08-27 23:16:58', '0000-00-00 00:00:00', '127.0.0.1'),
+(261, 'hllanos', '2015-08-27 23:19:57', '2015-08-27 23:30:14', '127.0.0.1'),
+(262, 'hllanos', '2015-08-27 23:32:13', '0000-00-00 00:00:00', '127.0.0.1'),
+(263, 'hllanos', '2015-08-27 23:32:36', '0000-00-00 00:00:00', '127.0.0.1'),
+(264, 'hllanos', '2015-08-27 23:33:05', '0000-00-00 00:00:00', '127.0.0.1'),
+(265, 'hllanos', '2015-08-27 23:33:46', '0000-00-00 00:00:00', '127.0.0.1'),
+(266, 'hllanos', '2015-08-27 23:34:18', '0000-00-00 00:00:00', '127.0.0.1'),
+(267, 'hllanos', '2015-08-27 23:35:46', '0000-00-00 00:00:00', '127.0.0.1'),
+(268, 'hllanos', '2015-08-27 23:36:21', '0000-00-00 00:00:00', '127.0.0.1'),
+(269, 'hllanos', '2015-08-27 23:37:31', '0000-00-00 00:00:00', '127.0.0.1'),
+(270, 'hllanos', '2015-08-27 23:37:48', '0000-00-00 00:00:00', '127.0.0.1'),
+(271, 'hllanos', '2015-08-27 23:38:39', '2015-08-27 23:42:14', '127.0.0.1'),
+(272, 'hllanos', '2015-08-27 23:53:26', '2015-08-27 23:57:00', '127.0.0.1'),
+(273, 'hllanos', '2015-08-28 00:03:57', '0000-00-00 00:00:00', '127.0.0.1'),
+(274, 'hllanos', '2015-08-28 00:04:26', '2015-08-28 00:08:38', '127.0.0.1'),
+(275, 'hllanos', '2015-08-28 00:14:16', '0000-00-00 00:00:00', '127.0.0.1'),
+(276, 'hllanos', '2015-08-28 00:17:54', '0000-00-00 00:00:00', '127.0.0.1'),
+(277, 'hllanos', '2015-08-28 00:18:18', '0000-00-00 00:00:00', '127.0.0.1'),
+(278, 'hllanos', '2015-08-28 00:18:52', '2015-08-28 00:22:22', '127.0.0.1'),
+(279, 'hllanos', '2015-08-28 00:50:32', '0000-00-00 00:00:00', '127.0.0.1'),
+(280, 'hllanos', '2015-08-28 00:51:07', '2015-08-28 00:54:41', '127.0.0.1');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `cargo`
+--
+ALTER TABLE `cargo`
+  ADD PRIMARY KEY (`ID_cargo`);
+
+--
+-- Indices de la tabla `clases`
+--
+ALTER TABLE `clases`
+  ADD PRIMARY KEY (`ID_Clases`);
+
+--
+-- Indices de la tabla `clases_has_experiencia_academica`
+--
+ALTER TABLE `clases_has_experiencia_academica`
+  ADD PRIMARY KEY (`ID_Clases`,`ID_Experiencia_academica`),
+  ADD KEY `fk_Clases_has_Experiencia_academica_Experiencia_academica1_idx` (`ID_Experiencia_academica`),
+  ADD KEY `fk_Clases_has_Experiencia_academica_Clases1_idx` (`ID_Clases`);
+
+--
+-- Indices de la tabla `departamento_laboral`
+--
+ALTER TABLE `departamento_laboral`
+  ADD PRIMARY KEY (`Id_departamento_laboral`);
+
+--
+-- Indices de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD PRIMARY KEY (`No_Empleado`,`N_identidad`),
+  ADD KEY `fk_Empleado_Persona1_idx` (`N_identidad`),
+  ADD KEY `fk_empleado_dep` (`Id_departamento`),
+  ADD KEY `No_Empleado` (`No_Empleado`);
+
+--
+-- Indices de la tabla `empleado_has_cargo`
+--
+ALTER TABLE `empleado_has_cargo`
+  ADD PRIMARY KEY (`No_Empleado`,`ID_cargo`),
+  ADD KEY `fk_Empleado_has_Cargo_Cargo1_idx` (`ID_cargo`),
+  ADD KEY `fk_Empleado_has_Cargo_Empleado1_idx` (`No_Empleado`),
+  ADD KEY `No_Empleado` (`No_Empleado`);
+
+--
+-- Indices de la tabla `estudios_academico`
+--
+ALTER TABLE `estudios_academico`
+  ADD PRIMARY KEY (`Id_universidad`),
+  ADD KEY `fk_Estudios_academico_Tipo_estudio1_idx` (`ID_Tipo_estudio`),
+  ADD KEY `fk_Estudios_academico_Persona1_idx` (`N_identidad`),
+  ADD KEY `fk_estudio_universidad` (`Id_universidad`);
+
+--
+-- Indices de la tabla `experiencia_academica`
+--
+ALTER TABLE `experiencia_academica`
+  ADD PRIMARY KEY (`ID_Experiencia_academica`),
+  ADD KEY `fk_Experiencia_academica_Persona1_idx` (`N_identidad`);
+
+--
+-- Indices de la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  ADD PRIMARY KEY (`ID_Experiencia_laboral`),
+  ADD KEY `fk_Experiencia_laboral_Persona1_idx` (`N_identidad`);
+
+--
+-- Indices de la tabla `experiencia_laboral_has_cargo`
+--
+ALTER TABLE `experiencia_laboral_has_cargo`
+  ADD PRIMARY KEY (`ID_Experiencia_laboral`,`ID_cargo`),
+  ADD KEY `fk_Experiencia_laboral_has_Cargo_Cargo1_idx` (`ID_cargo`),
+  ADD KEY `fk_Experiencia_laboral_has_Cargo_Experiencia_laboral1_idx` (`ID_Experiencia_laboral`);
+
+--
+-- Indices de la tabla `idioma`
+--
+ALTER TABLE `idioma`
+  ADD PRIMARY KEY (`ID_Idioma`);
+
+--
+-- Indices de la tabla `idioma_has_persona`
+--
+ALTER TABLE `idioma_has_persona`
+  ADD PRIMARY KEY (`ID_Idioma`,`N_identidad`),
+  ADD KEY `fk_Idioma_has_Persona_Persona1_idx` (`N_identidad`),
+  ADD KEY `fk_Idioma_has_Persona_Idioma_idx` (`ID_Idioma`);
+
+--
+-- Indices de la tabla `i_entrada`
+--
+ALTER TABLE `i_entrada`
+  ADD KEY `usuario_ID` (`usuario_ID`);
+
+--
+-- Indices de la tabla `i_instancia_producto`
+--
+ALTER TABLE `i_instancia_producto`
+  ADD PRIMARY KEY (`id_instancia`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
+-- Indices de la tabla `i_marca`
+--
+ALTER TABLE `i_marca`
+  ADD PRIMARY KEY (`id_marca`);
+
+--
+-- Indices de la tabla `i_producto`
+--
+ALTER TABLE `i_producto`
+  ADD PRIMARY KEY (`id_producto`),
+  ADD KEY `id_marca` (`id_marca`),
+  ADD KEY `tipo_producto` (`tipo_producto`);
+
+--
+-- Indices de la tabla `i_salida`
+--
+ALTER TABLE `i_salida`
+  ADD KEY `usuario_ID` (`usuario_ID`);
+
+--
+-- Indices de la tabla `i_tipo_producto`
+--
+ALTER TABLE `i_tipo_producto`
+  ADD PRIMARY KEY (`id_tipo_producto`);
+
+--
+-- Indices de la tabla `pais`
+--
+ALTER TABLE `pais`
+  ADD PRIMARY KEY (`Id_pais`);
+
+--
+-- Indices de la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD PRIMARY KEY (`N_identidad`);
 
 --
 -- Indices de la tabla `rol`
@@ -373,21 +1005,80 @@ ALTER TABLE `rol`
   ADD PRIMARY KEY (`rol_ID`);
 
 --
+-- Indices de la tabla `telefono`
+--
+ALTER TABLE `telefono`
+  ADD PRIMARY KEY (`ID_Telefono`);
+
+--
+-- Indices de la tabla `tipo_area`
+--
+ALTER TABLE `tipo_area`
+  ADD PRIMARY KEY (`id_Tipo_Area`);
+
+--
+-- Indices de la tabla `tipo_estudio`
+--
+ALTER TABLE `tipo_estudio`
+  ADD PRIMARY KEY (`ID_Tipo_estudio`);
+
+--
+-- Indices de la tabla `titulo`
+--
+ALTER TABLE `titulo`
+  ADD PRIMARY KEY (`id_titulo`);
+
+--
+-- Indices de la tabla `unidad_academica`
+--
+ALTER TABLE `unidad_academica`
+  ADD PRIMARY KEY (`Id_UnidadAcademica`);
+
+--
+-- Indices de la tabla `universidad`
+--
+ALTER TABLE `universidad`
+  ADD PRIMARY KEY (`Id_universidad`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`usuario_ID`), ADD KEY `FK_usuario_rol` (`rol_ID`);
+  ADD PRIMARY KEY (`usuario_ID`),
+  ADD KEY `FK_usuario_rol` (`rol_ID`);
 
 --
 -- Indices de la tabla `usuario_logs`
 --
 ALTER TABLE `usuario_logs`
-  ADD PRIMARY KEY (`id_logs`), ADD KEY `usuario_log` (`usuario_log`), ADD KEY `usuario_log_2` (`usuario_log`);
+  ADD PRIMARY KEY (`id_logs`),
+  ADD KEY `usuario_log` (`usuario_log`),
+  ADD KEY `usuario_log_2` (`usuario_log`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `i_instancia_producto`
+--
+ALTER TABLE `i_instancia_producto`
+  MODIFY `id_instancia` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `i_marca`
+--
+ALTER TABLE `i_marca`
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `i_producto`
+--
+ALTER TABLE `i_producto`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `i_tipo_producto`
+--
+ALTER TABLE `i_tipo_producto`
+  MODIFY `id_tipo_producto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -397,16 +1088,41 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuario_logs`
 --
 ALTER TABLE `usuario_logs`
-  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=222;
+  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=281;
 --
 -- Restricciones para tablas volcadas
 --
 
 --
+-- Filtros para la tabla `i_entrada`
+--
+ALTER TABLE `i_entrada`
+  ADD CONSTRAINT `FK_EntradaUsuario` FOREIGN KEY (`usuario_ID`) REFERENCES `usuario` (`usuario_ID`);
+
+--
+-- Filtros para la tabla `i_instancia_producto`
+--
+ALTER TABLE `i_instancia_producto`
+  ADD CONSTRAINT `FK_InstanciaProducto` FOREIGN KEY (`id_producto`) REFERENCES `i_producto` (`id_producto`);
+
+--
+-- Filtros para la tabla `i_producto`
+--
+ALTER TABLE `i_producto`
+  ADD CONSTRAINT `FK_marcaProducto` FOREIGN KEY (`id_marca`) REFERENCES `i_marca` (`id_marca`),
+  ADD CONSTRAINT `FK_tipoProdcto` FOREIGN KEY (`tipo_producto`) REFERENCES `i_tipo_producto` (`id_tipo_producto`);
+
+--
+-- Filtros para la tabla `i_salida`
+--
+ALTER TABLE `i_salida`
+  ADD CONSTRAINT `FK_SalidaUsuario` FOREIGN KEY (`usuario_ID`) REFERENCES `usuario` (`usuario_ID`);
+
+--
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`rol_ID`) REFERENCES `rol` (`rol_ID`);
+  ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`rol_ID`) REFERENCES `rol` (`rol_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

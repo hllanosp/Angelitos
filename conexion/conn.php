@@ -5,4 +5,4 @@
  $dbname = 'prueba';
  $username = 'root';
  $password = '';
-?> 
+?>

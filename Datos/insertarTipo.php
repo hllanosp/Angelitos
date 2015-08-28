@@ -14,7 +14,7 @@ if (isset($_POST['nombre'])) {
 	if($query){
 	
 		//echo '<META HTTP-EQUIV="REFRESH" CONTENT="2">' ;
-		echo mensajes('Actualizado con Exito','verde');
+		echo mensajes('Ingresado con Exito','verde');
 	
 	
 	

@@ -2,18 +2,9 @@
 
  <?php
  $maindir = "../../../";
-  if(isset($_GET['contenido']))
-    {
-      $contenido = $_GET['contenido'];
-    }
-  else
-    {
-      $contenido = 'administracion';
-    }
 
- require_once($maindir."pages/navbar.php");
- // include ($maindir.'conexion/.php');
- require_once($maindir."funciones/seguridad.php");
+include('../../../Datos/conexion.php');
+
 
 
 
@@ -28,11 +19,11 @@
     
     if($tipoProcedimiento == "insetarPersona"){
        
-    require_once('../../../../pages/recursos_humanos/cv/nuevo/personaAgregar.php');
+    require_once('../../../pages/recursos_humanos/cv/nuevo/personaAgregar.php');
     }
       if($tipoProcedimiento == "editarPersona"){
        
-    require_once('../../../../pages/recursos_humanos/cv/nuevo/personaAgregar.php');
+    require_once('../../../pages/recursos_humanos/cv/nuevo/personaAgregar.php');
     }
     
    }
@@ -216,6 +207,7 @@
                   <div id="IngresoPersona" class="form-group">
                       
                         <div class="panel-body">
+                            
                             <h1>Ingreso de Información Personal</h1></br>
                                 <div class="panel-group" id="accordion">
                                     <div class="panel panel-primary">

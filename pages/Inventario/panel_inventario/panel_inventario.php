@@ -11,11 +11,9 @@
 </div>
 
 <div class="mailbox row" id = "mailbox">
-
-    <div class="box box-solid">
+  <div class="box box-solid">
       <div class="box-body well" >
           <div class="row">
-
             <!--columna del historial de movimientos -->
             <div class="col-xs-12 col-md-3">
                 <div class="row">
@@ -23,6 +21,7 @@
                     <h1 style="color:black; margin-left:50px;">Acciones <small></small></h1>
                 	</div>
               	</div>
+
                   <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
@@ -63,21 +62,25 @@
                                 </div>
                             </a>
                         </div>
-
-
                 </div>
-            <!--  -->
+            <!-- cuerpo principal  del panel inventario -->
           	<div class="col-xs-12 col-md-9 " >
               <div class="box" id="cuerpo_panel_inventario">
+                <div id="notificaciones">
 
-          	   </div>
-
-            <!-- fin col -->
+                </div>
+                  <?php
+                    require_once('panel_historial.php');
+                   ?>
+              </div>
             </div>
+          </div>
+          <!-- fin panel inventario -->
+
       </div>
     </div>
-
 </div>
+
 <script type="text/javascript">
   $(document).ready(function(){
 

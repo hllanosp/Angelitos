@@ -15,11 +15,7 @@
 
   require_once($maindir."funciones/timeout.php");
   
-   if(!isset( $_SESSION['user_id'] ))
-  {
-    header('Location: '.$maindir.'login/logout.php?code=100');
-    exit();
-  }
+
 
 /* 
  * To change this license header, choose License Headers in Project Properties.

@@ -17,7 +17,7 @@ require_once($maindir."funciones/seguridad.php");
 
 <div id="wrapper">
            <div class="navbar-default sidebar" role="navigation">
-               <div class="container">
+               <div class="">
                    <ul class="nav nav-list bs-docs-sidenav nav-collapse" id="">
                      <li class="nav-header">
                        <a id="inv_home" href="#"><i class="glyphicon glyphicon-home actived"></i> Inicio</a>
@@ -43,11 +43,15 @@ require_once($maindir."funciones/seguridad.php");
 </div>
 <div id="page-wrapper">
   <div id="contenedor">
+    <div id="notificaciones">
+
+    </div>
     <div>
       <h1 class="page-header">
           <small>Modulo de Administracion de Inventario</small>
       </h1>
     </div>
+
     <div class="col-lg-4">
     <div class="panel panel-red">
         <div class="panel-heading">

@@ -1,6 +1,6 @@
 <?php
 
- require_once('funciones.php');
+ //require_once('funciones.php');
 
 //echo $_POST['nombre'];
 if (isset($_POST['nombre'])) {

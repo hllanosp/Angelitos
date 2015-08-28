@@ -185,7 +185,7 @@
 
                 echo'  <td> <center>';
                 
-                  if($_SESSION['user_rol'] != 100){
+                  if($_SESSION['rol_ID'] != 100){
                echo ' <button class="elimina btn btn-danger glyphicon glyphicon-trash" disabled="TRUE"></button>
 
             </center>  </td> ';

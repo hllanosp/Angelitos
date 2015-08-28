@@ -2,6 +2,7 @@
       <h1 class="page-header">
           <small>registrar Producto</small>
       </h1>
+
       <ol class="breadcrumb">
           <li class="active">
               <span class="fa fa-dashboard"></span></i> Inventario
@@ -11,8 +12,28 @@
           </li>
       </ol>
     </div>
-    <h1 class="page-header" style="color:black;">Registrar Producto<button class="btn btn-default" data-toggle="modal" data-target="#compose-modal-insertar"><i class="glyphicon glyphicon-wrench"></i> Agregar </button></h1>
+    <h1 class="page-header" style="color:black;">Registrar nueva Categoria </h1><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+    	<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal">&times;</button>
+    		<h4 class="modal-title">Modal Header</h4>
+    	</div>
+    	<div class="modal-body">
+    		<p>Some text in the modal.</p>
+    	</div>
+    	<div class="modal-footer">
+    		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    	</div>
+    </div>
+
+    </div>
+    </div>
 
   <div class="box-body table-responsive ">
     <table id = "tabla_prductos_man" class='table table-bordered table-striped display' cellspacing="0" >

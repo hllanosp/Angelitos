@@ -1,34 +1,26 @@
 <?php
  include ('../../Datos/conexion.php');
- 
+
+     
+$enlace = mysql_connect('localhost', 'root', '');
+                 mysql_select_db("prueba", $enlace);
+
  $maindir = "../../";
 
-  if(isset($_GET['contenido']))
-    {
-      $contenido = $_GET['contenido'];
-    }
-  else
-    {
-      $contenido = 'recursos_humanos';
-    }
+ 
+ require_once($maindir."funciones/check_session.php");
 
-//  require_once($maindir."funciones/check_session.php");
+ require_once($maindir."funciones/timeout.php");
+  //  require_once($maindir."funciones/seguridad.php");
+    
 
-  //require_once($maindir."funciones/timeout.php");
-    require_once($maindir."funciones/seguridad.php");
-  
-   if(!isset( $_SESSION['user_id'] ))
-  {
-    header('Location: '.$maindir.'login/logout.php?code=100');
-    exit();
-  }
   
     if(isset($_POST["tipoProcedimiento"])){
     $tipoProcedimiento = $_POST["tipoProcedimiento"];
     
     if($tipoProcedimiento == "insertar"){
        
-    require_once("../../Datos/insertarcargo.php");
+    require_once("../../Datos/insertarCargo.php");
     }
      if($tipoProcedimiento == "actualizar"){
        

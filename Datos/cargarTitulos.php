@@ -166,7 +166,7 @@
                   <td><div class="text" id="ntitulo-<?php echo $id ?>"><?php echo $row['titulo'] ?></div></td>
                   
 <?php
-   if($_SESSION['user_rol'] != 100){
+   if($_SESSION['rol_ID'] != 100){
            echo'       <td>
           <center>
               <button class="elimina btn btn-danger glyphicon glyphicon-trash" disabled="TRUE"></button>

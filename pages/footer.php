@@ -6,8 +6,9 @@
 </head>
 <body>
 	<div  id = "footer">
-		<footer class="text-center"><strong> Sistema creado por el equipo de Seguridad Informatica</strong></footer>
-		
+		<footer class="text-center"><strong> "Contemos nuestros Angelitos" </strong>
+		 <p><strong>informacion :hllanos75@gmail.com</p></strong></footer>
+
 	</div>
 </body>
-</html>
+</html

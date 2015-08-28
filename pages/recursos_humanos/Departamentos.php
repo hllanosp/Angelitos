@@ -15,12 +15,7 @@ $maindir = "../../";
   require_once($maindir."funciones/check_session.php");
 
   require_once($maindir."funciones/timeout.php");
-  
-   if(!isset( $_SESSION['user_id'] ))
-  {
-    header('Location: '.$maindir.'login/logout.php?code=100');
-    exit();
-  }
+
   
   
   

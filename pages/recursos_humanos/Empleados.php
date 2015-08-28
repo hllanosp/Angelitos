@@ -8,25 +8,8 @@
 
    $maindir = "../../";
 
-  if(isset($_GET['contenido']))
-    {
-      $contenido = $_GET['contenido'];
-    }
-  else
-    {
-      $contenido = 'recursos_humanos';
-    }
 
-  require_once($maindir."funciones/check_session.php");
 
-  require_once($maindir."funciones/timeout.php");
-
-  if(!isset( $_SESSION['user_id'] ))
-  {
-    header('Location: '.$maindir.'login/logout.php?code=100');
-    exit();
-  }
- // require_once($maindir."pages/navbar.php");
 
 
 if(isset($_POST["tipoProcedimiento"])){
@@ -47,7 +30,6 @@ if(isset($_POST["tipoProcedimiento"])){
     }
       
     
-}
 
 
 
@@ -255,5 +237,4 @@ if(isset($_POST["tipoProcedimiento"])){
 </body>
 
 </html>
-
 
