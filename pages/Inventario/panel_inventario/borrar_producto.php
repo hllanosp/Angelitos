@@ -1,4 +1,6 @@
 <?php
+session_start() ;
+$usuario_ID = $_SESSION['usuario_ID'];
 // <!-- Declaramos la direccion raiz -->
    $maindir = "../../../";
    include ($maindir.'conexion/config.inc.php');
@@ -7,31 +9,29 @@
     $filas = $_GET["i"];
     $elementos = $_GET["j"];
 
-    $columnas = $elementos/($filas - 1);
+    $columnas = $elementos/($filas);
     $elemento = 0;
 
-    $stament2 = $db->prepare("CALL aumentar_STOCK(?,?)");
-    for($i = 1; $i < $filas; $i++){
-        $r = 0;
-        for ($j= 1; $j <= $columnas; $j++){
-            if (($j+1)%2 == 0){
-                $stament2->bindValue($j-$r, $matrizResumen[$elemento]);
-                $r++;
-            }
-                $elemento++;
+    for($i = 1; $i <= $filas; $i++){
+      $stament2 = $db->prepare("CALL PA_nueva_instancia(?,?,?)");
+  		$stament2->execute(array($matrizResumen[$elemento],-$matrizResumen[$elemento+2],$matrizResumen[$elemento+3]));
+  		$stament2->closeCursor();
+
+      $stament2 = $db->prepare("CALL PA_instancia_producto(?)");
+      $stament2->execute(array($matrizResumen[$elemento]));
+      while($row= $stament2->fetch())
+        {
+
+         $indice = $row['indice'];
         }
-      //
-      // $stament2 = $db->prepare("CALL aumentar_STOCK(?,?,?)");
-      // for($i = 1; $i < $filas; $i++){
-      //     for ($j= 1; $j <= columnas; $j++){
-      //         if ($elemento%2 == 0){
-      //           $stament2->bindValue($j, $matrizResumen[$elemento]);
-      //         }
-      //         $elemento++;
-      //     }
-      //     $stament2->execute();
-      //     $stament2->closeCursor();
-      // }
+      $stament2->closeCursor();
+
+      $stament2 = $db->prepare("CALL PA_nueva_salida(?,?,?)");
+      $stament2->execute(array($indice,$matrizResumen[$elemento+2],$usuario_ID));
+      $stament2->closeCursor();
+
+      $elemento = $elemento + $columnas;
+     }
 
     $mensaje = 'La transaccion se realizo correctamente';
     echo '<div class="alert alert-success alert-succes">

@@ -1,8 +1,11 @@
 <?php
 //include '../../Datos/conexion.php';
 
- $pame = mysql_query("SELECT * FROM titulo");
-
+  include '../../conexion/config.inc.php';
+  $query  = $db->prepare("SELECT * FROM titulo");
+  $query->execute();
+  $result1 = $query->fetchAll();
+  
 
 ?>
 <html lang="es">
@@ -157,7 +160,7 @@
       <tbody>
           
         <?php
-        while ($row = mysql_fetch_array($pame)) {
+        foreach($result1 as $row) {
             $id = $row['id_titulo'];
          ?>
             

@@ -1,29 +1,24 @@
 <?php
 
- 
-
-require_once 'funciones.php';
-  	
-
-    if (isset($_POST['Pais'])) 
-    {
-        $Pais = $_POST['Pais']; 
-        
+     include '../../conexion/config.inc.php';
+     require_once('funciones.php');
   
-       $query =mysql_query("INSERT INTO pais(Nombre_pais) VALUES('$Pais')"); 
-       
-       
-       if($query){
-           
-           
-           echo mensajes('Agregado con Exito','verde');
-       }else{
+    if (!empty($_POST['Pais'])) 
+    {
+        $nombre = $_POST['Pais']; 
+     
+        $query = $db->prepare("INSERT INTO pais(Nombre_pais)  VALUES ('".$nombre."')");
+       if ($query->execute()) {
+           echo mensajes('Universidad ingresada con Exito','verde');
+    } 
+    }
+    else{
         
-           echo mensajes('no se puedo ingresar registro','rojo');
-       }
-        
-       
+        echo mensajes('requisitos en blanco','rojo');   
     }   
+
+
+
    
    
     

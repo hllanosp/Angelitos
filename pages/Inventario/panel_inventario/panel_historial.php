@@ -17,7 +17,6 @@
            <th style= "color: white">nombre</th>
            <th style= "color: white">categoria</th>
            <th style= "color: white">En Inventario</th>
-           <th> </th>
            <!-- <th style= "color: white">Cantidad</th> -->
 
          </tr>
@@ -25,7 +24,7 @@
        <tbody>
 				<?php
 				//ejecutamos la consulta con ayuda del archivo conexion.php que se encuentra arriba
-					$query  = $db->prepare("select  i_producto.id_producto, i_producto.nombre, i_producto.tipo_producto, i_instancia_producto.cantidad FROM  i_producto inner join i_instancia_producto on i_instancia_producto.id_producto = i_producto.id_producto ");
+					$query  = $db->prepare("CALL PA_resumen()");
 					$query->execute();
 					$result1 = $query->fetchAll();
 						foreach($result1 as $row)
@@ -35,11 +34,6 @@
   										<td><center> $row[nombre] </td></center>
   										<td><center> $row[tipo_producto]</td></center>
                       <td><center> $row[cantidad]</td></center>
-
-
-                      <td style=''>
-                      	<a href='' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-time'></i> Historial</a>
-                  		</td>
   									</tr>";
 						}
 				?>

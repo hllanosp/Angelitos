@@ -1,9 +1,11 @@
 <?php
 
 
-//include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
 
- $pame = mysql_query("SELECT * FROM idioma");
+ $pame = $db->prepare("SELECT * FROM idioma");
+ $pame -> execute();
+ $rows = $pame->fetchAll(PDO::FETCH_ASSOC);
  
  
   if(isset($_GET['contenido']))
@@ -18,7 +20,6 @@
   require_once($maindir."funciones/check_session.php");
 
   require_once($maindir."funciones/timeout.php");
-
 
 ?>
 <html lang="es">
@@ -173,7 +174,7 @@
       <tbody>
           
         <?php
-        while ($row = mysql_fetch_array($pame)) {
+        foreach ($rows as $row) {
             $id = $row['ID_Idioma'];
          ?>
             

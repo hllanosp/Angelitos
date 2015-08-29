@@ -1,8 +1,15 @@
 <?php
 
-//include '../Datos/conexion.php';
 
- $pame = mysql_query("SELECT * FROM universidad inner join pais on pais.Id_pais=universidad.Id_pais");
+  include '../../conexion/config.inc.php';
+  $query  = $db->prepare("SELECT * FROM universidad inner join pais on pais.Id_pais=universidad.Id_pais");
+  $query->execute();
+  $result1 = $query->fetchAll();
+  
+
+
+
+ 
  
   if(isset($_GET['contenido']))
     {
@@ -200,7 +207,7 @@
                                         <tbody>
 HTML;
 
-               while ($row = mysql_fetch_array($pame))  {
+               foreach($result1 as $row){
 
              $idU = $row['Id_universidad'];
             $nombreU = $row['nombre_universidad'];

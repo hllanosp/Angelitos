@@ -2,8 +2,11 @@
 
 
  //include '../../Datos/conexion.php';
- 
- $pame = mysql_query("SELECT * FROM pais");
+ include '../../conexion/config.inc.php';
+  $query  = $db->prepare("SELECT * FROM pais");
+  $query->execute();
+  $result1 = $query->fetchAll();
+
  
   
   if(isset($_GET['contenido']))
@@ -188,7 +191,7 @@
       <tbody>
           
         <?php
-        while ($row = mysql_fetch_array($pame)) {
+        foreach($result1 as $row) {
             $id = $row['Id_pais'];
          ?>
             

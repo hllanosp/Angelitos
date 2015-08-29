@@ -1,58 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.4.3
--- http://www.phpmyadmin.net
---
--- Servidor: localhost
--- Tiempo de generación: 28-08-2015 a las 09:05:33
--- Versión del servidor: 5.6.24
--- Versión de PHP: 5.5.24
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Base de datos: `prueba`
---
-
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `aumentar_STOCK`(IN `producto_ID` INT(11), IN `nombre` INT(11), IN `entrada` INT)
-    NO SQL
-update  i_instancia_producto set i_instancia_producto.cantidad = i_instancia_producto.cantidad + entrada where i_instancia_producto.id_producto = producto_ID$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Log_ID`(OUT `ID` INT(10) UNSIGNED, IN `usuario_log` VARCHAR(25), IN `fecha_ingreso` DATE, IN `ip_conexion` VARCHAR(40))
-    NO SQL
-    DETERMINISTIC
-INSERT into usuario_logs (id_logs,usuario_log,fecha_ingreso,ip_conexion)VALUES(1,@usuario_log,@fecha_ingreso,@ip_conexion)$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Reabastecer`(IN `producto_ID` INT(11), IN `entrada` INT(11), IN `usuario` VARCHAR(50))
-    NO SQL
-INSERT into i_entrada ( id_instancia, fecha_entrada, usuario_ID, cant_entrada)      VALUES ( producto_ID, CURRENT_TIMESTAMP, usuario, entrada)$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_INSERTAR_LOG`(
-    IN IPCONG VARCHAR(40),
-    IN USER_LOG VARCHAR(25), 
-    OUT `ULTIMOID` INT(11))
-BEGIN 
-
-   START TRANSACTION;
-   
-   INSERT INTO usuario_logs ( usuario_log, fecha_ingreso, ip_conexion) VALUES ( USER_LOG, CURRENT_TIMESTAMP, IPCONG);
- 
-     SET ULTIMOID = last_insert_id(); 
-   
-   COMMIT;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -70,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `cargo` (
 --
 
 INSERT INTO `cargo` (`ID_cargo`, `Cargo`) VALUES
+(0, 'Pedro  Pablo Perez Hernandez'),
 (1, 'Administrador Principal'),
 (2, 'Medico Residente '),
 (3, 'Enfermera'),
@@ -108,14 +54,6 @@ CREATE TABLE IF NOT EXISTS `departamento_laboral` (
   `nombre_departamento` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `departamento_laboral`
---
-
-INSERT INTO `departamento_laboral` (`Id_departamento_laboral`, `nombre_departamento`) VALUES
-(0, 'Salud'),
-(1, 'administrativo');
-
 -- --------------------------------------------------------
 
 --
@@ -132,17 +70,6 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `estado_empleado` tinyint(1) DEFAULT NULL,
   `foto_perfil` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `empleado`
---
-
-INSERT INTO `empleado` (`No_Empleado`, `N_identidad`, `Id_departamento`, `Fecha_ingreso`, `fecha_salida`, `Observacion`, `estado_empleado`, `foto_perfil`) VALUES
-('123', '0801-1991-17475', 1, '2015-03-11', '0000-00-00', 'jajajaja', 1, 0x6e756c6c),
-('aa92', '0801-1992-06985', 1, '2015-03-11', '0000-00-00', 'holaaaaaaa', 1, 0x6e756c6c),
-('flux', '0801-1991-04000', 1, '2015-03-06', '0000-00-00', 'jode', 1, 0x6e756c6c),
-('lm91', '0801-1991-17475', 1, '2015-03-06', '0000-00-00', 'problemas siguiendo ordenes', 1, ''),
-('mo93', '0801-1993-01722', 1, '2015-03-06', '0000-00-00', 'trabajador', 1, 0x6e756c6c);
 
 -- --------------------------------------------------------
 
@@ -251,16 +178,18 @@ CREATE TABLE IF NOT EXISTS `i_entrada` (
   `id_instancia` int(11) DEFAULT NULL,
   `fecha_entrada` date DEFAULT NULL,
   `usuario_ID` int(11) DEFAULT NULL,
-  `cant_entrada` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cant_entrada` int(11) DEFAULT NULL,
+  `item` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `i_entrada`
 --
 
-INSERT INTO `i_entrada` (`id_instancia`, `fecha_entrada`, `usuario_ID`, `cant_entrada`) VALUES
-(1, '2015-08-27', 16, 100),
-(2, '2015-08-27', 16, 100);
+INSERT INTO `i_entrada` (`id_instancia`, `fecha_entrada`, `usuario_ID`, `cant_entrada`, `item`) VALUES
+(8, '2015-08-28', 16, 1000, 4),
+(10, '2015-08-28', 16, 100, 5),
+(12, '2015-08-28', 16, 1000, 6);
 
 -- --------------------------------------------------------
 
@@ -273,17 +202,19 @@ CREATE TABLE IF NOT EXISTS `i_instancia_producto` (
   `fecha_exp` date DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `id_producto` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `i_instancia_producto`
 --
 
 INSERT INTO `i_instancia_producto` (`id_instancia`, `fecha_exp`, `cantidad`, `id_producto`) VALUES
-(5, '2016-01-14', 7800, 1),
-(6, '2016-09-08', 5050, 2),
-(7, '2015-12-10', 150, 3),
-(8, '2016-06-13', 100, 4);
+(1, '2015-08-28', 100, 8),
+(8, '2015-08-31', 1000, 8),
+(9, '0000-00-00', -200, 8),
+(10, '2015-07-27', 100, 8),
+(11, '0000-00-00', -500, 8),
+(12, '2015-08-31', 1000, 8);
 
 -- --------------------------------------------------------
 
@@ -294,7 +225,14 @@ INSERT INTO `i_instancia_producto` (`id_instancia`, `fecha_exp`, `cantidad`, `id
 CREATE TABLE IF NOT EXISTS `i_marca` (
   `id_marca` int(11) NOT NULL,
   `descripcion` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `i_marca`
+--
+
+INSERT INTO `i_marca` (`id_marca`, `descripcion`) VALUES
+(1, 'Ceteco');
 
 -- --------------------------------------------------------
 
@@ -307,17 +245,15 @@ CREATE TABLE IF NOT EXISTS `i_producto` (
   `nombre` varchar(20) DEFAULT NULL,
   `tipo_producto` int(11) DEFAULT NULL,
   `id_marca` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `i_producto`
 --
 
 INSERT INTO `i_producto` (`id_producto`, `nombre`, `tipo_producto`, `id_marca`) VALUES
-(1, 'alcohol', 1, NULL),
-(2, 'panales', 2, NULL),
-(3, 'talco', 1, NULL),
-(4, 'Leche porlvo', 2, NULL);
+(8, 'Pañales', 4, 1),
+(9, 'Mantas ', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -329,8 +265,17 @@ CREATE TABLE IF NOT EXISTS `i_salida` (
   `id_instancia` int(11) DEFAULT NULL,
   `fecha_salida` date DEFAULT NULL,
   `usuario_ID` int(11) DEFAULT NULL,
-  `cantidad_salida` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cantidad_salida` int(11) DEFAULT NULL,
+  `item` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `i_salida`
+--
+
+INSERT INTO `i_salida` (`id_instancia`, `fecha_salida`, `usuario_ID`, `cantidad_salida`, `item`) VALUES
+(9, '2015-08-28', 16, 200, 2),
+(11, '2015-08-28', 16, 500, 3);
 
 -- --------------------------------------------------------
 
@@ -341,15 +286,17 @@ CREATE TABLE IF NOT EXISTS `i_salida` (
 CREATE TABLE IF NOT EXISTS `i_tipo_producto` (
   `id_tipo_producto` int(11) NOT NULL,
   `descripcion` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `i_tipo_producto`
 --
 
 INSERT INTO `i_tipo_producto` (`id_tipo_producto`, `descripcion`) VALUES
-(1, 'Medicamento'),
-(2, 'accesorios');
+(4, 'Desechables'),
+(9, 'Limpieza'),
+(11, 'Medicos'),
+(12, 'Comestibles');
 
 -- --------------------------------------------------------
 
@@ -393,6 +340,13 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `Nacionalidad` varchar(20) NOT NULL,
   `foto_perfil` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`N_identidad`, `Primer_nombre`, `Segundo_nombre`, `Primer_apellido`, `Segundo_apellido`, `Fecha_nacimiento`, `Sexo`, `Direccion`, `Correo_electronico`, `Estado_Civil`, `Nacionalidad`, `foto_perfil`) VALUES
+('0000-0000-00000', 'Prueba', 'Prueba', 'Prueba', 'Prueba', '2015-03-29', 'M', 'prueba', 'prueba@prueba.com', 'soltero', 'prueba', '');
 
 -- --------------------------------------------------------
 
@@ -528,7 +482,7 @@ INSERT INTO `universidad` (`Id_universidad`, `nombre_universidad`, `Id_pais`) VA
 (1, 'UNAH', 0),
 (11, 'CATOLICA', 0),
 (13, 'ceutec', 1),
-(14, 'hola', 1);
+(14, 'UPI', 0);
 
 -- --------------------------------------------------------
 
@@ -555,7 +509,7 @@ INSERT INTO `usuario` (`usuario`, `contrasena`, `rol_ID`, `usuario_ID`, `fecha_c
 ('pineda1234', '$2a$07$7PqV8qgy4K9toN3aiWoOueysZN8SOCoL.62VauwPTx7rPA4t46jRW', 1, 8, '2015-06-25', NULL, 1, 1),
 ('Arleandino', '$2a$07$.TYyvGoiHPP/jA0drgfN0e5hIfwd965he8El1tVxSe2r0VLaiCIr6', 5, 11, '2015-06-27', '2015-07-08', 0, 0),
 ('Arle Reyes', '$2a$07$p550WnRYfbI4VCVyZ.QZO.Zpwh5ST6j9Xk1Adca8WvHPvxecnDYuO', 5, 12, '2015-06-27', '2015-07-08', 0, 0),
-('hllanos', '$2a$07$TX1seqOwkG76jFPKlLpZe.3ajaLKclf0jzCSMfYXQOfGy0sM4Gyeu', 1, 16, '2015-07-06', '0000-00-00', 1, 0),
+('hllanos', '$2a$07$TX1seqOwkG76jFPKlLpZe.3ajaLKclf0jzCSMfYXQOfGy0sM4Gyeu', 1, 16, '2015-07-06', '0000-00-00', 1, 1),
 ('hectorllanos', '$2a$07$88EXV6GmXGpYLoHx402l5OfhbaYXnqZ87pohRJNxHu1kIEx5WOYVm', 5, 17, '2015-07-08', '2015-07-08', 0, 0),
 ('prueba', '$2a$07$85JeqXKUI2z23IgA7bamaeCSr30hAq/EolgnIwfxL2t2YmFcys3au', 2, 18, '2015-07-08', NULL, 0, 0);
 
@@ -571,7 +525,7 @@ CREATE TABLE IF NOT EXISTS `usuario_logs` (
   `fecha_ingreso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_salida` datetime NOT NULL,
   `ip_conexion` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=372 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario_logs`
@@ -794,65 +748,156 @@ INSERT INTO `usuario_logs` (`id_logs`, `usuario_log`, `fecha_ingreso`, `fecha_sa
 (219, 'pineda1234', '2015-07-12 23:04:23', '0000-00-00 00:00:00', '::1'),
 (220, 'pineda1234', '2015-07-12 23:04:45', '2015-07-12 23:04:49', '::1'),
 (221, 'pineda1234', '2015-07-12 23:04:54', '0000-00-00 00:00:00', '::1'),
-(222, 'hllanos', '2015-08-27 11:47:52', '2015-08-27 11:52:23', '127.0.0.1'),
-(223, 'hllanos', '2015-08-27 12:01:22', '2015-08-27 12:13:07', '127.0.0.1'),
-(224, 'hllanos', '2015-08-27 12:16:52', '2015-08-27 12:32:01', '127.0.0.1'),
-(225, 'hllanos', '2015-08-27 12:46:04', '2015-08-27 12:50:08', '127.0.0.1'),
-(226, 'hllanos', '2015-08-27 13:06:37', '2015-08-27 13:16:32', '127.0.0.1'),
-(227, 'hllanos', '2015-08-27 13:16:54', '2015-08-27 13:26:22', '127.0.0.1'),
-(228, 'hllanos', '2015-08-27 13:33:45', '0000-00-00 00:00:00', '127.0.0.1'),
-(229, 'hllanos', '2015-08-27 15:50:01', '0000-00-00 00:00:00', '127.0.0.1'),
-(230, 'hllanos', '2015-08-27 16:49:39', '2015-08-27 16:53:51', '127.0.0.1'),
-(231, 'hllanos', '2015-08-27 17:00:34', '2015-08-27 17:05:27', '127.0.0.1'),
-(232, 'hllanos', '2015-08-27 17:07:08', '2015-08-27 17:14:24', '127.0.0.1'),
-(233, 'hllanos', '2015-08-27 17:14:49', '0000-00-00 00:00:00', '127.0.0.1'),
-(234, 'hllanos', '2015-08-27 17:16:23', '0000-00-00 00:00:00', '127.0.0.1'),
-(235, 'hllanos', '2015-08-27 17:16:50', '0000-00-00 00:00:00', '127.0.0.1'),
-(236, 'hllanos', '2015-08-27 17:17:45', '0000-00-00 00:00:00', '127.0.0.1'),
-(237, 'hllanos', '2015-08-27 17:19:01', '0000-00-00 00:00:00', '127.0.0.1'),
-(238, 'hllanos', '2015-08-27 17:19:29', '0000-00-00 00:00:00', '127.0.0.1'),
-(239, 'hllanos', '2015-08-27 17:20:02', '0000-00-00 00:00:00', '127.0.0.1'),
-(240, 'hllanos', '2015-08-27 17:26:00', '0000-00-00 00:00:00', '127.0.0.1'),
-(241, 'hllanos', '2015-08-27 17:26:31', '0000-00-00 00:00:00', '127.0.0.1'),
-(242, 'hllanos', '2015-08-27 17:27:49', '0000-00-00 00:00:00', '127.0.0.1'),
-(243, 'hllanos', '2015-08-27 17:28:29', '2015-08-27 17:32:03', '127.0.0.1'),
-(244, 'hllanos', '2015-08-27 17:34:34', '0000-00-00 00:00:00', '127.0.0.1'),
-(245, 'hllanos', '2015-08-27 18:05:48', '0000-00-00 00:00:00', '127.0.0.1'),
-(246, 'hllanos', '2015-08-27 18:07:11', '0000-00-00 00:00:00', '127.0.0.1'),
-(247, 'hllanos', '2015-08-27 18:09:11', '0000-00-00 00:00:00', '127.0.0.1'),
-(248, 'hllanos', '2015-08-27 18:13:09', '2015-08-27 18:21:31', '127.0.0.1'),
-(249, 'hllanos', '2015-08-27 18:31:27', '2015-08-27 18:54:15', '127.0.0.1'),
-(250, 'hllanos', '2015-08-27 18:59:08', '2015-08-27 19:04:54', '127.0.0.1'),
-(251, 'hllanos', '2015-08-27 19:07:17', '2015-08-27 19:08:29', '127.0.0.1'),
-(252, 'hllanos', '2015-08-27 19:09:05', '0000-00-00 00:00:00', '127.0.0.1'),
-(253, 'hllanos', '2015-08-27 19:15:16', '2015-08-27 19:19:03', '127.0.0.1'),
-(254, 'hllanos', '2015-08-27 22:41:37', '2015-08-27 22:56:17', '127.0.0.1'),
-(255, 'hllanos', '2015-08-27 22:58:52', '2015-08-27 23:04:17', '127.0.0.1'),
-(256, 'hllanos', '2015-08-27 23:04:38', '2015-08-27 23:08:02', '127.0.0.1'),
-(257, 'hllanos', '2015-08-27 23:11:30', '0000-00-00 00:00:00', '127.0.0.1'),
-(258, 'hllanos', '2015-08-27 23:11:46', '2015-08-27 23:15:18', '127.0.0.1'),
-(259, 'hllanos', '2015-08-27 23:16:40', '0000-00-00 00:00:00', '127.0.0.1'),
-(260, 'hllanos', '2015-08-27 23:16:58', '0000-00-00 00:00:00', '127.0.0.1'),
-(261, 'hllanos', '2015-08-27 23:19:57', '2015-08-27 23:30:14', '127.0.0.1'),
-(262, 'hllanos', '2015-08-27 23:32:13', '0000-00-00 00:00:00', '127.0.0.1'),
-(263, 'hllanos', '2015-08-27 23:32:36', '0000-00-00 00:00:00', '127.0.0.1'),
-(264, 'hllanos', '2015-08-27 23:33:05', '0000-00-00 00:00:00', '127.0.0.1'),
-(265, 'hllanos', '2015-08-27 23:33:46', '0000-00-00 00:00:00', '127.0.0.1'),
-(266, 'hllanos', '2015-08-27 23:34:18', '0000-00-00 00:00:00', '127.0.0.1'),
-(267, 'hllanos', '2015-08-27 23:35:46', '0000-00-00 00:00:00', '127.0.0.1'),
-(268, 'hllanos', '2015-08-27 23:36:21', '0000-00-00 00:00:00', '127.0.0.1'),
-(269, 'hllanos', '2015-08-27 23:37:31', '0000-00-00 00:00:00', '127.0.0.1'),
-(270, 'hllanos', '2015-08-27 23:37:48', '0000-00-00 00:00:00', '127.0.0.1'),
-(271, 'hllanos', '2015-08-27 23:38:39', '2015-08-27 23:42:14', '127.0.0.1'),
-(272, 'hllanos', '2015-08-27 23:53:26', '2015-08-27 23:57:00', '127.0.0.1'),
-(273, 'hllanos', '2015-08-28 00:03:57', '0000-00-00 00:00:00', '127.0.0.1'),
-(274, 'hllanos', '2015-08-28 00:04:26', '2015-08-28 00:08:38', '127.0.0.1'),
-(275, 'hllanos', '2015-08-28 00:14:16', '0000-00-00 00:00:00', '127.0.0.1'),
-(276, 'hllanos', '2015-08-28 00:17:54', '0000-00-00 00:00:00', '127.0.0.1'),
-(277, 'hllanos', '2015-08-28 00:18:18', '0000-00-00 00:00:00', '127.0.0.1'),
-(278, 'hllanos', '2015-08-28 00:18:52', '2015-08-28 00:22:22', '127.0.0.1'),
-(279, 'hllanos', '2015-08-28 00:50:32', '0000-00-00 00:00:00', '127.0.0.1'),
-(280, 'hllanos', '2015-08-28 00:51:07', '2015-08-28 00:54:41', '127.0.0.1');
+(222, 'pineda1234', '2015-07-13 00:49:11', '2015-07-13 00:49:41', '::1'),
+(223, 'pineda1234', '2015-07-13 00:50:10', '2015-07-13 00:50:34', '::1'),
+(224, 'pineda1234', '2015-07-13 00:50:37', '0000-00-00 00:00:00', '::1'),
+(225, 'pineda1234', '2015-07-13 00:50:53', '2015-07-13 00:50:55', '::1'),
+(226, 'hllanos', '2015-07-13 01:05:10', '0000-00-00 00:00:00', '::1'),
+(227, 'hllanos', '2015-07-13 01:06:52', '0000-00-00 00:00:00', '::1'),
+(228, 'hllanos', '2015-07-13 01:08:12', '2015-07-13 01:08:16', '::1'),
+(229, 'pineda1234', '2015-07-13 01:18:55', '2015-07-13 01:19:21', '::1'),
+(230, 'pineda1234', '2015-07-13 01:21:22', '2015-07-13 01:21:43', '::1'),
+(231, 'pineda1234', '2015-07-13 01:22:32', '2015-07-13 01:22:53', '::1'),
+(232, 'pineda1234', '2015-07-13 01:24:26', '2015-07-13 01:24:46', '::1'),
+(233, 'pineda1234', '2015-07-13 01:29:13', '2015-07-13 01:29:36', '::1'),
+(234, 'pineda1234', '2015-07-15 13:55:04', '0000-00-00 00:00:00', '::1'),
+(235, 'pineda1234', '2015-07-15 13:59:00', '0000-00-00 00:00:00', '::1'),
+(236, 'pineda1234', '2015-07-15 13:59:14', '0000-00-00 00:00:00', '::1'),
+(237, 'pineda1234', '2015-07-15 13:59:58', '2015-07-15 14:00:18', '::1'),
+(238, 'pineda1234', '2015-07-18 20:23:14', '2015-07-18 20:24:33', '::1'),
+(239, 'pineda1234', '2015-07-19 23:28:51', '0000-00-00 00:00:00', '::1'),
+(240, 'pineda1234', '2015-07-19 23:29:07', '0000-00-00 00:00:00', '::1'),
+(241, 'pineda1234', '2015-07-20 11:58:32', '0000-00-00 00:00:00', '::1'),
+(242, 'pineda1234', '2015-07-20 12:19:42', '0000-00-00 00:00:00', '::1'),
+(243, 'pineda1234', '2015-07-20 12:19:58', '2015-07-20 12:23:09', '::1'),
+(244, 'hllanos', '2015-07-20 12:21:53', '2015-07-20 12:22:53', '::1'),
+(245, 'pineda1234', '2015-07-20 12:23:58', '2015-07-20 12:24:01', '::1'),
+(246, 'pineda1234', '2015-07-20 12:24:06', '2015-07-20 12:27:55', '::1'),
+(247, 'pineda1234', '2015-07-20 16:40:47', '0000-00-00 00:00:00', '::1'),
+(248, 'pineda1234', '2015-07-20 16:41:07', '2015-07-20 16:42:38', '::1'),
+(249, 'pineda1234', '2015-07-20 16:43:19', '0000-00-00 00:00:00', '::1'),
+(250, 'pineda1234', '2015-07-20 16:44:25', '0000-00-00 00:00:00', '::1'),
+(251, 'pineda1234', '2015-07-20 16:45:48', '0000-00-00 00:00:00', '::1'),
+(252, 'pineda1234', '2015-07-20 16:46:14', '0000-00-00 00:00:00', '::1'),
+(253, 'pineda1234', '2015-07-22 16:12:10', '0000-00-00 00:00:00', '127.0.0.1'),
+(254, 'hllanos', '2015-07-22 16:25:29', '0000-00-00 00:00:00', '127.0.0.1'),
+(255, 'pineda1234', '2015-07-26 19:41:08', '2015-07-26 19:42:00', '127.0.0.1'),
+(256, 'hllanos', '2015-07-26 19:42:12', '2015-07-26 19:42:26', '127.0.0.1'),
+(257, 'pineda1234', '2015-07-26 19:42:31', '2015-07-26 19:42:33', '127.0.0.1'),
+(258, 'pineda1234', '2015-08-23 19:33:44', '2015-08-23 19:38:29', '::1'),
+(259, 'pineda1234', '2015-08-23 19:48:45', '0000-00-00 00:00:00', '::1'),
+(260, 'pineda1234', '2015-08-23 19:50:21', '0000-00-00 00:00:00', '::1'),
+(261, 'pineda1234', '2015-08-23 22:06:43', '2015-08-23 22:11:40', '::1'),
+(262, 'pineda1234', '2015-08-23 22:13:51', '0000-00-00 00:00:00', '::1'),
+(263, 'pineda1234', '2015-08-23 22:26:28', '0000-00-00 00:00:00', '::1'),
+(264, 'pineda1234', '2015-08-23 22:32:56', '0000-00-00 00:00:00', '::1'),
+(265, 'pineda1234', '2015-08-23 22:35:58', '0000-00-00 00:00:00', '::1'),
+(266, 'pineda1234', '2015-08-23 22:39:33', '0000-00-00 00:00:00', '::1'),
+(267, 'pineda1234', '2015-08-23 22:52:58', '2015-08-23 23:04:22', '::1'),
+(268, 'pineda1234', '2015-08-23 23:04:35', '0000-00-00 00:00:00', '::1'),
+(269, 'pineda1234', '2015-08-23 23:17:35', '2015-08-23 23:27:16', '::1'),
+(270, 'pineda1234', '2015-08-23 23:27:42', '0000-00-00 00:00:00', '::1'),
+(271, 'pineda1234', '2015-08-23 23:38:19', '0000-00-00 00:00:00', '::1'),
+(272, 'pineda1234', '2015-08-23 23:38:46', '2015-08-23 23:45:30', '::1'),
+(273, 'pineda1234', '2015-08-23 23:45:37', '0000-00-00 00:00:00', '::1'),
+(274, 'pineda1234', '2015-08-23 23:46:36', '2015-08-24 08:45:04', '::1'),
+(275, 'pineda1234', '2015-08-24 12:32:33', '0000-00-00 00:00:00', '::1'),
+(276, 'hllanos', '2015-08-24 21:09:55', '2015-08-24 21:30:32', '::1'),
+(277, 'hllanos', '2015-08-24 21:45:28', '0000-00-00 00:00:00', '::1'),
+(278, 'hllanos', '2015-08-24 21:46:02', '0000-00-00 00:00:00', '::1'),
+(279, 'hllanos', '2015-08-24 22:00:45', '0000-00-00 00:00:00', '::1'),
+(280, 'hllanos', '2015-08-24 22:01:01', '2015-08-24 22:22:44', '::1'),
+(281, 'hllanos', '2015-08-25 08:31:27', '2015-08-25 08:41:50', '::1'),
+(282, 'hllanos', '2015-08-25 08:52:29', '0000-00-00 00:00:00', '::1'),
+(283, 'hllanos', '2015-08-25 09:03:39', '0000-00-00 00:00:00', '::1'),
+(284, 'hllanos', '2015-08-25 09:05:33', '0000-00-00 00:00:00', '::1'),
+(285, 'hllanos', '2015-08-25 09:05:55', '2015-08-25 09:21:15', '::1'),
+(286, 'hllanos', '2015-08-25 09:21:47', '2015-08-25 09:33:56', '::1'),
+(287, 'hllanos', '2015-08-25 09:37:18', '0000-00-00 00:00:00', '::1'),
+(288, 'hllanos', '2015-08-25 09:43:39', '2015-08-25 09:51:05', '::1'),
+(289, 'hllanos', '2015-08-25 11:22:48', '0000-00-00 00:00:00', '::1'),
+(290, 'hllanos', '2015-08-25 11:25:34', '0000-00-00 00:00:00', '::1'),
+(291, 'hllanos', '2015-08-25 11:26:32', '2015-08-25 11:28:37', '::1'),
+(292, 'hllanos', '2015-08-25 15:56:09', '2015-08-25 16:06:22', '::1'),
+(293, 'hllanos', '2015-08-25 16:16:51', '2015-08-25 16:20:30', '::1'),
+(294, 'hllanos', '2015-08-25 19:13:38', '2015-08-25 19:28:13', '::1'),
+(295, 'hllanos', '2015-08-25 19:30:50', '2015-08-25 19:36:06', '::1'),
+(296, 'hllanos', '2015-08-25 19:40:49', '2015-08-25 19:45:42', '::1'),
+(297, 'hllanos', '2015-08-25 19:52:18', '0000-00-00 00:00:00', '::1'),
+(298, 'hllanos', '2015-08-25 19:54:54', '2015-08-25 20:02:42', '::1'),
+(299, 'hllanos', '2015-08-25 20:29:28', '2015-08-25 20:35:49', '::1'),
+(300, 'hllanos', '2015-08-25 20:36:32', '2015-08-25 20:40:47', '::1'),
+(301, 'hllanos', '2015-08-25 20:41:27', '2015-08-25 20:53:05', '::1'),
+(302, 'hllanos', '2015-08-25 21:21:18', '0000-00-00 00:00:00', '::1'),
+(303, 'hllanos', '2015-08-25 21:22:17', '0000-00-00 00:00:00', '::1'),
+(304, 'hllanos', '2015-08-25 21:56:11', '2015-08-25 22:00:31', '::1'),
+(305, 'hllanos', '2015-08-25 22:10:09', '0000-00-00 00:00:00', '::1'),
+(306, 'hllanos', '2015-08-25 22:46:28', '0000-00-00 00:00:00', '::1'),
+(307, 'hllanos', '2015-08-25 22:46:54', '2015-08-25 22:52:21', '::1'),
+(308, 'hllanos', '2015-08-25 22:52:58', '0000-00-00 00:00:00', '::1'),
+(309, 'hllanos', '2015-08-25 23:00:08', '2015-08-25 23:05:01', '::1'),
+(310, 'hllanos', '2015-08-25 23:06:34', '0000-00-00 00:00:00', '::1'),
+(311, 'hllanos', '2015-08-25 23:07:24', '2015-08-25 23:51:17', '::1'),
+(312, 'hllanos', '2015-08-25 23:52:01', '0000-00-00 00:00:00', '::1'),
+(313, 'hllanos', '2015-08-25 23:53:24', '0000-00-00 00:00:00', '::1'),
+(314, 'hllanos', '2015-08-26 00:05:16', '2015-08-26 00:08:57', '::1'),
+(315, 'hllanos', '2015-08-26 00:14:31', '0000-00-00 00:00:00', '::1'),
+(316, 'hllanos', '2015-08-26 00:19:52', '0000-00-00 00:00:00', '::1'),
+(317, 'hllanos', '2015-08-26 01:00:52', '0000-00-00 00:00:00', '::1'),
+(318, 'hllanos', '2015-08-26 01:03:57', '0000-00-00 00:00:00', '::1'),
+(319, 'hllanos', '2015-08-26 01:18:51', '2015-08-26 07:20:25', '::1'),
+(320, 'hllanos', '2015-08-27 15:14:41', '2015-08-27 15:35:24', '::1'),
+(321, 'hllanos', '2015-08-27 15:50:51', '0000-00-00 00:00:00', '::1'),
+(322, 'hllanos', '2015-08-27 16:30:52', '2015-08-27 16:41:09', '::1'),
+(323, 'hllanos', '2015-08-27 16:41:23', '0000-00-00 00:00:00', '::1'),
+(324, 'hllanos', '2015-08-27 16:55:10', '2015-08-27 17:02:22', '::1'),
+(325, 'hllanos', '2015-08-27 17:03:09', '0000-00-00 00:00:00', '::1'),
+(326, 'hllanos', '2015-08-27 17:22:10', '0000-00-00 00:00:00', '::1'),
+(327, 'hllanos', '2015-08-27 17:28:10', '2015-08-27 18:45:37', '::1'),
+(328, 'hllanos', '2015-08-27 18:48:45', '2015-08-27 18:52:27', '::1'),
+(329, 'hllanos', '2015-08-27 18:53:05', '2015-08-27 18:56:54', '::1'),
+(330, 'hllanos', '2015-08-27 19:04:21', '2015-08-27 19:11:14', '::1'),
+(331, 'hllanos', '2015-08-27 19:12:07', '0000-00-00 00:00:00', '::1'),
+(332, 'hllanos', '2015-08-27 23:10:07', '2015-08-27 23:13:37', '::1'),
+(333, 'hllanos', '2015-08-27 23:19:38', '2015-08-27 23:23:40', '::1'),
+(334, 'hllanos', '2015-08-27 23:26:38', '0000-00-00 00:00:00', '::1'),
+(335, 'hllanos', '2015-08-27 23:58:27', '2015-08-28 00:02:35', '::1'),
+(336, 'hllanos', '2015-08-28 00:37:51', '0000-00-00 00:00:00', '::1'),
+(337, 'hllanos', '2015-08-28 00:44:52', '2015-08-28 00:59:07', '::1'),
+(338, 'hllanos', '2015-08-28 01:12:54', '2015-08-28 01:30:52', '::1'),
+(339, 'pineda1234', '2015-08-28 01:38:10', '0000-00-00 00:00:00', '::1'),
+(340, 'hllanos', '2015-08-28 07:07:10', '0000-00-00 00:00:00', '::1'),
+(341, 'hllanos', '2015-08-28 07:11:41', '2015-08-28 07:16:37', '::1'),
+(342, 'hllanos', '2015-08-28 07:17:56', '0000-00-00 00:00:00', '::1'),
+(343, 'hllanos', '2015-08-28 08:26:55', '2015-08-28 08:33:07', '::1'),
+(344, 'hllanos', '2015-08-28 08:34:01', '2015-08-28 08:40:09', '::1'),
+(345, 'hllanos', '2015-08-28 08:59:38', '2015-08-28 09:03:07', '::1'),
+(346, 'hllanos', '2015-08-28 09:22:36', '0000-00-00 00:00:00', '::1'),
+(347, 'hllanos', '2015-08-28 09:23:05', '2015-08-28 09:32:32', '::1'),
+(348, 'hllanos', '2015-08-28 09:33:49', '2015-08-28 09:39:53', '::1'),
+(349, 'hllanos', '2015-08-28 09:40:31', '0000-00-00 00:00:00', '::1'),
+(350, 'hllanos', '2015-08-28 09:48:20', '0000-00-00 00:00:00', '::1'),
+(351, 'hllanos', '2015-08-28 09:50:50', '0000-00-00 00:00:00', '::1'),
+(352, 'hllanos', '2015-08-28 09:54:50', '0000-00-00 00:00:00', '::1'),
+(353, 'hllanos', '2015-08-28 09:58:54', '0000-00-00 00:00:00', '::1'),
+(354, 'hllanos', '2015-08-28 09:59:17', '0000-00-00 00:00:00', '::1'),
+(355, 'hllanos', '2015-08-28 10:10:18', '0000-00-00 00:00:00', '::1'),
+(356, 'hllanos', '2015-08-28 10:13:23', '0000-00-00 00:00:00', '::1'),
+(357, 'hllanos', '2015-08-28 10:13:38', '2015-08-28 10:19:59', '::1'),
+(358, 'hllanos', '2015-08-28 10:27:46', '0000-00-00 00:00:00', '::1'),
+(359, 'hllanos', '2015-08-28 10:29:56', '0000-00-00 00:00:00', '::1'),
+(360, 'hllanos', '2015-08-28 19:24:14', '2015-08-28 19:27:36', '127.0.0.1'),
+(361, 'hllanos', '2015-08-28 19:53:00', '0000-00-00 00:00:00', '127.0.0.1'),
+(362, 'hllanos', '2015-08-28 19:53:06', '2015-08-28 20:02:06', '127.0.0.1'),
+(363, 'hllanos', '2015-08-28 20:09:41', '2015-08-28 20:24:20', '127.0.0.1'),
+(364, 'hllanos', '2015-08-28 20:30:43', '2015-08-28 20:38:57', '127.0.0.1'),
+(365, 'hllanos', '2015-08-28 20:39:13', '2015-08-28 20:45:14', '127.0.0.1'),
+(366, 'hllanos', '2015-08-28 20:52:33', '2015-08-28 20:56:36', '127.0.0.1'),
+(367, 'hllanos', '2015-08-28 21:01:02', '2015-08-28 21:14:21', '127.0.0.1'),
+(368, 'hllanos', '2015-08-28 21:16:30', '2015-08-28 21:55:54', '127.0.0.1'),
+(369, 'hllanos', '2015-08-28 21:58:11', '2015-08-28 22:46:46', '127.0.0.1'),
+(370, 'hllanos', '2015-08-28 22:46:55', '0000-00-00 00:00:00', '127.0.0.1'),
+(371, 'hllanos', '2015-08-28 22:49:09', '0000-00-00 00:00:00', '127.0.0.1');
 
 --
 -- Índices para tablas volcadas
@@ -951,6 +996,7 @@ ALTER TABLE `idioma_has_persona`
 -- Indices de la tabla `i_entrada`
 --
 ALTER TABLE `i_entrada`
+  ADD PRIMARY KEY (`item`),
   ADD KEY `usuario_ID` (`usuario_ID`);
 
 --
@@ -978,6 +1024,7 @@ ALTER TABLE `i_producto`
 -- Indices de la tabla `i_salida`
 --
 ALTER TABLE `i_salida`
+  ADD PRIMARY KEY (`item`),
   ADD KEY `usuario_ID` (`usuario_ID`);
 
 --
@@ -1060,25 +1107,35 @@ ALTER TABLE `usuario_logs`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `i_entrada`
+--
+ALTER TABLE `i_entrada`
+  MODIFY `item` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT de la tabla `i_instancia_producto`
 --
 ALTER TABLE `i_instancia_producto`
-  MODIFY `id_instancia` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id_instancia` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `i_marca`
 --
 ALTER TABLE `i_marca`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `i_producto`
 --
 ALTER TABLE `i_producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT de la tabla `i_salida`
+--
+ALTER TABLE `i_salida`
+  MODIFY `item` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `i_tipo_producto`
 --
 ALTER TABLE `i_tipo_producto`
-  MODIFY `id_tipo_producto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_tipo_producto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -1088,10 +1145,57 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuario_logs`
 --
 ALTER TABLE `usuario_logs`
-  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=281;
+  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=372;
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `clases_has_experiencia_academica`
+--
+ALTER TABLE `clases_has_experiencia_academica`
+  ADD CONSTRAINT `fclex` FOREIGN KEY (`ID_Clases`) REFERENCES `clases` (`ID_Clases`);
+
+--
+-- Filtros para la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`);
+
+--
+-- Filtros para la tabla `empleado_has_cargo`
+--
+ALTER TABLE `empleado_has_cargo`
+  ADD CONSTRAINT `empleado_has_cargo_ibfk_1` FOREIGN KEY (`No_Empleado`) REFERENCES `empleado` (`No_Empleado`),
+  ADD CONSTRAINT `empleado_has_cargo_ibfk_2` FOREIGN KEY (`ID_cargo`) REFERENCES `cargo` (`ID_cargo`);
+
+--
+-- Filtros para la tabla `estudios_academico`
+--
+ALTER TABLE `estudios_academico`
+  ADD CONSTRAINT `estudios_academico_ibfk_1` FOREIGN KEY (`ID_Tipo_estudio`) REFERENCES `tipo_estudio` (`ID_Tipo_estudio`),
+  ADD CONSTRAINT `estudios_academico_ibfk_2` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`),
+  ADD CONSTRAINT `estudios_academico_ibfk_3` FOREIGN KEY (`Id_universidad`) REFERENCES `universidad` (`Id_universidad`);
+
+--
+-- Filtros para la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  ADD CONSTRAINT `experiencia_laboral_ibfk_1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`);
+
+--
+-- Filtros para la tabla `experiencia_laboral_has_cargo`
+--
+ALTER TABLE `experiencia_laboral_has_cargo`
+  ADD CONSTRAINT `experiencia_laboral_has_cargo_ibfk_1` FOREIGN KEY (`ID_Experiencia_laboral`) REFERENCES `experiencia_laboral` (`ID_Experiencia_laboral`),
+  ADD CONSTRAINT `experiencia_laboral_has_cargo_ibfk_2` FOREIGN KEY (`ID_cargo`) REFERENCES `cargo` (`ID_cargo`);
+
+--
+-- Filtros para la tabla `idioma_has_persona`
+--
+ALTER TABLE `idioma_has_persona`
+  ADD CONSTRAINT `idioma_has_persona_ibfk_1` FOREIGN KEY (`ID_Idioma`) REFERENCES `idioma` (`ID_Idioma`),
+  ADD CONSTRAINT `idioma_has_persona_ibfk_2` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`);
 
 --
 -- Filtros para la tabla `i_entrada`

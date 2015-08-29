@@ -1,7 +1,9 @@
 <?php
 
-$queryCE = mysql_query("SELECT * FROM persona");
-
+ $pame = $db->prepare("select * from persona");
+ $pame -> execute();
+ $rows = $pame->fetchAll(PDO::FETCH_ASSOC);
+ 
 ?>
 
 
@@ -249,8 +251,7 @@ $queryCE = mysql_query("SELECT * FROM persona");
                                         </thead>
                                         <tbody>
 HTML;
-
-            while ($rowCE = mysql_fetch_array($queryCE))  {
+            foreach ($rows as $rowCE) {
 
       
             $Noidentidad = $rowCE['N_identidad'];

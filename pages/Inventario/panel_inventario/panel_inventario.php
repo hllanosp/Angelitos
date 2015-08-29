@@ -9,6 +9,9 @@
       <small>Inventario</small>
   </h1
 </div>
+<div class="" id="notificaciones">
+
+</div>
 
 <div class="mailbox row" id = "mailbox">
   <div class="box box-solid">
@@ -24,13 +27,13 @@
 
                   <div class="panel panel-green">
                             <div class="panel-heading">
-                                <div class="row">
+                                <div class="row" id="historial_entradas">
                                     <div class="col-xs-3">
                                         <i class="fa fa-refresh fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>Historial</div>
+                                        <div class="huge">34</div>
+                                        <div>Historial de reabastecimiento</div>
                                     </div>
                                 </div>
                             </div>
@@ -44,13 +47,13 @@
                         </div>
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
-                                <div class="row">
+                                <div class="row" id="historial_salidas">
                                     <div class="col-xs-3">
                                         <i class="fa fa-shopping-cart fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">12</div>
-                                        <div>Historial</div>
+                                        <div>Historial de salidas de Producto</div>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +91,7 @@
       event.preventDefault();
       // alert("has presionado estadisticas");
 
-      $("#cuerpo_panel_inventario" ).load("pages/Inventario/panel_inventario/reabastecer.php" );
+      $("#cuerpo_panel_inventario" ).load("pages/Inventario/panel_inventario/reabastecer_producto.php" );
       });
     $("#nueva_salida").click(function(event) {
       event.preventDefault();
@@ -96,6 +99,20 @@
 
       $("#cuerpo_panel_inventario" ).load( "pages/Inventario/panel_inventario/salidaProducto.php"  );
       });
+
+      $("#historial_salidas").click(function(event) {
+        event.preventDefault();
+        // alehistorirt("has presionado estadisticas");
+
+        $("#cuerpo_panel_inventario" ).load( "pages/Inventario/panel_inventario/historial_salidas.php"  );
+        });
+
+        $("#historial_entradas").click(function(event) {
+          event.preventDefault();
+          // alehistorirt("has presionado estadisticas");
+
+          $("#cuerpo_panel_inventario" ).load( "pages/Inventario/panel_inventario/historial_reabastecimiento.php"  );
+          });
 
   });
 

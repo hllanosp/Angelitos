@@ -7,7 +7,7 @@
  ?>
 	<h1 style="color: black; margin-left:30px;">Salida de Producto</h1>
   <div class="box-body table-responsive ">
-    <form class="" >
+    <div class="" >
     <table id = "tabla_prductos" class='table table-bordered table-striped display' cellspacing="0" >
        <thead >
          <tr style="background-color: #f0ad4e " >
@@ -22,7 +22,7 @@
        <tbody>
 				<?php
 				//ejecutamos la consulta con ayuda del archivo conexion.php que se encuentra arriba
-					$query  = $db->prepare("select  i_producto.id_producto, i_producto.nombre, i_producto.tipo_producto, i_instancia_producto.cantidad FROM  i_producto inner join i_instancia_producto on i_instancia_producto.id_producto = i_producto.id_producto");
+					$query  = $db->prepare("CALL PA_resumen()");
 					$query->execute();
 					$result1 = $query->fetchAll();
 						foreach($result1 as $row)
@@ -47,12 +47,10 @@
 				</tbody>
        </tbody>
      </table>
-   </form>
+   </div>
 
  <!-- fin tabla -->
-
-
-     <div class="col-xs-8" style="margin-left:20%;">
+  <div class="col-xs-8" style="margin-left:20%;">
        <div class="panel panel-default">
                <div class="panel-heading">
                    <label><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Resumen Transaccion Actual</label>
@@ -75,7 +73,7 @@
                </div>
        </div>
        <div class="" style="margin:auto;">
-        <form class="form-horizontal" id="form_resumen" >
+        <div class="form-horizontal" id="form_resumen" >
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
                   <div class="checkbox">
@@ -83,14 +81,16 @@
             		<a class="btn  btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
                     <button id ="enviarResumen" class="btn  btn-primary"><i class ='glyphicon glyphicon-shopping-cart' ></i> Finalizar Transaccion </button>
                     </label>
+                    <div id="notificaciones"></div>
                   </div>
                 </div>
               </div>
-        </form>
+        </div>
 
        </div>
 
    </div>
+
 </div>
 
 <script type="text/javascript">
@@ -124,36 +124,6 @@
         producto = $("#producto").val("");
         cantidad = $("#cantidad").val("");
     });
-    // $("#form_resumen").submit(function(e) {
-    //   if (confirm('Esta seguro de realizar la transaccion')) {
-    //     e.preventDefault();
-    //     var matrizResumen = [,];
-    //
-    //     var i = 0;
-    //     var j = 0;
-    //
-    //     $("#tbl_resumen_cuerpo tr").each(function(){
-    //         $(this).find('td').each(function(){
-    //             matrizResumen[i,j] = $(this).text();
-    //             j++;
-    //         });
-    //         i++;
-    //     });
-    //
-    //        var datos ={matrizResumen: matrizResumen, i: i, j: j};
-    //        $.ajax({
-    //                data: datos,
-    //                url:"pages/Inventario/panel_inventario/borrar_producto.php",
-    //                type : 'post',
-    //                success: function(data) {
-    //                  $('#notificaciones').html(data);
-    //                }
-    //
-    //              });
-    //
-    //   }
-    //
-    // });
 
     $("#enviarResumen").click(function(){
         var matrizResumen = [,];
@@ -168,17 +138,12 @@
             i++;
         });
 
-        if (j>0){
-            $.get("pages/Inventario/panel_inventario/borrar_producto.php", {matrizResumen: matrizResumen, i: i, j: j},function(html){
-                $("#notificaciones").html(html);
-            });
-        }
-        else{
-        }
+        $.get("pages/Inventario/panel_inventario/borrar_producto.php", {matrizResumen: matrizResumen, i: i, j: j},function(html){
+
+        $("#notificaciones").html(html);
+        $('#tbl_resumen_cuerpo').remove();
+        $("#cuerpo_panel_inventario" ).load( "pages/Inventario/panel_inventario/salidaProducto.php"  );
+        });
     });
-
-
-
 	});
-
 </script>
