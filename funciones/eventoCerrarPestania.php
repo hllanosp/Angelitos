@@ -10,6 +10,8 @@
 	$query2 = $db ->prepare("UPDATE usuario SET Logeado = 0 where usuario_ID = '".$usuario_ID."' ;");
 	$query2 ->execute();
 
-	header("location: login/login.php");
+
+	$_SESSION = array();
+	session_destroy();
 
 ?>

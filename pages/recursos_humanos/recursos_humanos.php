@@ -8,7 +8,7 @@
     }
   else
     {
-      $contenido = 'administracion';
+      $contenido = 'recursos_humanos';
     }
 
  require_once($maindir."pages/navbar.php");
