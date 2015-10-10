@@ -1,11 +1,7 @@
 <?php
 
-
-
-
 //definine esta variable temporal para tener un rol cuon el cual trabajar
   $rol = 100;
-
 ?>
 
 <div class="navbar navbar-default" id="subnav">
@@ -93,8 +89,8 @@ HTML;
     }
     // --------------------------------------------------------------------------
 
+     // pagina del modulo de inventario
     if($rol >= 40){
-     // pagina del modulo de gestion de folios
       if($contenido == 'inventario') {
         $url = 'pages/Inventario/principal_inventario.php?contenido=inventario';
         echo <<<HTML
@@ -108,21 +104,9 @@ HTML;
 HTML;
         }
     }
+
     //----------------------------------------------------------------------------
 
-    if($rol == 100 || $rol == 50 || $rol == 30 || $rol == 20){
-      if($contenido == 'recursos_humanos'){
-        echo <<<HTML
-        <li class="active"><a id="recursos_humanos" >Recursos Humanos</a></li>
-
-HTML;
-      }
-      else{
-        echo <<<HTML
-        <li><a role="button" id="recursos_humanos">Recursos Humanos</a></li>
-HTML;
-      }
-    }
 ?>
 
            </ul>
@@ -136,7 +120,7 @@ HTML;
       $("#neonatos").click(function(event) {
       event.preventDefault();
 
-      $("#div_contenido" ).load( "pages/Neonatos/principal.php?contenido=neonatos" );
+      $("#div_contenido" ).load( "pages/Neonatos/principal_neonatos.php?contenido=neonatos" );
       });
       // --------------------------
 

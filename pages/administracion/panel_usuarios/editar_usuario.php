@@ -16,8 +16,6 @@
  <?php
   // recibimos las variables por post
   $usuario_ID = $_POST["usuario_ID"];
-  // $empleado = $_POST["empleado"];
-  // $nombreUsuarioAnt = $_POST["nombreUsuarioAnt"];
   $nombreUsuario = $_POST["usuario"];
   $password = $_POST["password"];
   $rol = $_POST["rol"];
@@ -46,17 +44,7 @@
         $codMensaje =0;
 
     }
-    // elseif($empleado == -1){
-
-    //     $mensaje="Por favor seleccione un empleado valido";
-    //     $codMensaje =0;
-
-    // }
-    // elseif($rol == -1){
-
-    //     $mensaje="Por favor seleccione un rol valido";
-    //     $codMensaje =0;
-    // }
+    
     else{
       try{
         // realizamos la consulta
@@ -89,7 +77,5 @@
 ?>
 <!-- efecto alerta temporal -->
 <script type="text/javascript">
-  // setTimeout(function() {
-  //   $("#notificaciones").fadeOut(1500);
-  // },4000);
+ 
 </script>

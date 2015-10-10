@@ -1,7 +1,7 @@
 table {
  /*margin :3px;*/
-  border-collapse: ;
-  border-spacing: 0 1px;
+  /*border-collapse: ;*/
+  /*border-spacing: 0 1px;*/
 }
 
 thead th {
@@ -10,17 +10,17 @@ thead th {
 }
 
 tbody td {
-  background-color: white;
+  /*background-color: white;*/
 }
 
 tr td:first-child,
 tr th:first-child {
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+  /*border-top-left-radius: 6px;*/
+  /*border-bottom-left-radius: 6px;*/
 }
 
 tr td:last-child,
 tr th:last-child {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+  /*border-top-right-radius: 6px;*/
+  /*border-bottom-right-radius: 6px;*/
 }

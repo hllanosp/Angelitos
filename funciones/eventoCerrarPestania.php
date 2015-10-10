@@ -14,4 +14,6 @@
 	$_SESSION = array();
 	session_destroy();
 
+	include("location: ".$maindir."login/checkout.php");
+
 ?>
