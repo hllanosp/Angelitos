@@ -9,6 +9,8 @@
       $contenido = 'administracion';
     }
 
+
+
  require_once($maindir."pages/navbar.php");
  // include ($maindir.'conexion/.php');
  require_once($maindir."funciones/seguridad.php");
@@ -87,12 +89,10 @@
               </div>
 
 
-                <div class = "box" style="margin-top: 15px;">
-                  <div class="box-header well">
-                    <i class="fa fa-bar-chart-o fa-fw"></i>
-                    <h5 class="box-title" style = "color:black;"> usuarios activos</h5>
-                  </div>
-
+                <div class = "panel panel-default" style="margin-top: 15px;">
+                  <div class="panel-heading">
+                   <label><span class="fa fa-bar-chart-o fa-fw" aria-hidden="true"></span>usuarios acivos</label>
+                 </div>
                         <?php
                           require_once('panel_Grafos/grafo_empleados.php');
                          ?>

@@ -153,6 +153,7 @@
         $.get("pages/Inventario/panel_inventario/insertar_producto.php", {matrizResumen: matrizResumen, i: i, j: j},function(html){
 
         $("#notificaciones").html(html);
+        $("#notificaciones").fadeOut(4500);
         $('#tbl_resumen_cuerpo').remove();
         $("#cuerpo_panel_inventario" ).load( "pages/Inventario/panel_inventario/reabastecer_producto.php"  );
         });

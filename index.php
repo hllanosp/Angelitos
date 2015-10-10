@@ -10,8 +10,11 @@
 
     function accionAntesDeSalir()
     {
-      $.ajax("funciones/eventoCerrarPestania.php");
-    	// return "Perderas todos tus datos de sesion";
+      var confirm = confirm("Perderas los datos de tu sesion...");
+      if (confirm) {
+        $.ajax("funciones/eventoCerrarPestania.php");
+      };
+      
 		}
 </script>
 

@@ -46,8 +46,8 @@
 
   <!-- estilo en el admin -->
   <link href="componentes/sb-admin-2.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css" >
-<script src = "css/scripts.js" type="text/javascript">
+  <!-- <link rel="stylesheet" href="css/styles.css" > -->
+  <script src = "css/scripts.js" type="text/javascript">
 
 </script>
 
@@ -68,6 +68,11 @@
 
    <!-- iconos -->
     <link href="componentes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+  <!-- formularios step wizard  -->
+    <link rel="stylesheet" href="componentes/jquery-steps-master/demo/css/jquery.steps.css">
+    <script src = "componentes/jquery-steps-master/build/jquery.steps.js"></script>
+
 <script >
    $(document).ready(function(){
 
