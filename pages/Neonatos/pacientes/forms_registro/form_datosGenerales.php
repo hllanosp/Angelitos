@@ -1,112 +1,55 @@
 <div class="row">
-    <label class="col-xs-6 control-label">
-        Institución de nacimiento:
-        <input type="text" class="form-control" id="institucion_nacimiento">
-    </label>
-    <label class="col-xs-6 control-label">
-        Lugar de nacimiento:
-        <input type="text" class="form-control" id="lugar_nacimiento">
-    </label>
-</div>
-<div class="row">
-    <label class="col-xs-12 control-label">
-        Nombre del recien nacido:
-        <input type="text" class="form-control" id="nombre_recien_nacido">
-    </label>
-</div>
-<div class="row">
-    <div class="col-xs-6">
-        <label class="control-label">Tiene pulsera ID: </label>
-        <label class="radio-inline"><input type="radio" name="optradio"
-                                           id="tiene_pulsera_si">Si</label>
-        <label class="radio-inline"><input type="radio" name="optradio"
-                                           id="tiene_pulsera_no">No</label> 
-    </div>
-    <div class="col-xs-6">
-        <label class="control-label">Sexo: </label>
-        <label class="radio-inline"><input type="radio" name="optradio1">H</label>
-        <label class="radio-inline"><input type="radio" name="optradio1">M</label>
-        <label class="radio-inline"><input type="radio" name="optradio1">No determinado</label> 
-    </div>
-</div>
-<div class="row">
-    <label class="col-xs-6 control-label">
-        Nombre de la madre:
-        <input type="text" class="form-control">
-    </label>
-    <label class="col-xs-6 control-label">
-        Historia clínica de la madre:
-        <input type="text" class="form-control">
-    </label>
-</div>
-<div class="row">
-    <div class="col-xs-5">
-        <label class="control-label">
-            Ubicación de la madre:
-        </label>
-        <div class="col-xs-6">
-            <label class="radio"><input type="radio" name="optradio1">Mismo Hospital</label>
-            <label class="radio"><input type="radio" name="optradio1">Otro Hospital</label>
-        </div>
-        <div class="col-xs-6">
-            <label class="radio"><input type="radio" name="optradio1">Domicilio</label>
-            <label class="radio"><input type="radio" name="optradio1">Fallecida</label>
-        </div>
-    </div>
-    <div class="col-xs-6">
-        <div class="col-xs-6">
-            <label class="control-label">
-                Condición de salud:
-            </label>
-            <div class="col-xs-6">
-                <label class="radio"><input type="radio" name="optradio1">Normal</label>
+    <!-- <div class="col-md-12">
+      <div class="featurette">
+
+            <img class="featurette-image  pull-left" src="img/angel.png">
+            <div class="alert alert-success"><h1>(formulario 1) Datos Generales</h1></div>
+       
+      </div>
+    </div> -->
+
+    <form class = "form" role="form" id="form_actualizar">
+      <!-- para poder acceder a la variable usuario_ID por javascript -->
+      <input type="hidden" id="usuario_ID" name="idUsuario" value="">
+          <div class="form-group">
+
+          </div>
+          <div id="verUserName_actualizar" class="form-group">
+            <label>Nombre del usuario</label>
+            <input type="hidden" id="nombreUsuarioAnt" name="nombreUsuarioAnt" value="">
+            <input type="text" class="form-control" id="nombreUsuario_actualizar" maxlength="30" value=" " placeholder="" title = "Solo son permitidos numeros y letras 5 caracteres minimo" pattern="[a-zA-Z0-9]{5,}"autocomplete = "off" required>
+          </div>
+          <div id="verPass_actualizar" class="form-group">
+            <label>Contraseña (Maximo 20 carateres)</label>
+            <input type="password" class="form-control" id="password_actualizar" name="password_actualizar" title = "Solo son permitidos numeros y letras 8 caracteres minimo" pattern="[a-zA-Z0-9]{5,}" autocomplete = "off" maxlength="20" required>
+          </div>
+          <div id="verPass2_actualizar" class="form-group">
+            <label class="control-label">Repetir contraseña</label>
+            <input type="password" class="form-control" id="password_actualizar2" name="" maxlength="20" required>
+          </div>
+          <div class="form-group">
+            <label class="" for="pwd">Rol del usuario</label>
+            <div class="col-sm-10">
+                <select id = "rol" class="form-control">
+                    <option> -- Seleccione un rol de usuario -- </option>
+                    
+
+                </select>
             </div>
-            <div class="col-xs-6">
-                <label class="radio"><input type="radio" name="optradio1">Crítica</label>
+          </div>
+
+          <div class="row form-group " style = "height:35px; margin-top: 50px; margin-button : 5px;" >
+            <div class="col-md-4">
+              <label>Estado del usuario:  </label>
+
             </div>
-        </div>
-        <div class="col-xs-6">
-            <label class="control-label">
-                Conoció a su hijo(a):
-            </label>
-            <div class="col-xs-6">
-                <label class="radio"><input type="radio" name="optradio1">Si</label>
+            <div class="col-md-8">
+
             </div>
-            <div class="col-xs-6">
-                <label class="radio"><input type="radio" name="optradio1">No</label>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <label class="col-xs-12 control-label">
-        Nombre del padre o responsable (parentesco):
-        <input type="text" class="form-control" id="nombre_recien_nacido">
-    </label>
-</div>
-<div class="row">
-    <div class="col-xs-5">
-        <label class="col-xs-6 control-label">
-            Dirección:
-            <input type="text" class="form-control" id="institucion_nacimiento">
-        </label>
-        <label class="col-xs-6 control-label">
-            Teléfono:
-            <input type="text" class="form-control" id="lugar_nacimiento">
-        </label>
-    </div>
-    <div class="col-xs-7">
-            <label class="control-label col-xs-12">
-                Información inicial de la familia:
-            </label>
-            <div class="col-xs-4">
-                <label class="radio"><input type="radio" name="optradio1">Directa</label>
-            </div>
-            <div class="col-xs-4">
-                <label class="radio"><input type="radio" name="optradio1">Telefónica</label>
-            </div>
-            <div class="col-xs-4">
-                <label class="radio"><input type="radio" name="optradio1">No se logró</label>
-            </div>
-    </div>
+          </div>
+          <hr>
+          <div class=" form-group clearfix">
+              <button id="submit_actualizar_usuario"  class="btn btn-primary pull-right"><i class="glyphicon glyphicon-edit"></i> Actualizar Informacion</button>
+          </div>
+      </form>
 </div>

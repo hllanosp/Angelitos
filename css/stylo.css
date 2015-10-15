@@ -62,7 +62,7 @@ body{
 }
 .animacion{
 	-moz-animation: animar 0.5s 1;
-	-moz-animation:timing-function-ease;
+	-moz-animation:timing-function:ease;
 	-moz-animation-duration:1s;
 	-moz-transform-style:preserve-3d;
 }
@@ -77,4 +77,4 @@ body{
  }
  #modal_editar_usuario h3{
  	color:#222222;
- }
+
