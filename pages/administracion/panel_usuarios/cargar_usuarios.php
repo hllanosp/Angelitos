@@ -103,6 +103,7 @@
       <div class="modal-body">
         <!-- aqui se cargar el form actualizado con los datos del usuario a modificar -->
       </div>
+      
   </div>
 </div>
 </div>
