@@ -27,7 +27,7 @@
       </h1> -->
       <ol class="breadcrumb">
           <li class="active">
-              <span class="fa fa-dashboard"></span> Modulo Neonatos
+              <span class="fa fa-dashboard"></span> Módulo Neonatos
           </li>
            <li class="active">
               <i class="fa fa-table"></i> Pacientes
@@ -37,53 +37,11 @@
 
 
 <div id="wizard">
-    <h2>Datos Generales</h2>
+    <h2>Datos generales</h2>
     <section>
         <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_datosGenerales.php');
          ?>
-    </section>
-
-    <h2>Datos Maternos</h2>
-    <section>
-        <?php 
-            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_datosMaternos.php');
-         ?>
-    </section>
-
-    <h2>Examen Fisico</h2>
-    <section>
-        <?php 
-            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_examenFisico.php');
-         ?>
-    </section>
-
-    <h2>Ingreso</h2>
-    <section>
-        <?php 
-            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_ingreso.php');
-         ?>
-    </section>
-    
-    <h2>Patologias y Tratamientos</h2>
-    <section>
-        <?php 
-            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_patologias_tratamientos.php');
-         ?>
-    </section>
-
-    <h2>Recien Nacidos</h2>
-    <section>
-        <?php 
-            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_recienNacidos.php');
-         ?>
-    </section>
-
-    <h2>Test Silverman</h2>
-    <section>
-        <?php 
-            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_testSilverman.php');
-         ?>    
     </section>
 
     <h2>Transporte</h2>
@@ -93,10 +51,52 @@
          ?>
     </section>
 
-    <h2>Valoracion Inicial</h2>
+    <h2>Ingreso</h2>
+    <section>
+        <?php 
+            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_ingreso.php');
+         ?>
+    </section>
+
+    <h2>Datos maternos</h2>
+    <section>
+        <?php 
+            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_datosMaternos.php');
+         ?>
+    </section>
+    
+    <h2>Datos de recien nacido</h2>
+    <section>
+        <?php 
+            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_recienNacidos.php');
+         ?>
+    </section>
+
+    <h2>Valoración inicial</h2>
     <section>
         <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_valoracionInicial.php');
+         ?>
+    </section>
+
+    <h2>Examen físico</h2>
+    <section>
+        <?php 
+            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_examenFisico.php');
+         ?>    
+    </section>
+
+    <h2>Silverman - Andersen</h2>
+    <section>
+        <?php 
+            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_testSilverman.php');
+         ?>
+    </section>
+
+    <h2>Patologías</h2>
+    <section>
+        <?php 
+            include($maindir.'pages/Neonatos/pacientes/forms_registro/form_patologias_tratamientos.php');
          ?>
     </section>
 
