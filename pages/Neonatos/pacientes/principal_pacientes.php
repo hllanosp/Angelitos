@@ -23,9 +23,9 @@
 
 <div class="container-fluid">
   <div class = "row">
-      <h1 class="page-header">
+     <!--  <h1 class="page-header">
           <small>Gestion De Pacientes</small>
-      </h1>
+      </h1> -->
       <ol class="breadcrumb">
           <li class="active">
               <span class="fa fa-dashboard"></span> Módulo Neonatos
@@ -37,10 +37,10 @@
     </div>
 
     <div class="row">
-      <div class="panel panel-default">
+      <div class="panel panel-default well" style  = "padding : 0px; background-color:#4D3992; ">
         
-        <div class="panel-body">
-          <div class="btn-group-box" >
+        <div class="panel-body ">
+          <div class="btn-group-box" style = "margin-left: 20%;">
               <button id = "open-wizard" class="btn btn-success"><i class=" fa fa-plus fa-2x"></i><br>Nuevo Paciente</button>
               <!-- <button class="btn"><i class= "fa fa-user fa-3x"></i><br>Account</button> -->
               <button class="btn btn-primary "><i class=" fa fa-search fa-2x"></i><br>Buscar Paciente</button>
