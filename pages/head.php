@@ -17,8 +17,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>plantilla</title>
-  <meta name = "viewport" content = "width = device-whidth, initial-scale=1">
+  <title>Fundacion Angelitos</title>
+  <meta name = "viewport" content = "width = device-whidth, initial-scale=0.80">
 
   <!-- ========REFERENCIAS======== -->
   <!-- jquery-->
