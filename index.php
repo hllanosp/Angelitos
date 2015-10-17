@@ -4,7 +4,7 @@
  ?>
 
 <!-- Este codigo en js, tiene como funcion cerrar el log en la base de datos y destruir las variables de sesion si se ha cerrado la pestaña del navegador -->
-<script language="JavaScript" type="text/javascript">
+<script  type="text/javascript">
 
     window.onbeforeunload = accionAntesDeSalir;
 
