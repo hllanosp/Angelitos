@@ -47,9 +47,7 @@
   <!-- estilo en el admin -->
   <link href="componentes/sb-admin-2.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="css/styles.css" > -->
-  <script src = "css/scripts.js" type="text/javascript">
-
-</script>
+  <script src = "css/scripts.js" type="text/javascript"></script>
 
   <!-- stilos personalizados -->
   <link rel="stylesheet" href="css/stylo.css">
@@ -64,14 +62,18 @@
    <link rel="stylesheet" href="componentes/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
 
    <!-- plugin jquery para confirm -->
-   <script src="componentes/Bootstrap-Confirmation-master/bootstrap-confirmation.js"></script>
+   
 
    <!-- iconos -->
     <link href="componentes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
   <!-- formularios step wizard  -->
-    <link rel="stylesheet" href="componentes/jquery-steps-master/demo/css/jquery.steps.css">
-    <script src = "componentes/jquery-steps-master/build/jquery.steps.js"></script>
+    <!-- <link rel="stylesheet" href="componentes/jquery-steps-master/demo/css/jquery.steps.css"> -->
+    <!-- // <script src = "componentes/jquery-steps-master/build/jquery.steps.js"></script> -->
+
+    <link rel="stylesheet" href="componentes/bootstrap-application-wizard-master/src/bootstrap-wizard.css">
+    <script src = "componentes/bootstrap-application-wizard-master/src/bootstrap-wizard.js"></script>
+
 
 <script >
    $(document).ready(function(){

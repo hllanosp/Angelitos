@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-10-2015 a las 07:11:46
+-- Tiempo de generación: 17-10-2015 a las 00:32:40
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -1110,7 +1110,7 @@ INSERT INTO `usuario` (`usuario`, `contrasena`, `rol_ID`, `usuario_ID`, `fecha_c
 ('pineda1234', '$2a$07$7PqV8qgy4K9toN3aiWoOueysZN8SOCoL.62VauwPTx7rPA4t46jRW', 1, 8, '2015-06-25', NULL, 1, 0),
 ('Arleandinooo', '$2a$07$0Bti6VzhknuYxIJ4JEk1HunhqmQEIo/CLpH/7iNeR4ZilEpPmgEWO', 1, 11, '2015-06-27', '2015-10-06', 0, 0),
 ('ArleReyes', '$2a$07$O2NlXrsvbRMNPybi4HoDH.a6Lw1q5xj23NOYbFQKJC1jwqTpTBwFa', 5, 12, '2015-06-27', '0000-00-00', 1, 0),
-('hllanos', '$2a$07$TX1seqOwkG76jFPKlLpZe.3ajaLKclf0jzCSMfYXQOfGy0sM4Gyeu', 1, 16, '2015-07-06', '0000-00-00', 1, 1),
+('hllanos', '$2a$07$TX1seqOwkG76jFPKlLpZe.3ajaLKclf0jzCSMfYXQOfGy0sM4Gyeu', 1, 16, '2015-07-06', '0000-00-00', 1, 0),
 ('hectorllanos', '$2a$07$88EXV6GmXGpYLoHx402l5OfhbaYXnqZ87pohRJNxHu1kIEx5WOYVm', 5, 17, '2015-07-08', '2015-07-08', 0, 0),
 ('prueba', '$2a$07$85JeqXKUI2z23IgA7bamaeCSr30hAq/EolgnIwfxL2t2YmFcys3au', 2, 18, '2015-07-08', NULL, 0, 0);
 
@@ -1126,7 +1126,7 @@ CREATE TABLE IF NOT EXISTS `usuario_logs` (
   `fecha_ingreso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_salida` datetime NOT NULL,
   `ip_conexion` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=459 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=473 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario_logs`
@@ -1585,7 +1585,21 @@ INSERT INTO `usuario_logs` (`id_logs`, `usuario_log`, `fecha_ingreso`, `fecha_sa
 (455, 'pineda1234', '2015-10-11 17:35:44', '2015-10-11 17:55:56', '127.0.0.1'),
 (456, 'pineda1234', '2015-10-11 18:36:24', '2015-10-13 21:56:05', '127.0.0.1'),
 (457, 'pineda1234', '2015-10-13 22:02:58', '2015-10-13 22:07:50', '127.0.0.1'),
-(458, 'pineda1234', '2015-10-13 22:11:08', '2015-10-13 22:32:27', '127.0.0.1');
+(458, 'pineda1234', '2015-10-13 22:11:08', '2015-10-13 22:32:27', '127.0.0.1'),
+(459, 'pineda1234', '2015-10-13 23:40:09', '2015-10-13 23:55:31', '127.0.0.1'),
+(460, 'pineda1234', '2015-10-14 15:24:20', '0000-00-00 00:00:00', '127.0.0.1'),
+(461, 'pineda1234', '2015-10-14 17:14:57', '2015-10-14 17:25:44', '127.0.0.1'),
+(462, 'pineda1234', '2015-10-14 17:26:52', '2015-10-14 18:09:27', '127.0.0.1'),
+(463, 'pineda1234', '2015-10-14 18:10:20', '2015-10-14 18:13:44', '127.0.0.1'),
+(464, 'pineda1234', '2015-10-14 18:15:25', '2015-10-14 21:12:02', '127.0.0.1'),
+(465, 'pineda1234', '2015-10-15 00:03:48', '2015-10-15 11:12:40', '127.0.0.1'),
+(466, 'pineda1234', '2015-10-15 11:25:05', '2015-10-15 11:33:40', '127.0.0.1'),
+(467, 'pineda1234', '2015-10-15 13:06:49', '2015-10-15 13:11:41', '127.0.0.1'),
+(468, 'pineda1234', '2015-10-15 13:16:20', '2015-10-15 13:26:24', '127.0.0.1'),
+(469, 'pineda1234', '2015-10-15 15:32:30', '2015-10-15 16:24:39', '127.0.0.1'),
+(470, 'pineda1234', '2015-10-15 16:34:42', '2015-10-15 17:09:46', '127.0.0.1'),
+(471, 'pineda1234', '2015-10-15 17:14:52', '2015-10-15 17:28:47', '127.0.0.1'),
+(472, 'pineda1234', '2015-10-15 18:58:17', '2015-10-15 19:04:10', '127.0.0.1');
 
 --
 -- Índices para tablas volcadas
@@ -1833,7 +1847,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuario_logs`
 --
 ALTER TABLE `usuario_logs`
-  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=459;
+  MODIFY `id_logs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=473;
 --
 -- Restricciones para tablas volcadas
 --

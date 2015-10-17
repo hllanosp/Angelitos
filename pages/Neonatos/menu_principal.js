@@ -12,7 +12,7 @@
       event.preventDefault();
       // alert("has presionado estadisticas");
 
-      $("#page-wrapper" ).load( "pages/Neonatos/pacientes/pacientes.php" );
+      $("#page-wrapper" ).load( "pages/Neonatos/pacientes/principal_pacientes.php" );
       });
 
     $("#neonatos_traslados").click(function(event) {
