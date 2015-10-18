@@ -2,14 +2,19 @@
  $maindir = "../../../";
  ?>
 
+<style>
+    .modal-header{
+        background-color: white;
+        color: black;
+    }
+</style>
 
 <div class="wizard" id="some-wizard" data-title="Wizard Title">
-    <div class="wizard-card" data-cardname="card1">
-        <h3>Datos Generales</h3>
-         <?php 
+    <div class="wizard-card" data-cardname="card1" style="overflow: scroll; height: 525px;">
+        <h3 hidden>Datos Generales</h3>
+        <?php
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_datosGenerales.php');
-         ?>
-    
+        ?>
     </div>
 
     <div class="wizard-card" data-cardname="card2">
@@ -28,7 +33,7 @@
     </div>
 
     
-    <div class="wizard-card" data-cardname="card3">
+    <div class="wizard-card" data-cardname="card4">
         <h3>Datos Maternos</h3>
          <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_datosMaternos.php');
@@ -36,7 +41,7 @@
     </div>
 
     
-    <div class="wizard-card" data-cardname="card4">
+    <div class="wizard-card" data-cardname="card5">
         <h3>Datos Recien Nacido</h3>
         <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_recienNacidos.php');
@@ -44,7 +49,7 @@
     </div>
 
     
-    <div class="wizard-card" data-cardname="card5">
+    <div class="wizard-card" data-cardname="card6">
         <h3>Valoracion Inicial</h3>
         <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_valoracionInicial.php');
@@ -52,7 +57,7 @@
     </div>
 
     
-    <div class="wizard-card" data-cardname="card6">
+    <div class="wizard-card" data-cardname="card7">
         <h3>Examen Fisico</h3>
          <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_examenFisico.php');
@@ -60,14 +65,14 @@
     </div>
 
     
-    <div class="wizard-card" data-cardname="card7">
+    <div class="wizard-card" data-cardname="card8">
         <h3>Test Silverman</h3>
           <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_testSilverman.php');
          ?>
     </div>
 
-    <div class="wizard-card" data-cardname="card8">
+    <div class="wizard-card" data-cardname="card9">
         <h3>Patologias</h3>
           <?php 
             include($maindir.'pages/Neonatos/pacientes/forms_registro/form_patologias_tratamientos.php');
