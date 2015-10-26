@@ -4,7 +4,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <div id="radioBtn" class="btn-group">
-                        <a class="btn btn-default btn-sm Active" data-toggle="weird" data-title="In">Intrahospitalario</a>
+                        <a class="btn btn-default btn-sm active" data-toggle="weird" data-title="In">Intrahospitalario</a>
                         <a class="btn btn-default btn-sm notActive" data-toggle="weird" data-title="Oh">Otro hospital</a>
                         <a class="btn btn-default btn-sm notActive" data-toggle="weird" data-title="Cm">CMI</a>
                         <a class="btn btn-default btn-sm notActive" data-toggle="weird" data-title="Us">US</a>
