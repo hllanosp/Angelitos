@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-xs-7">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label class="control-label">Dia</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
+                        <input id="direccion" type="num" class="form-control" name="direccion" value="" placeholder="dia">                                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label class="control-label">Mes</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        <input id="telefono" type="num" class="form-control" name="telefono" value="" placeholder="Mes">                                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label class="control-label">año</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        <input id="telefono" type="text" class="form-control" name="telefono" value="" placeholder="Año">                                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-5">
+       <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label">Horas</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-location-arrow"></i></span>
+                        <input id="direccion" type="num" class="form-control" name="direccion" value="" placeholder="dia">                                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label">Minutos</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                        <input id="telefono" type="num" class="form-control" name="telefono" value="" placeholder="Mes">                                        
+                    </div>
+                </div>
+            </div>
+           
+        </div> 
+    </div>
+</div>

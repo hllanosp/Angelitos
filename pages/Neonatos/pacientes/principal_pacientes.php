@@ -76,9 +76,6 @@
         </div>
       </div>
     </div>
-
-
-
 </div>
  <!-- container fluid -->
 
@@ -92,23 +89,74 @@ include("modal_stepWizard.php");
   <script type="text/javascript">
   $(document).ready(function(){
     var wizard = $('#some-wizard').wizard({
-          
           keyboard : true,
           contentHeight : 600,
           contentWidth : 900,
           backdrop: 'static',
           showCancel: 'true' ,
-          
      });
-
     $('#open-wizard').click(function(e) {
           e.preventDefault();
           wizard.show();
-          wizard.setTitle("Historial Clinico");
+          wizard.setTitle("Nuevo Historial Clinico");
         });
+
+//     wizard.cards["card1"].on("validate", function(card) {
+//     var retValue = {};
+//     var input = card.el.find("#institucion");
+//     // var input_institucion = card.el.find('#lugarNacimiento');
+//     // var nombrenacido = card.el.find('#nombreNacido');
+//     // var nombre_madre = card.el.find('#nombreMadre');
+//     // var nombrePadre = card.el.find('#nombrePadre');
+    
+     
+
+//     var name = input.val();
+//     // var input_institucion1 = input_institucion.val();
+//     // var nombrenacido1 = nombrenacido.val();
+//     // var nombre_madre1 = nombre_madre.val();
+//     // var nombrePadre1 = nombrePadre.val();
+//     if (name == "") {
+//         retValue.status = false;
+//         retValue.msg = "Please enter a labbbbbel";
+//     }
+//     else{retValue.status = true;}
+//     // if (input_institucion1 == "") {
+//     //     card.wizard.errorPopover(input_institucion, "Campo requerido1");
+//     //     return false;
+//     // }
+//     // if (nombrenacido1 == "") {
+//     //     card.wizard.errorPopover(nombrenacido, "Campo requerido2");
+//     //     return false;
+//     // }
+//     // if (nombrePadre1 == "") {
+//     //     card.wizard.errorPopover(nombre_madre, "Campo requerido3");
+//     //     return false;
+//     // }
+
+//    return retValue;
+// });
+
+
+
 
 
   });
+
+  function validarInstitucion(el){
+        // var input = el.find("#institucion");
+        // var name = input.val();
+        // var retValue = {};
+
+        // if (name == "") {
+        //   retValue.status = false;
+        //   retValue.msg = "Please enter a labbbbbel";
+        // } else {
+        //   retValue.status = true;
+        // }
+
+        // return retValue;
+  }
    
   </script>
 
