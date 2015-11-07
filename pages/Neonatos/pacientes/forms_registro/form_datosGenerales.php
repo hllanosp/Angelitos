@@ -14,13 +14,14 @@
         $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
     });
 </script>
+<form>
 <div class="row">
     <div class="col-xs-5">
         <div class="form-group">
             <label class="control-label">Institución de nacimiento</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                <input id="institucion" type="text" class="form-control" name="institucion" value="" placeholder="Institución de nacimiento">                                        
+                <input  id="institucion" type="text" class="form-control" name="institucion" value="" placeholder="Institución de nacimiento" required>                                        
             </div>
         </div>
     </div>
@@ -29,7 +30,7 @@
             <label class="control-label">Lugar de nacimiento</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-map"></i></span>
-                <input id="lugarNacimiento" type="text" class="form-control" name="lugarNacimiento" value="" placeholder="Lugar de nacimiento">                                        
+                <input id="lugarNacimiento" type="text" class="form-control" name="lugarNacimiento" value="" placeholder="Lugar de nacimiento" required>                                        
             </div>
         </div>
     </div>
@@ -190,4 +191,4 @@
             </div>
         </center>
     </div>
-</div>
+</div></form>
