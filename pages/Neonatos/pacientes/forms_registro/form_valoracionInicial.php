@@ -28,7 +28,7 @@
                     <!-- <label class="control-label">Orden Nacimiento</label> -->
                     <div class="input-group">
                         <span class="input-group-addon"><i class=""></i></span>
-                        <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="To rectal">                                        
+                        <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="To rectal">                                        
                     </div>
                 </div>
                 
@@ -39,7 +39,7 @@
                     <!-- <label class="control-label">Orden Nacimiento</label> -->
                     <div class="input-group">
                         <span class="input-group-addon"><i class=""></i></span>
-                        <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="FC">                                        
+                        <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="FC">                                        
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     <!-- <label class="control-label">Orden Nacimiento</label> -->
                     <div class="input-group">
                         <span class="input-group-addon"><i class=""></i></span>
-                        <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="FR">                                        
+                        <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="FR">                                        
                     </div>
                 </div>
             </div>
@@ -60,14 +60,14 @@
                             <!-- <label class="control-label">Orden Nacimiento</label> -->
                             <div class="input-group">
                                 <span class="input-group-addon"><i class=""></i></span>
-                                <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="P/A ">                                        
+                                <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="P/A ">                                        
                             </div>
                         </div>
                         <div class="form-group" style ="margin-top : 2px;">
                             <!-- <label class="control-label">Orden Nacimiento</label> -->
                             <div class="input-group">
                                 <span class="input-group-addon"><i class=""></i></span>
-                                <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="FI02">                                        
+                                <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="FI02">                                        
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@
                             <!-- <label class="control-label">Orden Nacimiento</label> -->
                             <div class="input-group">
                                 <span class="input-group-addon"><i class=""></i></span>
-                                <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="Glucometria">                                        
+                                <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="Glucometria">                                        
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                             <!-- <label class="control-label">Orden Nacimiento</label> -->
                             <div class="input-group">
                                 <span class="input-group-addon"><i class=""></i></span>
-                                <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="So2">                                        
+                                <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="So2">                                        
                             </div>
                         </div>
                     </div>

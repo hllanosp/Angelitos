@@ -14,7 +14,6 @@
         $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
     });
 </script>
-
   
 <div class="row">
     <div class="col-xs-4">
@@ -61,7 +60,7 @@
             <label class="control-label">Orden Nacimiento</label>
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-time"></i></span>
-                <input id="orden?nacimiento" type="num" class="form-control" name="orden" value="" placeholder="orden">                                        
+                <input id="orden_nacimiento" type="num" class="form-control" name="orden" value="" placeholder="orden">                                        
             </div>
         </div>
     </div>
